@@ -831,12 +831,9 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
     <div className="min-h-screen bg-[#09090b] text-[#f4f4f5] flex flex-col font-sans selection:bg-[#7A0006] selection:text-white">
       
       {/* 00. MINIMAL ANNOUNCEMENT MARQUEE BAR */}
-      <div className="bg-[#7A0006] text-white text-xs font-mono py-1.5 px-4 overflow-hidden border-b border-[#991b1b] flex items-center justify-between z-50">
-        <div className="flex items-center space-x-2 text-[11px] uppercase tracking-wider overflow-hidden w-full whitespace-nowrap">
-          <span className="inline-flex items-center text-white bg-black/40 px-2 py-0.5 rounded font-bold text-[9px] tracking-widest shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping mr-1.5"></span>OFFICIAL WA: +62 821-1407-2159
-          </span>
-          <div className="inline-block animate-marquee pl-4 text-white/90">
+      <div className="bg-[#7A0006] text-white text-xs font-mono py-1.5 px-4 overflow-hidden border-b border-[#991b1b] flex items-center z-50">
+        <div className="overflow-hidden w-full whitespace-nowrap">
+          <div className="inline-block animate-marquee text-[11px] uppercase tracking-wider text-white/95 font-medium">
             {announcementText}
           </div>
         </div>
