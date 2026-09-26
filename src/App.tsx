@@ -60,7 +60,7 @@ export type Product = {
   description: string;
   image: string;
   sizes: { size: string; stock: number; available: boolean }[];
-  measurements: { size: string; ld: number; pb: number; pl: number }[];
+  measurements?: { size: string; ld: number; pb: number; pl: number }[];
 };
 
 export type CartItem = {
@@ -174,13 +174,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       { size: "L", stock: 14, available: true },
       { size: "XL", stock: 6, available: true },
       { size: "XXL", stock: 0, available: false }
-    ],
-    measurements: [
-      { size: "S", ld: 54, pb: 68, pl: 22 },
-      { size: "M", ld: 57, pb: 71, pl: 23 },
-      { size: "L", ld: 60, pb: 74, pl: 24 },
-      { size: "XL", ld: 63, pb: 77, pl: 25 },
-      { size: "XXL", ld: 66, pb: 80, pl: 26 }
     ]
   },
   {
@@ -204,13 +197,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       { size: "L", stock: 25, available: true },
       { size: "XL", stock: 15, available: true },
       { size: "XXL", stock: 10, available: true }
-    ],
-    measurements: [
-      { size: "S", ld: 55, pb: 72, pl: 23 },
-      { size: "M", ld: 58, pb: 75, pl: 24 },
-      { size: "L", ld: 62, pb: 78, pl: 25 },
-      { size: "XL", ld: 65, pb: 81, pl: 26 },
-      { size: "XXL", ld: 68, pb: 84, pl: 27 }
     ]
   },
   {
@@ -234,13 +220,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       { size: "L", stock: 9, available: true },
       { size: "XL", stock: 4, available: true },
       { size: "XXL", stock: 0, available: false }
-    ],
-    measurements: [
-      { size: "S", ld: 56, pb: 67, pl: 22 },
-      { size: "M", ld: 59, pb: 70, pl: 23 },
-      { size: "L", ld: 62, pb: 73, pl: 24 },
-      { size: "XL", ld: 65, pb: 76, pl: 25 },
-      { size: "XXL", ld: 68, pb: 79, pl: 26 }
     ]
   },
   {
@@ -264,13 +243,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       { size: "L", stock: 6, available: true },
       { size: "XL", stock: 2, available: true },
       { size: "XXL", stock: 1, available: true }
-    ],
-    measurements: [
-      { size: "S", ld: 53, pb: 69, pl: 21 },
-      { size: "M", ld: 56, pb: 72, pl: 22 },
-      { size: "L", ld: 59, pb: 75, pl: 23 },
-      { size: "XL", ld: 62, pb: 78, pl: 24 },
-      { size: "XXL", ld: 65, pb: 81, pl: 25 }
     ]
   },
   {
@@ -294,13 +266,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       { size: "L", stock: 7, available: true },
       { size: "XL", stock: 4, available: true },
       { size: "XXL", stock: 0, available: false }
-    ],
-    measurements: [
-      { size: "S", ld: 54, pb: 70, pl: 58 },
-      { size: "M", ld: 57, pb: 73, pl: 60 },
-      { size: "L", ld: 60, pb: 76, pl: 62 },
-      { size: "XL", ld: 63, pb: 79, pl: 64 },
-      { size: "XXL", ld: 66, pb: 82, pl: 66 }
     ]
   },
   {
@@ -324,13 +289,6 @@ export const INITIAL_PRODUCTS: Product[] = [
       { size: "L", stock: 0, available: false },
       { size: "XL", stock: 0, available: false },
       { size: "XXL", stock: 0, available: false }
-    ],
-    measurements: [
-      { size: "S", ld: 60, pb: 68, pl: 59 },
-      { size: "M", ld: 63, pb: 71, pl: 61 },
-      { size: "L", ld: 66, pb: 74, pl: 63 },
-      { size: "XL", ld: 69, pb: 77, pl: 65 },
-      { size: "XXL", ld: 72, pb: 80, pl: 67 }
     ]
   }
 ];
@@ -822,14 +780,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
         graphicAccent: "#7A0006",
         image: formImage || "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
         description: formDesc,
-        sizes: sizesArray,
-        measurements: [
-          { size: "S", ld: 54, pb: 68, pl: 22 },
-          { size: "M", ld: 57, pb: 71, pl: 23 },
-          { size: "L", ld: 60, pb: 74, pl: 24 },
-          { size: "XL", ld: 63, pb: 77, pl: 25 },
-          { size: "XXL", ld: 66, pb: 80, pl: 26 }
-        ]
+        sizes: sizesArray
       };
       setProducts(prev => [newProd, ...prev]);
       showToast(`Produk baru ${formSku} berhasil ditambahkan!`, "success");
@@ -921,7 +872,6 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
             <a href="#hero-section" className="hover:text-white transition-colors">Showcase</a>
             <a href="#catalog-section" className="hover:text-white transition-colors">Katalog</a>
             <a href="#lookbook-section" className="hover:text-white transition-colors">Lookbook</a>
-            <button onClick={() => setIsSizeGuideOpen(true)} className="hover:text-white transition-colors">Size Guide</button>
           </nav>
 
           <div className="flex items-center space-x-2 md:space-x-3">
@@ -935,11 +885,10 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
 
             <button 
               onClick={() => setIsSizeGuideOpen(true)} 
-              className="p-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white transition flex items-center space-x-1"
-              title="Size Guide (Panduan Ukuran & Kalkulator TB/BB)"
+              className="p-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white transition"
+              title="Size Guide"
             >
               <Ruler className="w-4 h-4 text-red-500" />
-              <span className="hidden sm:inline text-xs font-mono font-bold">Size Guide</span>
             </button>
 
             <button 
@@ -1109,14 +1058,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
           </div>
 
           <div className="flex items-center space-x-3">
-            <button 
-              onClick={() => setIsSizeGuideOpen(true)}
-              className="px-3.5 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-mono text-zinc-300 hover:text-white flex items-center space-x-2 transition"
-            >
-              <Ruler className="w-3.5 h-3.5 text-[#A60009]" />
-              <span>Tabel Size Chart</span>
-            </button>
-            <div className="px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-400">
+            <div className="px-3.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-400">
               <span className="text-white font-bold">{filteredProducts.length}</span> Kaos
             </div>
           </div>
@@ -1409,31 +1351,17 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                     <div className="space-y-2 pt-2">
                       <div className="flex items-center justify-between text-xs font-mono">
                         <span className="text-zinc-300 font-bold uppercase text-[11px]">Pilih Ukuran:</span>
-                        <div className="flex items-center space-x-2">
-                          <button 
-                            type="button" 
-                            onClick={() => {
-                              setSizeGuideTab("calculator");
-                              setIsSizeGuideOpen(true);
-                            }} 
-                            className="text-amber-400 hover:text-amber-300 flex items-center space-x-1 text-[11px] font-bold transition"
-                          >
-                            <Zap className="w-3 h-3 text-amber-400" />
-                            <span>Kalkulator TB/BB</span>
-                          </button>
-                          <span className="text-zinc-700">•</span>
-                          <button 
-                            type="button" 
-                            onClick={() => {
-                              setSizeGuideTab("table");
-                              setIsSizeGuideOpen(true);
-                            }} 
-                            className="text-[#A60009] hover:underline flex items-center space-x-1 text-[11px]"
-                          >
-                            <Ruler className="w-3 h-3" />
-                            <span>Size Chart</span>
-                          </button>
-                        </div>
+                        <button 
+                          type="button" 
+                          onClick={() => {
+                            setSizeGuideTab("table");
+                            setIsSizeGuideOpen(true);
+                          }} 
+                          className="text-[#A60009] hover:underline flex items-center space-x-1 text-[11px]"
+                        >
+                          <Ruler className="w-3 h-3" />
+                          <span>Size Chart</span>
+                        </button>
                       </div>
 
                       <div className="grid grid-cols-5 gap-2">
@@ -2326,18 +2254,6 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
           </div>
         );
       })()}
-
-      {/* MOBILE FLOATING SIZE GUIDE QUICK PILL (Accessible Anytime Anywhere on Mobile) */}
-      <div className="fixed bottom-4 left-4 z-40 sm:hidden">
-        <button
-          onClick={() => setIsSizeGuideOpen(true)}
-          className="px-3.5 py-2 rounded-full bg-zinc-950/95 border border-zinc-700 text-white font-mono text-xs font-bold shadow-[0_4px_20px_rgba(0,0,0,0.8)] backdrop-blur-md flex items-center space-x-1.5 active:scale-95 hover:border-red-500 transition"
-          title="Buka Size Guide & Kalkulator TB/BB"
-        >
-          <Ruler className="w-3.5 h-3.5 text-red-500" />
-          <span>Size Guide</span>
-        </button>
-      </div>
 
       {/* 08b. SHOPPING BAG / MULTI-ITEM CHECKOUT SLIDE-OVER DRAWER */}
       {isBagOpen && (
