@@ -93,14 +93,3 @@ dedicaterealite-site/
 ```
 
 ---
-
-## 🚀 Cara Menjalankan
-
-```bash
-# Menjalankan development server Vite
-npm start
-# atau
-npm run dev
-```
-
-Buka peramban di: **`http://localhost:3000`**
