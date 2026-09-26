@@ -34,7 +34,8 @@ import {
   ShoppingBag,
   Sliders,
   Zap,
-  Gift
+  Gift,
+  Info
 } from 'lucide-react';
 
 /* =========================================================================
@@ -74,6 +75,82 @@ export type CartItem = {
   fitType: string;
   fabricGsm: number;
 };
+
+export type SizeMetric = {
+  size: string;
+  ld: number; // Lebar Dada (cm)
+  pb: number; // Panjang Baju (cm)
+  pl: number; // Panjang Lengan (cm)
+  shoulderDrop: string;
+  tbRange: string;
+  bbRange: string;
+  persona: string;
+  desc: string;
+  deltaRegular: string;
+};
+
+export const STANDARD_SIZE_METRICS: SizeMetric[] = [
+  {
+    size: "S",
+    ld: 54,
+    pb: 68,
+    pl: 23,
+    shoulderDrop: "2.5 cm",
+    tbRange: "155 - 165 cm",
+    bbRange: "45 - 55 kg",
+    persona: "Compact True Boxy",
+    desc: "Proporsi pas di pinggang dengan kerah rib tebal anti-melar. Ideal bagi postur ramping untuk siluet boxy clean.",
+    deltaRegular: "+4 cm vs Kaos Reguler"
+  },
+  {
+    size: "M",
+    ld: 57,
+    pb: 71,
+    pl: 24,
+    shoulderDrop: "3.2 cm",
+    tbRange: "165 - 172 cm",
+    bbRange: "55 - 65 kg",
+    persona: "Street Standard Boxy",
+    desc: "Siluet boxy standar streetwear Yogyakarta. Bahu drop pas melewati sendi, panjang jatuh sedikit di bawah ban celana.",
+    deltaRegular: "+6 cm vs Kaos Reguler"
+  },
+  {
+    size: "L",
+    ld: 60,
+    pb: 74,
+    pl: 25,
+    shoulderDrop: "4.0 cm",
+    tbRange: "172 - 178 cm",
+    bbRange: "65 - 75 kg",
+    persona: "Signature Dedicate Fit",
+    desc: "Karakter siluet signature Dedicaterealite. Lebar 60 cm menghasilkan siluet kokoh dan drape tebal dengan katun 16s/14s.",
+    deltaRegular: "+8 cm vs Kaos Reguler"
+  },
+  {
+    size: "XL",
+    ld: 63,
+    pb: 77,
+    pl: 26,
+    shoulderDrop: "4.8 cm",
+    tbRange: "178 - 185 cm",
+    bbRange: "75 - 85 kg",
+    persona: "Heavy Slouch Oversize",
+    desc: "Siluet rileks streetwear sejati. Lengan mendekati siku, memberikan aura underground grunge yang dominan saat bergerak.",
+    deltaRegular: "+10 cm vs Kaos Reguler"
+  },
+  {
+    size: "XXL",
+    ld: 66,
+    pb: 80,
+    pl: 27,
+    shoulderDrop: "5.5 cm",
+    tbRange: "> 185 cm",
+    bbRange: "> 85 kg",
+    persona: "Maximum Street Slouch",
+    desc: "Ukuran terluas dengan drape maksimal 66 cm. Sempurna untuk siluet baggy skater, hip-hop, atau postur tinggi besar.",
+    deltaRegular: "+12 cm vs Kaos Reguler"
+  }
+];
 
 export const INITIAL_PRODUCTS: Product[] = [
   {
@@ -302,6 +379,7 @@ export default function App() {
   // Modals State
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
   const [selectedSize, setSelectedSize] = useState<string>("L");
+  const [inspectedSize, setInspectedSize] = useState<string>("L");
   const [selectedQty, setSelectedQty] = useState<number>(1);
   const [activeAngleIndex, setActiveAngleIndex] = useState<number>(0);
   const [isBattleRoomOpen, setIsBattleRoomOpen] = useState<boolean>(false);
@@ -1585,227 +1663,717 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
         </div>
       )}
 
-      {/* 08. INTERACTIVE SMART SIZE FINDER & SIZE CHART MODAL */}
+      {/* 08. REDESIGNED ATELIER SIZE GUIDE & TECHNICAL BLUEPRINT MODAL */}
       {isSizeGuideOpen && (() => {
         const recommendation = getRecommendedSize(userHeight, userWeight, fitPreference);
+        const activeMetric = STANDARD_SIZE_METRICS.find(m => m.size === inspectedSize) || STANDARD_SIZE_METRICS[2]; // Default L
+
         return (
           <div className="fixed inset-0 z-50 overflow-y-auto">
-            <div className="fixed inset-0 bg-black/85 backdrop-blur-sm" onClick={() => setIsSizeGuideOpen(false)}></div>
-            <div className="min-h-full flex items-center justify-center p-3 sm:p-6 relative z-10">
-              <div className="w-full max-w-2xl bg-zinc-950 rounded-2xl border border-zinc-800 p-5 sm:p-7 relative shadow-2xl">
-                <button onClick={() => setIsSizeGuideOpen(false)} className="absolute top-4 right-4 text-zinc-400 hover:text-white p-1 rounded-lg hover:bg-zinc-800 transition">
-                  <X className="w-5 h-5" />
-                </button>
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 bg-black/90 backdrop-blur-md transition-opacity" 
+              onClick={() => setIsSizeGuideOpen(false)}
+            />
+            
+            <div className="min-h-full flex items-center justify-center p-2.5 sm:p-5 relative z-10">
+              <div className="w-full max-w-4xl bg-[#0b0c10] rounded-3xl border border-zinc-700/80 shadow-[0_0_60px_rgba(0,0,0,0.95)] overflow-hidden relative text-white flex flex-col max-h-[92vh]">
+                
+                {/* Modal Top Atelier Bar */}
+                <div className="px-5 py-4 border-b border-zinc-800 bg-[#12141a] flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-9 h-9 rounded-xl bg-red-950/80 border border-red-700/60 flex items-center justify-center text-red-400 shrink-0">
+                      <Ruler className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-red-400 bg-red-950/60 border border-red-800/60 px-2.5 py-0.5 rounded-full font-bold">
+                          ATELIER SPEC // BOXY FIT ARCHIVE
+                        </span>
+                        <span className="text-zinc-600 text-xs hidden sm:inline">•</span>
+                        <span className="text-[11px] font-mono text-zinc-400 hidden sm:inline">Dedicaterealite Drop Pattern</span>
+                      </div>
+                      <h3 className="font-black text-lg sm:text-xl text-white uppercase tracking-tight mt-0.5">
+                        PANDUAN & KALKULATOR UKURAN BOXY
+                      </h3>
+                    </div>
+                  </div>
 
-                {/* Modal Title & Tab Switcher */}
-                <div className="mb-5">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 bg-amber-950/60 border border-amber-800/60 px-2 py-0.5 rounded-full inline-block mb-1.5">
-                    FITTING LAB & METRIC
-                  </span>
-                  <h3 className="font-black text-xl text-white uppercase tracking-tight">PANDUAN & KALKULATOR UKURAN</h3>
-                  <p className="text-xs font-mono text-zinc-400 mt-1">Dapatkan siluet boxy drop shoulder khas streetwear Yogyakarta yang presisi.</p>
-                </div>
-
-                {/* Tabs */}
-                <div className="flex rounded-xl bg-zinc-900/90 p-1 border border-zinc-800 mb-6">
-                  <button
-                    onClick={() => setSizeGuideTab("calculator")}
-                    className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-1.5 ${
-                      sizeGuideTab === "calculator"
-                        ? "bg-[#7A0006] text-white shadow-md"
-                        : "text-zinc-400 hover:text-white"
-                    }`}
+                  <button 
+                    onClick={() => setIsSizeGuideOpen(false)} 
+                    className="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800 transition"
                   >
-                    <Zap className="w-3.5 h-3.5" />
-                    <span>Smart Size Finder (TB/BB)</span>
-                  </button>
-                  <button
-                    onClick={() => setSizeGuideTab("table")}
-                    className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-1.5 ${
-                      sizeGuideTab === "table"
-                        ? "bg-zinc-800 text-white shadow-md"
-                        : "text-zinc-400 hover:text-white"
-                    }`}
-                  >
-                    <Ruler className="w-3.5 h-3.5" />
-                    <span>Size Chart Standar (cm)</span>
+                    <X className="w-5 h-5" />
                   </button>
                 </div>
 
-                {sizeGuideTab === "calculator" ? (
-                  <div className="space-y-6">
-                    {/* Controls: Sliders for Height & Weight */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 bg-zinc-900/60 border border-zinc-800/80 rounded-xl p-4">
-                      {/* Height Slider */}
-                      <div className="space-y-2">
-                        <div className="flex justify-between items-center text-xs font-mono">
-                          <span className="text-zinc-400">Tinggi Badan (TB):</span>
-                          <span className="text-amber-400 font-bold text-sm">{userHeight} cm</span>
+                {/* Tab Switcher & Specs Info */}
+                <div className="px-5 pt-3 pb-2.5 bg-[#0e1015] border-b border-zinc-800/80 flex flex-wrap gap-2.5 items-center justify-between">
+                  <div className="flex rounded-xl bg-zinc-900/90 p-1 border border-zinc-800 w-full sm:w-auto">
+                    <button
+                      onClick={() => setSizeGuideTab("table")}
+                      className={`flex-1 sm:flex-initial py-2 px-4 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-2 ${
+                        sizeGuideTab === "table"
+                          ? "bg-red-700 text-white shadow-lg shadow-red-950"
+                          : "text-zinc-400 hover:text-white"
+                      }`}
+                    >
+                      <Ruler className="w-3.5 h-3.5 text-white" />
+                      <span>Size Chart & Technical Blueprint (cm)</span>
+                    </button>
+                    <button
+                      onClick={() => setSizeGuideTab("calculator")}
+                      className={`flex-1 sm:flex-initial py-2 px-4 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-2 ${
+                        sizeGuideTab === "calculator"
+                          ? "bg-red-700 text-white shadow-lg shadow-red-950"
+                          : "text-zinc-400 hover:text-white"
+                      }`}
+                    >
+                      <Zap className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Smart Fit Finder (TB / BB)</span>
+                    </button>
+                  </div>
+
+                  <div className="hidden sm:flex items-center space-x-2 text-[11px] font-mono text-zinc-300 bg-zinc-900/70 border border-zinc-800 px-3 py-1.5 rounded-lg">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Toleransi Jahitan: ±1.5 cm • Katun Combed 16s/14s</span>
+                  </div>
+                </div>
+
+                {/* Modal Scrollable Body */}
+                <div className="p-4 sm:p-6 overflow-y-auto space-y-6 flex-1 bg-[#0a0b0e]">
+                  {sizeGuideTab === "table" ? (
+                    /* ----------------------------------------------------
+                       TAB 1: SIZE CHART & TECHNICAL BLUEPRINT
+                       ---------------------------------------------------- */
+                    <div className="space-y-6">
+                      
+                      {/* 1. Quick Size Inspector Bar */}
+                      <div className="space-y-2.5 bg-[#12141b] border border-zinc-800/90 rounded-2xl p-3.5">
+                        <div className="flex items-center justify-between text-xs font-mono">
+                          <span className="text-zinc-200 font-bold uppercase tracking-wider flex items-center space-x-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                            <span>Inspeksi Detail Siluet Ukuran:</span>
+                          </span>
+                          <span className="text-zinc-400 text-[11px]">
+                            Klik tombol untuk melihat simulasi anatomi
+                          </span>
                         </div>
-                        <input
-                          type="range"
-                          min="150"
-                          max="200"
-                          value={userHeight}
-                          onChange={(e) => setUserHeight(Number(e.target.value))}
-                          className="w-full accent-amber-400 cursor-pointer h-2 bg-zinc-800 rounded-lg appearance-none"
-                        />
-                        <div className="flex justify-between text-[10px] font-mono text-zinc-500">
-                          <span>150 cm</span>
-                          <span>175 cm</span>
-                          <span>200 cm</span>
+                        <div className="grid grid-cols-5 gap-2">
+                          {STANDARD_SIZE_METRICS.map(m => {
+                            const isInspected = m.size === inspectedSize;
+                            const isSelected = m.size === selectedSize;
+                            return (
+                              <button
+                                key={m.size}
+                                type="button"
+                                onClick={() => setInspectedSize(m.size)}
+                                className={`py-2.5 px-2 rounded-xl border text-center transition flex flex-col items-center justify-center relative ${
+                                  isInspected 
+                                    ? "bg-red-600 border-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.45)] ring-2 ring-red-400/50" 
+                                    : isSelected
+                                      ? "bg-zinc-800 border-zinc-600 text-white"
+                                      : "bg-[#161922] border-zinc-800/80 text-zinc-300 hover:border-zinc-600 hover:text-white"
+                                }`}
+                              >
+                                <span className="font-black text-base leading-none">{m.size}</span>
+                                <span className={`text-[10px] font-mono mt-1 ${isInspected ? "text-red-100 font-bold" : "text-zinc-400"}`}>
+                                  LD: {m.ld} cm
+                                </span>
+                                {isSelected && (
+                                  <span className="text-[9px] uppercase font-bold tracking-wider mt-0.5 px-1 rounded bg-black/50 text-emerald-400">
+                                    Aktif
+                                  </span>
+                                )}
+                              </button>
+                            );
+                          })}
                         </div>
                       </div>
 
-                      {/* Weight Slider */}
-                      <div className="space-y-2">
-                        <div className="flex justify-between items-center text-xs font-mono">
-                          <span className="text-zinc-400">Berat Badan (BB):</span>
-                          <span className="text-amber-400 font-bold text-sm">{userWeight} kg</span>
+                      {/* 2. Visual Blueprint & Spec Callout Grid */}
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch">
+                        
+                        {/* Interactive SVG Blueprint (5 cols) */}
+                        <div className="md:col-span-6 bg-[#111319] border border-zinc-800 rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden">
+                          <div className="flex items-center justify-between text-xs font-mono mb-2">
+                            <span className="text-red-400 font-bold uppercase tracking-wider text-[11px] flex items-center space-x-1.5">
+                              <span className="w-2 h-2 rounded-full bg-red-500"></span>
+                              <span>SKEMATIK ANATOMI KAOS [{activeMetric.size}]</span>
+                            </span>
+                            <span className="text-[10px] text-zinc-400 bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded">
+                              Pola Drop Shoulder
+                            </span>
+                          </div>
+
+                          {/* SVG Technical Drawing */}
+                          <div className="flex-1 flex items-center justify-center py-2">
+                            <svg viewBox="0 0 400 300" className="w-full h-auto max-h-[210px] select-none text-zinc-300">
+                              <defs>
+                                <pattern id="atelier-grid" width="16" height="16" patternUnits="userSpaceOnUse">
+                                  <path d="M 16 0 L 0 0 0 16" fill="none" stroke="rgba(255,255,255,0.035)" strokeWidth="1" />
+                                </pattern>
+                              </defs>
+                              <rect width="100%" height="100%" fill="url(#atelier-grid)" rx="8" />
+
+                              {/* T-Shirt Body Outline */}
+                              <path
+                                d="M 160 48 
+                                   C 175 62, 225 62, 240 48 
+                                   L 295 66 
+                                   L 365 110 
+                                   L 338 148 
+                                   L 290 125 
+                                   L 290 265 
+                                   L 110 265 
+                                   L 110 125 
+                                   L 62 148 
+                                   L 35 110 
+                                   L 105 66 
+                                   Z"
+                                fill="#161922"
+                                stroke="rgba(255, 255, 255, 0.55)"
+                                strokeWidth="2"
+                                strokeLinejoin="round"
+                              />
+
+                              {/* Collar Rib Accent */}
+                              <path
+                                d="M 160 48 C 175 66, 225 66, 240 48 C 225 54, 175 54, 160 48 Z"
+                                fill="#7A0006"
+                                stroke="#ef4444"
+                                strokeWidth="1.5"
+                              />
+
+                              {/* Drop Shoulder Seam (Dotted Yellow) */}
+                              <line x1="125" y1="56" x2="135" y2="95" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="3 3" />
+                              <line x1="275" y1="56" x2="265" y2="95" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="3 3" />
+
+                              {/* Dimension [A]: Lebar Dada (LD) */}
+                              <line x1="110" y1="135" x2="290" y2="135" stroke="#ef4444" strokeWidth="2" />
+                              <circle cx="110" cy="135" r="3.5" fill="#ef4444" />
+                              <circle cx="290" cy="135" r="3.5" fill="#ef4444" />
+                              <rect x="162" y="122" width="76" height="22" rx="4" fill="#0B0C0E" stroke="#ef4444" strokeWidth="1.5" />
+                              <text x="200" y="137" fill="#ffffff" fontSize="10.5" fontWeight="bold" fontFamily="monospace" textAnchor="middle">
+                                LD: {activeMetric.ld} CM
+                              </text>
+
+                              {/* Dimension [B]: Panjang Baju (PB) */}
+                              <line x1="300" y1="52" x2="300" y2="265" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="4 2" />
+                              <line x1="294" y1="52" x2="306" y2="52" stroke="#38bdf8" strokeWidth="1.5" />
+                              <line x1="294" y1="265" x2="306" y2="265" stroke="#38bdf8" strokeWidth="1.5" />
+                              <rect x="308" y="148" width="74" height="20" rx="4" fill="#0B0C0E" stroke="#38bdf8" strokeWidth="1" />
+                              <text x="345" y="162" fill="#38bdf8" fontSize="10" fontWeight="bold" fontFamily="monospace" textAnchor="middle">
+                                PB: {activeMetric.pb} CM
+                              </text>
+
+                              {/* Dimension [C]: Lengan (PL) */}
+                              <line x1="280" y1="60" x2="352" y2="130" stroke="#c084fc" strokeWidth="1.5" strokeDasharray="4 2" />
+                              <rect x="312" y="82" width="68" height="19" rx="4" fill="#0B0C0E" stroke="#c084fc" strokeWidth="1" />
+                              <text x="346" y="95" fill="#c084fc" fontSize="9.5" fontWeight="bold" fontFamily="monospace" textAnchor="middle">
+                                PL: {activeMetric.pl} CM
+                              </text>
+
+                              {/* Drop Shoulder Tag */}
+                              <text x="25" y="35" fill="#e4e4e7" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+                                // DROP BAHU: {activeMetric.shoulderDrop}
+                              </text>
+                            </svg>
+                          </div>
+
+                          <div className="flex items-center justify-between text-[11px] font-mono text-zinc-300 pt-2 border-t border-zinc-800/80">
+                            <span className="flex items-center space-x-1">
+                              <span className="w-2 h-2 rounded-full bg-red-500"></span>
+                              <span>LD: Lebar Dada</span>
+                            </span>
+                            <span className="flex items-center space-x-1">
+                              <span className="w-2 h-2 rounded-full bg-sky-400"></span>
+                              <span>PB: Panjang Baju</span>
+                            </span>
+                            <span className="flex items-center space-x-1">
+                              <span className="w-2 h-2 rounded-full bg-purple-400"></span>
+                              <span>PL: Panjang Lengan</span>
+                            </span>
+                          </div>
                         </div>
-                        <input
-                          type="range"
-                          min="40"
-                          max="115"
-                          value={userWeight}
-                          onChange={(e) => setUserWeight(Number(e.target.value))}
-                          className="w-full accent-amber-400 cursor-pointer h-2 bg-zinc-800 rounded-lg appearance-none"
-                        />
-                        <div className="flex justify-between text-[10px] font-mono text-zinc-500">
-                          <span>40 kg</span>
-                          <span>75 kg</span>
-                          <span>115 kg</span>
+
+                        {/* Garment Spec Profile Card (6 cols) */}
+                        <div className="md:col-span-6 bg-[#12141c] border border-zinc-800 rounded-2xl p-4 sm:p-5 flex flex-col justify-between">
+                          <div>
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center space-x-2.5">
+                                <span className="w-12 h-12 rounded-xl bg-red-600 text-white font-black text-2xl flex items-center justify-center shadow-lg shadow-red-950/80 border border-red-400">
+                                  {activeMetric.size}
+                                </span>
+                                <div>
+                                  <h4 className="text-white font-black text-base uppercase">
+                                    {activeMetric.persona}
+                                  </h4>
+                                  <p className="text-red-400 font-mono text-xs font-bold">
+                                    {activeMetric.deltaRegular}
+                                  </p>
+                                </div>
+                              </div>
+                              <span className="text-[10px] font-mono uppercase bg-zinc-900 border border-zinc-700 text-zinc-300 px-2 py-1 rounded-md">
+                                Spec Sheet
+                              </span>
+                            </div>
+
+                            {/* Key Dimension Stats */}
+                            <div className="grid grid-cols-2 gap-2.5 my-3.5">
+                              <div className="bg-[#181b24] border border-zinc-800/90 rounded-xl p-2.5">
+                                <span className="text-[10px] font-mono text-zinc-400 uppercase block">Lebar Dada (LD)</span>
+                                <span className="text-white font-mono font-bold text-base">{activeMetric.ld} cm</span>
+                                <span className="text-[10px] text-zinc-400 block mt-0.5">Keliling: {activeMetric.ld * 2} cm</span>
+                              </div>
+                              <div className="bg-[#181b24] border border-zinc-800/90 rounded-xl p-2.5">
+                                <span className="text-[10px] font-mono text-zinc-400 uppercase block">Panjang Baju (PB)</span>
+                                <span className="text-white font-mono font-bold text-base">{activeMetric.pb} cm</span>
+                                <span className="text-[10px] text-zinc-400 block mt-0.5">Jatuh di pinggang</span>
+                              </div>
+                              <div className="bg-[#181b24] border border-zinc-800/90 rounded-xl p-2.5">
+                                <span className="text-[10px] font-mono text-zinc-400 uppercase block">Panjang Lengan (PL)</span>
+                                <span className="text-white font-mono font-bold text-base">{activeMetric.pl} cm</span>
+                                <span className="text-[10px] text-zinc-400 block mt-0.5">Streetwear drop sleeve</span>
+                              </div>
+                              <div className="bg-[#181b24] border border-zinc-800/90 rounded-xl p-2.5">
+                                <span className="text-[10px] font-mono text-zinc-400 uppercase block">Drop Kemiringan Bahu</span>
+                                <span className="text-white font-mono font-bold text-base">{activeMetric.shoulderDrop}</span>
+                                <span className="text-[10px] text-zinc-400 block mt-0.5">Turun dari bahu alami</span>
+                              </div>
+                            </div>
+
+                            {/* Fitting Character Description */}
+                            <p className="text-xs text-zinc-300 leading-relaxed font-sans bg-[#0e1015] p-3 rounded-xl border border-zinc-800">
+                              {activeMetric.desc}
+                            </p>
+                          </div>
+
+                          {/* Quick Select Button for Inspected Size */}
+                          <div className="mt-4 pt-3 border-t border-zinc-800 flex items-center justify-between gap-3">
+                            <div className="text-[11px] font-mono text-zinc-300">
+                              <span>Sesuai Postur: </span>
+                              <strong className="text-white">{activeMetric.tbRange}</strong> / <strong className="text-white">{activeMetric.bbRange}</strong>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setSelectedSize(activeMetric.size);
+                                showToast(`Ukuran ${activeMetric.size} dipilih!`, "success");
+                              }}
+                              className={`py-2 px-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition flex items-center space-x-1.5 shrink-0 ${
+                                selectedSize === activeMetric.size
+                                  ? "bg-emerald-600 text-white cursor-default"
+                                  : "bg-red-600 hover:bg-red-500 text-white shadow-md active:scale-95"
+                              }`}
+                            >
+                              <Check className="w-3.5 h-3.5" />
+                              <span>{selectedSize === activeMetric.size ? "Sedang Digunakan" : `Pilih Ukuran ${activeMetric.size}`}</span>
+                            </button>
+                          </div>
                         </div>
+
                       </div>
+
+                      {/* 3. Comprehensive Spec Table (High Contrast & Clear Hierarchy) */}
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-xs font-mono">
+                          <span className="text-zinc-200 font-bold uppercase tracking-wider">
+                            TABEL UKURAN LENGKAP (CENTIMETER):
+                          </span>
+                          <span className="text-zinc-400 text-[11px]">
+                            Klik baris untuk memilih ukuran langsung
+                          </span>
+                        </div>
+
+                        <div className="overflow-x-auto rounded-2xl border border-zinc-800 bg-[#0e1015] shadow-xl">
+                          <table className="w-full text-xs font-mono text-left">
+                            <thead className="bg-[#161822] text-zinc-100 border-b-2 border-zinc-700/80">
+                              <tr>
+                                <th className="py-3 px-3.5 text-center font-black text-white">SIZE</th>
+                                <th className="py-3 px-3 text-red-400 font-bold">
+                                  <span className="flex items-center space-x-1">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                                    <span>LEBAR DADA (LD)</span>
+                                  </span>
+                                </th>
+                                <th className="py-3 px-3 text-sky-400 font-bold">
+                                  <span className="flex items-center space-x-1">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                                    <span>PANJANG (PB)</span>
+                                  </span>
+                                </th>
+                                <th className="py-3 px-3 text-purple-400 font-bold">
+                                  <span className="flex items-center space-x-1">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                                    <span>LENGAN (PL)</span>
+                                  </span>
+                                </th>
+                                <th className="py-3 px-3 text-amber-400 font-bold">
+                                  <span className="flex items-center space-x-1">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                                    <span>DROP BAHU</span>
+                                  </span>
+                                </th>
+                                <th className="py-3 px-3 text-zinc-100 font-bold">REKOMENDASI POSTUR</th>
+                                <th className="py-3 px-3 text-center text-zinc-100 font-bold">STATUS</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-zinc-800/80">
+                              {STANDARD_SIZE_METRICS.map((m) => {
+                                const isInspected = m.size === inspectedSize;
+                                const isSelected = m.size === selectedSize;
+                                return (
+                                  <tr 
+                                    key={m.size}
+                                    onClick={() => setInspectedSize(m.size)}
+                                    className={`transition-colors cursor-pointer ${
+                                      isInspected
+                                        ? "bg-gradient-to-r from-red-950/70 via-red-900/25 to-[#161922] border-l-4 border-l-red-500"
+                                        : isSelected
+                                          ? "bg-zinc-900/80 border-l-4 border-l-emerald-500"
+                                          : "bg-[#0e1015] hover:bg-[#151821]"
+                                    }`}
+                                  >
+                                    {/* Size */}
+                                    <td className="py-3 px-3.5 text-center">
+                                      <span className={`inline-flex items-center justify-center w-8 h-8 rounded-lg font-black text-sm ${
+                                        isInspected
+                                          ? "bg-red-600 text-white shadow-md shadow-red-900/60"
+                                          : isSelected
+                                            ? "bg-emerald-600 text-white"
+                                            : "bg-zinc-800 text-white border border-zinc-700"
+                                      }`}>
+                                        {m.size}
+                                      </span>
+                                    </td>
+
+                                    {/* LD */}
+                                    <td className="py-3 px-3">
+                                      <span className="text-white font-bold text-sm">{m.ld} cm</span>
+                                      <span className="block text-[10px] text-zinc-400 font-normal">
+                                        +{m.ld - 50} cm vs reguler
+                                      </span>
+                                    </td>
+
+                                    {/* PB */}
+                                    <td className="py-3 px-3">
+                                      <span className="text-zinc-100 font-semibold text-xs">{m.pb} cm</span>
+                                    </td>
+
+                                    {/* PL */}
+                                    <td className="py-3 px-3">
+                                      <span className="text-zinc-100 font-semibold text-xs">{m.pl} cm</span>
+                                    </td>
+
+                                    {/* Drop Bahu */}
+                                    <td className="py-3 px-3">
+                                      <span className="text-zinc-100 font-semibold text-xs">{m.shoulderDrop}</span>
+                                    </td>
+
+                                    {/* Rekomendasi Postur */}
+                                    <td className="py-3 px-3">
+                                      <div className="flex flex-col">
+                                        <span className="text-white font-medium text-xs">TB {m.tbRange}</span>
+                                        <span className="text-zinc-400 text-[11px]">BB {m.bbRange}</span>
+                                      </div>
+                                    </td>
+
+                                    {/* Status / Action */}
+                                    <td className="py-3 px-3 text-center">
+                                      {isSelected ? (
+                                        <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold">
+                                          <Check className="w-3 h-3" />
+                                          <span>Terpilih</span>
+                                        </span>
+                                      ) : (
+                                        <button
+                                          type="button"
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            setSelectedSize(m.size);
+                                            setInspectedSize(m.size);
+                                            showToast(`Ukuran ${m.size} dipilih!`, "success");
+                                          }}
+                                          className="px-2.5 py-1 rounded-md bg-zinc-800 hover:bg-red-600 text-zinc-200 hover:text-white border border-zinc-700 hover:border-red-500 text-[10px] font-bold transition"
+                                        >
+                                          Pilih {m.size}
+                                        </button>
+                                      )}
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+                        <p className="text-[11px] font-mono text-zinc-400 mt-2">
+                          *Tips: Jika tinggi badan dan berat badan kamu berada di antara 2 ukuran, pilih ukuran lebih besar untuk siluet slouchy streetwear yang lebih dramatis.
+                        </p>
+                      </div>
+
                     </div>
+                  ) : (
+                    /* ----------------------------------------------------
+                       TAB 2: SMART FIT FINDER (TB / BB SLIDERS)
+                       ---------------------------------------------------- */
+                    <div className="space-y-6">
+                      
+                      {/* 1. Quick Posture Presets */}
+                      <div className="space-y-2 bg-[#12141b] border border-zinc-800/90 rounded-2xl p-4">
+                        <span className="text-[11px] font-mono text-zinc-300 uppercase tracking-wider block font-bold">
+                          ⚡ PRESET POSTUR CEPAT (KLIK UNTUK TESTING INSTAN):
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {[
+                            { label: "162 cm • 50 kg (S)", h: 162, w: 50 },
+                            { label: "170 cm • 60 kg (M)", h: 170, w: 60 },
+                            { label: "175 cm • 72 kg (L)", h: 175, w: 72 },
+                            { label: "182 cm • 82 kg (XL)", h: 182, w: 82 },
+                            { label: "190 cm • 92 kg (XXL)", h: 190, w: 92 },
+                          ].map(p => {
+                            const isMatch = userHeight === p.h && userWeight === p.w;
+                            return (
+                              <button
+                                key={p.label}
+                                type="button"
+                                onClick={() => {
+                                  setUserHeight(p.h);
+                                  setUserWeight(p.w);
+                                }}
+                                className={`px-3 py-1.5 rounded-xl text-xs font-mono transition border ${
+                                  isMatch
+                                    ? "bg-red-600 border-red-500 text-white font-bold shadow-md shadow-red-950"
+                                    : "bg-[#181b24] border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-600"
+                                }`}
+                              >
+                                {p.label}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
 
-                    {/* Fit Preference Radio */}
-                    <div className="space-y-2">
-                      <label className="text-xs font-mono text-zinc-400 uppercase tracking-wider block">Preferensi Siluet:</label>
-                      <div className="grid grid-cols-2 gap-3">
+                      {/* 2. Interactive Tactile Sliders */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 bg-[#12141c] border border-zinc-800 rounded-2xl p-4 sm:p-5">
+                        
+                        {/* Height Slider with Steppers */}
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center text-xs font-mono">
+                            <span className="text-zinc-300 font-bold uppercase">Tinggi Badan (TB):</span>
+                            <div className="flex items-center space-x-1.5">
+                              <button
+                                type="button"
+                                onClick={() => setUserHeight(prev => Math.max(150, prev - 1))}
+                                className="w-6 h-6 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 flex items-center justify-center font-bold text-xs"
+                              >
+                                -
+                              </button>
+                              <span className="text-white font-mono font-black text-sm bg-zinc-900 border border-zinc-700 px-2.5 py-0.5 rounded-lg">
+                                {userHeight} cm
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => setUserHeight(prev => Math.min(200, prev + 1))}
+                                className="w-6 h-6 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 flex items-center justify-center font-bold text-xs"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+                          
+                          <input
+                            type="range"
+                            min="150"
+                            max="200"
+                            value={userHeight}
+                            onChange={(e) => setUserHeight(Number(e.target.value))}
+                            className="w-full accent-red-600 cursor-pointer h-2.5 bg-zinc-800 rounded-lg appearance-none"
+                          />
+                          
+                          <div className="flex justify-between text-[10px] font-mono text-zinc-400">
+                            <span>150 cm</span>
+                            <span>165 cm</span>
+                            <span>175 cm</span>
+                            <span>185 cm</span>
+                            <span>200 cm</span>
+                          </div>
+                        </div>
+
+                        {/* Weight Slider with Steppers */}
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center text-xs font-mono">
+                            <span className="text-zinc-300 font-bold uppercase">Berat Badan (BB):</span>
+                            <div className="flex items-center space-x-1.5">
+                              <button
+                                type="button"
+                                onClick={() => setUserWeight(prev => Math.max(40, prev - 1))}
+                                className="w-6 h-6 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 flex items-center justify-center font-bold text-xs"
+                              >
+                                -
+                              </button>
+                              <span className="text-white font-mono font-black text-sm bg-zinc-900 border border-zinc-700 px-2.5 py-0.5 rounded-lg">
+                                {userWeight} kg
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => setUserWeight(prev => Math.min(115, prev + 1))}
+                                className="w-6 h-6 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 flex items-center justify-center font-bold text-xs"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+                          
+                          <input
+                            type="range"
+                            min="40"
+                            max="115"
+                            value={userWeight}
+                            onChange={(e) => setUserWeight(Number(e.target.value))}
+                            className="w-full accent-red-600 cursor-pointer h-2.5 bg-zinc-800 rounded-lg appearance-none"
+                          />
+                          
+                          <div className="flex justify-between text-[10px] font-mono text-zinc-400">
+                            <span>40 kg</span>
+                            <span>60 kg</span>
+                            <span>75 kg</span>
+                            <span>90 kg</span>
+                            <span>115 kg</span>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      {/* 3. Fit Preference Radio */}
+                      <div className="space-y-2">
+                        <label className="text-xs font-mono text-zinc-300 uppercase tracking-wider block font-bold">
+                          Preferensi Siluet Streetwear:
+                        </label>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <button
+                            type="button"
+                            onClick={() => setFitPreference("boxy")}
+                            className={`p-3.5 rounded-2xl border text-left transition ${
+                              fitPreference === "boxy"
+                                ? "bg-gradient-to-r from-red-950/50 to-[#181b24] border-red-500 text-white shadow-[0_0_15px_rgba(239,68,68,0.25)] ring-1 ring-red-500"
+                                : "bg-[#12141c] border-zinc-800 text-zinc-400 hover:border-zinc-700"
+                            }`}
+                          >
+                            <div className="flex items-center justify-between mb-1.5">
+                              <span className="font-bold text-xs uppercase text-white">True Boxy Fit</span>
+                              <span className={`w-3 h-3 rounded-full flex items-center justify-center ${fitPreference === "boxy" ? "bg-red-500" : "bg-zinc-700"}`}>
+                                {fitPreference === "boxy" && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
+                              </span>
+                            </div>
+                            <p className="text-xs text-zinc-300 font-sans leading-relaxed">
+                              Drop shoulder 3-4 cm proporsional, panjang jatuh rapi di ban pinggang, siluet mengotak clean.
+                            </p>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => setFitPreference("baggy")}
+                            className={`p-3.5 rounded-2xl border text-left transition ${
+                              fitPreference === "baggy"
+                                ? "bg-gradient-to-r from-red-950/50 to-[#181b24] border-red-500 text-white shadow-[0_0_15px_rgba(239,68,68,0.25)] ring-1 ring-red-500"
+                                : "bg-[#12141c] border-zinc-800 text-zinc-400 hover:border-zinc-700"
+                            }`}
+                          >
+                            <div className="flex items-center justify-between mb-1.5">
+                              <span className="font-bold text-xs uppercase text-white">Baggy / Loose Oversized</span>
+                              <span className={`w-3 h-3 rounded-full flex items-center justify-center ${fitPreference === "baggy" ? "bg-red-500" : "bg-zinc-700"}`}>
+                                {fitPreference === "baggy" && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
+                              </span>
+                            </div>
+                            <p className="text-xs text-zinc-300 font-sans leading-relaxed">
+                              Ekstra longgar 1 tingkat di atasnya, menjuntai melampaui pinggul, siluet streetwear grunge 90s/Y2K.
+                            </p>
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* 4. Live Atelier Recommendation Card */}
+                      <div className="bg-gradient-to-r from-red-950/40 via-[#151822] to-[#12141c] border border-red-500/40 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+                        <div className="flex items-center space-x-4">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 text-white font-black text-3xl sm:text-4xl flex items-center justify-center shadow-lg shadow-red-950 shrink-0 border border-red-400">
+                            {recommendation.size}
+                          </div>
+                          <div>
+                            <div className="flex items-center space-x-2">
+                              <span className="text-[10px] font-mono uppercase text-red-400 font-bold bg-red-950/60 border border-red-800/60 px-2 py-0.5 rounded">
+                                HASIL ANALISIS ATELIER
+                              </span>
+                              <span className="text-zinc-500">•</span>
+                              <span className="text-xs text-white font-bold">
+                                {fitPreference === "boxy" ? "True Boxy" : "Baggy Oversize"}
+                              </span>
+                            </div>
+                            <p className="text-xs text-zinc-200 mt-1 leading-relaxed max-w-lg">
+                              {recommendation.desc}
+                            </p>
+                            <p className="text-[11px] font-mono text-zinc-400 mt-1">
+                              Kain katun tebal 235-260 GSM combed 16s/14s menjamin siluet drop shoulder tetap tegak dan berbobot.
+                            </p>
+                          </div>
+                        </div>
+
                         <button
                           type="button"
-                          onClick={() => setFitPreference("boxy")}
-                          className={`p-3 rounded-xl border text-left transition ${
-                            fitPreference === "boxy"
-                              ? "bg-zinc-800/90 border-amber-400/80 text-white shadow-[0_0_12px_rgba(251,191,36,0.15)]"
-                              : "bg-zinc-900/40 border-zinc-800 text-zinc-400 hover:border-zinc-700"
-                          }`}
+                          onClick={() => {
+                            setSelectedSize(recommendation.size);
+                            setInspectedSize(recommendation.size);
+                            setIsSizeGuideOpen(false);
+                            showToast(`Ukuran ${recommendation.size} berhasil diterapkan!`, "success");
+                          }}
+                          className="w-full sm:w-auto shrink-0 py-3 px-5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-black text-xs uppercase tracking-wider transition shadow-[0_0_20px_rgba(239,68,68,0.5)] flex items-center justify-center space-x-2 active:scale-95"
                         >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="font-bold text-xs uppercase">True Boxy Fit</span>
-                            <span className={`w-2.5 h-2.5 rounded-full ${fitPreference === "boxy" ? "bg-amber-400" : "bg-zinc-700"}`} />
-                          </div>
-                          <p className="text-[11px] text-zinc-400 font-mono">Drop shoulder proporsional & jatuh rapi di pinggang.</p>
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => setFitPreference("baggy")}
-                          className={`p-3 rounded-xl border text-left transition ${
-                            fitPreference === "baggy"
-                              ? "bg-zinc-800/90 border-amber-400/80 text-white shadow-[0_0_12px_rgba(251,191,36,0.15)]"
-                              : "bg-zinc-900/40 border-zinc-800 text-zinc-400 hover:border-zinc-700"
-                          }`}
-                        >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="font-bold text-xs uppercase">Baggy / Loose Oversized</span>
-                            <span className={`w-2.5 h-2.5 rounded-full ${fitPreference === "baggy" ? "bg-amber-400" : "bg-zinc-700"}`} />
-                          </div>
-                          <p className="text-[11px] text-zinc-400 font-mono">Ekstra lebar, santai, dan menjuntai melampaui pinggul.</p>
+                          <Check className="w-4 h-4" />
+                          <span>Gunakan Ukuran {recommendation.size}</span>
                         </button>
                       </div>
-                    </div>
 
-                    {/* Recommendation Card */}
-                    <div className="bg-gradient-to-r from-amber-950/30 via-zinc-900 to-zinc-900 border border-amber-500/30 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-16 h-16 rounded-2xl bg-amber-400 text-zinc-950 font-black text-2xl flex items-center justify-center shadow-lg shrink-0">
-                          {recommendation.size}
-                        </div>
-                        <div>
-                          <div className="flex items-center space-x-2">
-                            <span className="text-[11px] font-mono uppercase text-amber-400 font-bold">Rekomendasi Terbaik</span>
-                            <span className="text-zinc-600">•</span>
-                            <span className="text-xs text-white font-bold">{fitPreference === "boxy" ? "True Boxy" : "Baggy Oversize"}</span>
-                          </div>
-                          <p className="text-xs text-zinc-300 mt-0.5 leading-relaxed">
-                            {recommendation.desc}
-                          </p>
-                        </div>
-                      </div>
+                    </div>
+                  )}
+                </div>
 
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setSelectedSize(recommendation.size);
-                          setIsSizeGuideOpen(false);
-                          showToast(`Ukuran ${recommendation.size} berhasil dipilih!`, "success");
-                        }}
-                        className="w-full sm:w-auto shrink-0 py-2.5 px-4 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 font-black text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center space-x-1.5"
-                      >
-                        <Check className="w-3.5 h-3.5" />
-                        <span>Gunakan Ukuran {recommendation.size}</span>
-                      </button>
-                    </div>
+                {/* Modal Footer with Active Size Summary */}
+                <div className="px-5 py-3.5 border-t border-zinc-800 bg-[#12141a] flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <div className="flex items-center space-x-3 text-xs font-mono">
+                    <span className="text-zinc-400">Ukuran Terpilih Saat Ini:</span>
+                    <span className="px-2.5 py-1 rounded-lg bg-red-600 text-white font-black text-sm shadow-md">
+                      {selectedSize}
+                    </span>
+                    <span className="text-zinc-500 hidden sm:inline">•</span>
+                    <span className="text-zinc-300 hidden sm:inline">
+                      {STANDARD_SIZE_METRICS.find(m => m.size === selectedSize)?.persona} (LD: {STANDARD_SIZE_METRICS.find(m => m.size === selectedSize)?.ld} cm)
+                    </span>
                   </div>
-                ) : (
-                  <div>
-                    <div className="overflow-x-auto rounded-xl border border-zinc-800">
-                      <table className="w-full text-xs font-mono text-left">
-                        <thead className="bg-black/60 text-zinc-400 border-b border-zinc-800">
-                          <tr>
-                            <th className="py-2.5 px-3">Size</th>
-                            <th className="py-2.5 px-3">Lebar Dada (LD)</th>
-                            <th className="py-2.5 px-3">Panjang Baju (PB)</th>
-                            <th className="py-2.5 px-3">Panjang Lengan</th>
-                            <th className="py-2.5 px-3">Saran Postur</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-zinc-800 text-white">
-                          <tr className={selectedSize === "S" ? "bg-amber-950/20" : ""}>
-                            <td className="py-2.5 px-3 font-bold text-amber-400">S</td>
-                            <td className="py-2.5 px-3">54 cm</td>
-                            <td className="py-2.5 px-3">68 cm</td>
-                            <td className="py-2.5 px-3 text-zinc-400">23 cm</td>
-                            <td className="py-2.5 px-3 text-zinc-400">TB 155-165 cm / BB 45-55 kg</td>
-                          </tr>
-                          <tr className={selectedSize === "M" ? "bg-amber-950/20" : ""}>
-                            <td className="py-2.5 px-3 font-bold text-amber-400">M</td>
-                            <td className="py-2.5 px-3">57 cm</td>
-                            <td className="py-2.5 px-3">71 cm</td>
-                            <td className="py-2.5 px-3 text-zinc-400">24 cm</td>
-                            <td className="py-2.5 px-3 text-zinc-400">TB 165-172 cm / BB 55-65 kg</td>
-                          </tr>
-                          <tr className={selectedSize === "L" ? "bg-amber-950/20" : ""}>
-                            <td className="py-2.5 px-3 font-bold text-amber-400">L</td>
-                            <td className="py-2.5 px-3">60 cm</td>
-                            <td className="py-2.5 px-3">74 cm</td>
-                            <td className="py-2.5 px-3 text-zinc-400">25 cm</td>
-                            <td className="py-2.5 px-3 text-zinc-400">TB 172-178 cm / BB 65-75 kg</td>
-                          </tr>
-                          <tr className={selectedSize === "XL" ? "bg-amber-950/20" : ""}>
-                            <td className="py-2.5 px-3 font-bold text-amber-400">XL</td>
-                            <td className="py-2.5 px-3">63 cm</td>
-                            <td className="py-2.5 px-3">77 cm</td>
-                            <td className="py-2.5 px-3 text-zinc-400">26 cm</td>
-                            <td className="py-2.5 px-3 text-zinc-400">TB 178-185 cm / BB 75-85 kg</td>
-                          </tr>
-                          <tr className={selectedSize === "XXL" ? "bg-amber-950/20" : ""}>
-                            <td className="py-2.5 px-3 font-bold text-amber-400">XXL</td>
-                            <td className="py-2.5 px-3">66 cm</td>
-                            <td className="py-2.5 px-3">80 cm</td>
-                            <td className="py-2.5 px-3 text-zinc-400">27 cm</td>
-                            <td className="py-2.5 px-3 text-zinc-400">TB &gt; 185 cm / BB &gt; 85 kg</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <p className="text-[11px] font-mono text-zinc-500 mt-3">
-                      *Toleransi ukuran jahitan manual ±1-2 cm. Menggunakan rib leher tebal anti-melar.
-                    </p>
+
+                  <div className="flex items-center space-x-2.5 w-full sm:w-auto">
+                    <button
+                      onClick={() => setIsSizeGuideOpen(false)}
+                      className="flex-1 sm:flex-initial py-2.5 px-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono text-xs transition"
+                    >
+                      Tutup
+                    </button>
+                    <button
+                      onClick={() => {
+                        const targetSize = sizeGuideTab === "calculator" ? recommendation.size : inspectedSize;
+                        setSelectedSize(targetSize);
+                        setIsSizeGuideOpen(false);
+                        showToast(`Ukuran ${targetSize} berhasil diterapkan!`, "success");
+                      }}
+                      className="flex-1 sm:flex-initial py-2.5 px-5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-black text-xs uppercase tracking-wider transition shadow-[0_0_20px_rgba(239,68,68,0.4)] flex items-center justify-center space-x-1.5 active:scale-95"
+                    >
+                      <Check className="w-4 h-4" />
+                      <span>
+                        Gunakan Ukuran {sizeGuideTab === "calculator" ? recommendation.size : inspectedSize}
+                      </span>
+                    </button>
                   </div>
-                )}
+                </div>
+
               </div>
             </div>
           </div>
