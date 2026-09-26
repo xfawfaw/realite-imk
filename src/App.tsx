@@ -2753,7 +2753,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
             onClick={() => setIsAdminOpen(false)}
           ></div>
           <div className="min-h-full flex items-center justify-center p-2 sm:p-5 relative z-10">
-            <div className={`w-full max-w-5xl rounded-3xl border shadow-2xl overflow-hidden relative max-h-[92vh] flex flex-col transition-all ${
+            <div className={`w-full max-w-5xl rounded-3xl border shadow-2xl overflow-hidden relative h-[88vh] max-h-[820px] min-h-[560px] flex flex-col transition-colors duration-150 ${
               adminTheme === 'light' 
                 ? 'bg-slate-50 text-slate-800 border-slate-200' 
                 : 'bg-zinc-950 text-white border-zinc-800'
@@ -2998,7 +2998,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                         </button>
                       </div>
 
-                      <div className="shrink-0 flex items-center justify-end">
+                      <div className="shrink-0 flex items-center justify-end min-h-[34px]">
                         {adminActiveTab === "products" && (
                           <button 
                             onClick={openAddProductModal}
@@ -3014,7 +3014,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                             className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-600/20 transition active:scale-95"
                           >
                             <Plus className="w-3.5 h-3.5" />
-                            <span>+ Tambah Slide Showcase</span>
+                            <span>+ Tambah Slide</span>
                           </button>
                         )}
                         {adminActiveTab === "lookbook" && (
@@ -3209,33 +3209,32 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
 
                   {/* Tab: Showcase Squeeze Carousel CMS */}
                   {adminActiveTab === "showcase" && (
-                    <div className={`flex-1 flex flex-col overflow-hidden p-4 sm:p-5 space-y-4 ${
+                    <div className={`flex-1 flex flex-col overflow-hidden p-4 sm:p-5 space-y-3.5 ${
                       adminTheme === 'light' ? 'bg-slate-50' : 'bg-transparent'
                     }`}>
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 shrink-0">
-                        <div>
-                          <h3 className={`text-sm font-bold uppercase tracking-wider ${
+                      <div className="flex items-center justify-between text-xs font-mono shrink-0 py-0.5">
+                        <div className="flex items-center space-x-2">
+                          <Layers className="w-4 h-4 text-[#A60009]" />
+                          <span className={`font-bold uppercase text-xs ${
                             adminTheme === 'light' ? 'text-slate-900' : 'text-white'
                           }`}>
-                            Hero Squeeze Carousel Drops ({showcaseSlides.length} Slide)
-                          </h3>
-                          <p className={`text-[11px] ${
-                            adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'
+                            Hero Squeeze Carousel Drops
+                          </span>
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${
+                            adminTheme === 'light' ? 'bg-slate-100 text-slate-600 border-slate-200' : 'bg-zinc-900 text-zinc-400 border-zinc-800'
                           }`}>
-                            Slide banner utama interaktif di beranda. Geser urutan dengan tombol panah untuk mengubah tata letak hero drop.
-                          </p>
+                            {showcaseSlides.length} Slide
+                          </span>
                         </div>
-                        <button 
-                          onClick={openAddShowcaseModal}
-                          className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-600/20 transition active:scale-95 shrink-0"
-                        >
-                          <Plus className="w-3.5 h-3.5" />
-                          <span>+ Tambah Slide</span>
-                        </button>
+                        <p className={`text-[11px] hidden sm:block ${
+                          adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'
+                        }`}>
+                          Gunakan tombol panah untuk mengatur urutan geser carousel di beranda
+                        </p>
                       </div>
 
                       {/* Showcase Slides Table */}
-                      <div className={`flex-1 overflow-y-auto rounded-2xl border shadow-xs transition ${
+                      <div className={`flex-1 overflow-y-auto rounded-2xl border shadow-xs transition-colors ${
                         adminTheme === 'light' ? 'bg-white border-slate-200' : 'bg-zinc-950 border-zinc-800'
                       }`}>
                         <table className="w-full text-left text-xs font-mono">
@@ -3376,34 +3375,35 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
 
                   {/* Tab: Lookbook CMS */}
                   {adminActiveTab === "lookbook" && (
-                    <div className={`flex-1 flex flex-col overflow-hidden p-4 sm:p-5 space-y-4 ${
+                    <div className={`flex-1 flex flex-col overflow-hidden p-4 sm:p-5 space-y-3.5 ${
                       adminTheme === 'light' ? 'bg-slate-50' : 'bg-transparent'
                     }`}>
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 shrink-0">
-                        <div>
-                          <h3 className={`text-sm font-bold uppercase tracking-wider ${
+                      <div className="flex items-center justify-between text-xs font-mono shrink-0 py-0.5">
+                        <div className="flex items-center space-x-2">
+                          <Camera className="w-4 h-4 text-[#A60009]" />
+                          <span className={`font-bold uppercase text-xs ${
                             adminTheme === 'light' ? 'text-slate-900' : 'text-white'
                           }`}>
-                            Street Style Editorial Lookbook ({lookbookItems.length} Foto)
-                          </h3>
-                          <p className={`text-[11px] ${
-                            adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'
+                            Street Style Editorial Lookbook
+                          </span>
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${
+                            adminTheme === 'light' ? 'bg-slate-100 text-slate-600 border-slate-200' : 'bg-zinc-900 text-zinc-400 border-zinc-800'
                           }`}>
-                            Galeri foto editorial jalanan Yogyakarta. Tautkan lookbook ke item katalog agar pembeli bisa langsung melihat produknya.
-                          </p>
+                            {lookbookItems.length} Foto
+                          </span>
                         </div>
-                        <button 
-                          onClick={openAddLookbookModal}
-                          className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-600/20 transition active:scale-95 shrink-0"
-                        >
-                          <Plus className="w-3.5 h-3.5" />
-                          <span>+ Tambah Lookbook</span>
-                        </button>
+                        <p className={`text-[11px] hidden sm:block ${
+                          adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'
+                        }`}>
+                          Tautkan foto ke katalog pakaian untuk fitur direct shop-look
+                        </p>
                       </div>
 
-                      {/* Lookbook Cards Grid */}
-                      <div className="flex-1 overflow-y-auto">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
+                      {/* Lookbook Cards Container */}
+                      <div className={`flex-1 overflow-y-auto rounded-2xl border shadow-xs p-4 sm:p-5 transition-colors ${
+                        adminTheme === 'light' ? 'bg-white border-slate-200' : 'bg-zinc-950 border-zinc-800'
+                      }`}>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                           {lookbookItems.map((item, idx) => {
                             const linkedProd = products.find(p => p.id === item.linkedProductId);
                             return (
@@ -3522,93 +3522,115 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
 
                   {/* Tab 2: WhatsApp & Store Settings */}
                   {adminActiveTab === "settings" && (
-                    <div className={`p-6 overflow-y-auto space-y-6 max-w-xl ${
+                    <div className={`flex-1 flex flex-col overflow-hidden p-4 sm:p-5 space-y-3.5 ${
                       adminTheme === 'light' ? 'bg-slate-50' : 'bg-transparent'
                     }`}>
-                      <div className={`p-5 rounded-2xl border space-y-4 font-mono text-xs transition shadow-xs ${
-                        adminTheme === 'light'
-                          ? 'bg-white border-slate-200 text-slate-800'
-                          : 'bg-zinc-900/60 border-zinc-800 text-white'
-                      }`}>
-                        <h5 className={`font-bold text-sm uppercase flex items-center space-x-2 ${
-                          adminTheme === 'light' ? 'text-slate-900' : 'text-white'
-                        }`}>
+                      <div className="flex items-center justify-between text-xs font-mono shrink-0 py-0.5">
+                        <div className="flex items-center space-x-2">
                           <MessageCircle className="w-4 h-4 text-emerald-500" />
-                          <span>Nomor WhatsApp Tujuan Checkout</span>
-                        </h5>
-                        
-                        <div>
-                          <label className={`block text-[11px] mb-1.5 ${
-                            adminTheme === 'light' ? 'text-slate-600' : 'text-zinc-400'
-                          }`}>Nomor WhatsApp Admin (Format 62...):</label>
-                          <input 
-                            type="text" 
-                            value={waNumber}
-                            onChange={(e) => setWaNumber(e.target.value)}
-                            className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
-                              adminTheme === 'light'
-                                ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-emerald-600'
-                                : 'bg-zinc-900 border-zinc-800 text-white focus:border-emerald-600'
-                            }`}
-                          />
-                          <span className={`text-[10px] mt-1.5 block ${
-                            adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'
+                          <span className={`font-bold uppercase text-xs ${
+                            adminTheme === 'light' ? 'text-slate-900' : 'text-white'
                           }`}>
-                            Nomor terverifikasi saat ini: <strong className="text-emerald-600 font-bold">+{waNumber}</strong>
+                            Pengaturan WhatsApp & Toko
                           </span>
                         </div>
-
-                        <div className="flex items-center space-x-2 pt-1">
-                          <button 
-                            onClick={() => {
-                              window.open(`https://wa.me/${waNumber}?text=Halo%20Admin%20Dedicaterealite!%20Tes%20koneksi%20berhasil%20🔥`, '_blank');
-                            }}
-                            className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center space-x-1.5 shadow-sm transition"
-                          >
-                            <ExternalLink className="w-3.5 h-3.5" />
-                            <span>Tes Hubungkan WhatsApp</span>
-                          </button>
-                          <button 
-                            onClick={() => {
-                              setWaNumber(OFFICIAL_WA_NUMBER);
-                              showToast("Nomor di-reset ke +62 821-1407-2159", "success");
-                            }}
-                            className={`px-3 py-2 rounded-xl border text-xs transition ${
-                              adminTheme === 'light'
-                                ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
-                                : 'bg-zinc-900 hover:bg-zinc-800 border-zinc-800 text-zinc-400 hover:text-white'
-                            }`}
-                          >
-                            Reset ke Default
-                          </button>
-                        </div>
+                        <p className={`text-[11px] hidden sm:block ${
+                          adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'
+                        }`}>
+                          Nomor tujuan order & teks announcement bar berjalan
+                        </p>
                       </div>
 
-                      {/* Announcement Bar Marquee Editor */}
-                      <div className={`p-5 rounded-2xl border space-y-3 font-mono text-xs transition shadow-xs ${
-                        adminTheme === 'light'
-                          ? 'bg-white border-slate-200 text-slate-800'
-                          : 'bg-zinc-900/60 border-zinc-800 text-white'
+                      <div className={`flex-1 overflow-y-auto rounded-2xl border shadow-xs p-5 sm:p-6 transition-colors ${
+                        adminTheme === 'light' ? 'bg-white border-slate-200' : 'bg-zinc-950 border-zinc-800'
                       }`}>
-                        <h5 className={`font-bold text-sm uppercase ${
-                          adminTheme === 'light' ? 'text-slate-900' : 'text-white'
-                        }`}>Teks Running Announcement Bar</h5>
-                        <input 
-                          type="text" 
-                          value={announcementText}
-                          onChange={(e) => setAnnouncementText(e.target.value)}
-                          className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                        <div className="max-w-2xl space-y-6">
+                          <div className={`p-5 rounded-2xl border space-y-4 font-mono text-xs transition shadow-xs ${
                             adminTheme === 'light'
-                              ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
-                              : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
-                          }`}
-                        />
-                        <button 
-                          onClick={() => showToast("Teks announcement berhasil disimpan", "success")}
-                          className="px-4 py-2 rounded-xl bg-[#7A0006] hover:bg-[#991b1b] text-white font-bold text-xs uppercase shadow-sm transition"
-                        >
-                          Simpan Pengumuman
-                        </button>
+                              ? 'bg-slate-50 border-slate-200 text-slate-800'
+                              : 'bg-zinc-900/60 border-zinc-800 text-white'
+                          }`}>
+                            <h5 className={`font-bold text-sm uppercase flex items-center space-x-2 ${
+                              adminTheme === 'light' ? 'text-slate-900' : 'text-white'
+                            }`}>
+                              <MessageCircle className="w-4 h-4 text-emerald-500" />
+                              <span>Nomor WhatsApp Tujuan Checkout</span>
+                            </h5>
+                            
+                            <div>
+                              <label className={`block text-[11px] mb-1.5 ${
+                                adminTheme === 'light' ? 'text-slate-600' : 'text-zinc-400'
+                              }`}>Nomor WhatsApp Admin (Format 62...):</label>
+                              <input 
+                                type="text" 
+                                value={waNumber}
+                                onChange={(e) => setWaNumber(e.target.value)}
+                                className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                                  adminTheme === 'light'
+                                    ? 'bg-white border-slate-300 text-slate-900 focus:bg-white focus:border-emerald-600'
+                                    : 'bg-zinc-900 border-zinc-800 text-white focus:border-emerald-600'
+                                }`}
+                              />
+                              <span className={`text-[10px] mt-1.5 block ${
+                                adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'
+                              }`}>
+                                Nomor terverifikasi saat ini: <strong className="text-emerald-600 font-bold">+{waNumber}</strong>
+                              </span>
+                            </div>
+
+                            <div className="flex items-center space-x-2 pt-1">
+                              <button 
+                                onClick={() => {
+                                  window.open(`https://wa.me/${waNumber}?text=Halo%20Admin%20Dedicaterealite!%20Tes%20koneksi%20berhasil%20🔥`, '_blank');
+                                }}
+                                className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center space-x-1.5 shadow-sm transition"
+                              >
+                                <ExternalLink className="w-3.5 h-3.5" />
+                                <span>Tes Hubungkan WhatsApp</span>
+                              </button>
+                              <button 
+                                onClick={() => {
+                                  setWaNumber(OFFICIAL_WA_NUMBER);
+                                  showToast("Nomor di-reset ke +62 821-1407-2159", "success");
+                                }}
+                                className={`px-3 py-2 rounded-xl border text-xs transition ${
+                                  adminTheme === 'light'
+                                    ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
+                                    : 'bg-zinc-900 hover:bg-zinc-800 border-zinc-800 text-zinc-400 hover:text-white'
+                                }`}
+                              >
+                                Reset ke Default
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* Announcement Bar Marquee Editor */}
+                          <div className={`p-5 rounded-2xl border space-y-3 font-mono text-xs transition shadow-xs ${
+                            adminTheme === 'light'
+                              ? 'bg-slate-50 border-slate-200 text-slate-800'
+                              : 'bg-zinc-900/60 border-zinc-800 text-white'
+                          }`}>
+                            <h5 className={`font-bold text-sm uppercase ${
+                              adminTheme === 'light' ? 'text-slate-900' : 'text-white'
+                            }`}>Teks Running Announcement Bar</h5>
+                            <input 
+                              type="text" 
+                              value={announcementText}
+                              onChange={(e) => setAnnouncementText(e.target.value)}
+                              className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                                adminTheme === 'light'
+                                  ? 'bg-white border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                                  : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                              }`}
+                            />
+                            <button 
+                              onClick={() => showToast("Teks announcement berhasil disimpan", "success")}
+                              className="px-4 py-2 rounded-xl bg-[#7A0006] hover:bg-[#991b1b] text-white font-bold text-xs uppercase shadow-sm transition"
+                            >
+                              Simpan Pengumuman
+                            </button>
+                          </div>
+                        </div>
                       </div>
 
                     </div>
@@ -3616,73 +3638,94 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
 
                   {/* Tab 3: Backup & Restore JSON */}
                   {adminActiveTab === "backup" && (
-                    <div className={`p-6 overflow-y-auto space-y-5 max-w-xl font-mono text-xs ${
+                    <div className={`flex-1 flex flex-col overflow-hidden p-4 sm:p-5 space-y-3.5 ${
                       adminTheme === 'light' ? 'bg-slate-50' : 'bg-transparent'
                     }`}>
-                      
-                      <div className={`p-5 rounded-2xl border space-y-3 shadow-xs transition ${
-                        adminTheme === 'light'
-                          ? 'bg-white border-slate-200 text-slate-800'
-                          : 'bg-zinc-900/60 border-zinc-800 text-white'
-                      }`}>
-                        <div className={`font-bold uppercase ${adminTheme === 'light' ? 'text-slate-900' : 'text-white'}`}>
-                          Download Backup Master Data (JSON)
+                      <div className="flex items-center justify-between text-xs font-mono shrink-0 py-0.5">
+                        <div className="flex items-center space-x-2">
+                          <Download className="w-4 h-4 text-[#A60009]" />
+                          <span className={`font-bold uppercase text-xs ${
+                            adminTheme === 'light' ? 'text-slate-900' : 'text-white'
+                          }`}>
+                            Backup & Restore Master Data
+                          </span>
                         </div>
-                        <p className={`text-[11px] ${adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'}`}>
-                          Unduh seluruh arsip data pakaian, slide showcase hero, editorial lookbook, dan pengaturan toko sebagai cadangan JSON.
+                        <p className={`text-[11px] hidden sm:block ${
+                          adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'
+                        }`}>
+                          Unduh arsip offline lengkap atau reset data ke konfigurasi pabrik
                         </p>
-                        <button 
-                          onClick={() => {
-                            const payload = {
-                              version: "2.1",
-                              exportedAt: new Date().toISOString(),
-                              products,
-                              showcaseSlides,
-                              lookbookItems,
-                              waNumber,
-                              announcementText
-                            };
-                            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
-                            const anchor = document.createElement('a');
-                            anchor.setAttribute("href", dataStr);
-                            anchor.setAttribute("download", `dedicaterealite_full_backup_${new Date().toISOString().slice(0, 10)}.json`);
-                            anchor.click();
-                            showToast("Backup JSON lengkap berhasil diunduh!", "success");
-                          }}
-                          className={`px-3.5 py-2.5 rounded-xl border flex items-center space-x-1.5 transition ${
-                            adminTheme === 'light'
-                              ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-800 font-semibold'
-                              : 'bg-zinc-900 hover:bg-zinc-800 border-zinc-800 text-white'
-                          }`}
-                        >
-                          <Download className="w-3.5 h-3.5" />
-                          <span>Unduh File JSON Lengkap</span>
-                        </button>
                       </div>
 
-                      <div className={`p-5 rounded-2xl border space-y-3 transition ${
-                        adminTheme === 'light'
-                          ? 'bg-rose-50/70 border-rose-200 text-rose-900'
-                          : 'bg-red-950/20 border-red-900/50 text-white'
+                      <div className={`flex-1 overflow-y-auto rounded-2xl border shadow-xs p-5 sm:p-6 transition-colors ${
+                        adminTheme === 'light' ? 'bg-white border-slate-200' : 'bg-zinc-950 border-zinc-800'
                       }`}>
-                        <div className="font-bold text-rose-700 uppercase">Reset Data Pabrik</div>
-                        <p className={`text-[11px] ${adminTheme === 'light' ? 'text-rose-600' : 'text-zinc-400'}`}>
-                          Kembalikan semua item pakaian, slide showcase hero, dan editorial lookbook ke versi default streetwear Dedicaterealite.
-                        </p>
-                        <button 
-                          onClick={() => {
-                            if (confirm("Reset seluruh data produk, showcase, dan lookbook ke default?")) {
-                              setProducts(INITIAL_PRODUCTS);
-                              setShowcaseSlides(INITIAL_SHOWCASE_SLIDES);
-                              setLookbookItems(INITIAL_LOOKBOOK_ITEMS);
-                              setWaNumber(OFFICIAL_WA_NUMBER);
-                              showToast("Data katalog, showcase, & lookbook di-reset ke default", "info");
-                            }
-                          }}
-                          className="px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold transition shadow-xs"
-                        >
-                          Reset ke Default Pabrik
-                        </button>
+                        <div className="max-w-2xl space-y-5">
+                          <div className={`p-5 rounded-2xl border space-y-3 shadow-xs transition ${
+                            adminTheme === 'light'
+                              ? 'bg-slate-50 border-slate-200 text-slate-800'
+                              : 'bg-zinc-900/60 border-zinc-800 text-white'
+                          }`}>
+                            <div className={`font-bold uppercase ${adminTheme === 'light' ? 'text-slate-900' : 'text-white'}`}>
+                              Download Backup Master Data (JSON)
+                            </div>
+                            <p className={`text-[11px] ${adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'}`}>
+                              Unduh seluruh arsip data pakaian, slide showcase hero, editorial lookbook, dan pengaturan toko sebagai cadangan JSON.
+                            </p>
+                            <button 
+                              onClick={() => {
+                                const payload = {
+                                  version: "2.1",
+                                  exportedAt: new Date().toISOString(),
+                                  products,
+                                  showcaseSlides,
+                                  lookbookItems,
+                                  waNumber,
+                                  announcementText
+                                };
+                                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
+                                const anchor = document.createElement('a');
+                                anchor.setAttribute("href", dataStr);
+                                anchor.setAttribute("download", `dedicaterealite_full_backup_${new Date().toISOString().slice(0, 10)}.json`);
+                                anchor.click();
+                                showToast("Backup JSON lengkap berhasil diunduh!", "success");
+                              }}
+                              className={`px-3.5 py-2.5 rounded-xl border flex items-center space-x-1.5 transition ${
+                                adminTheme === 'light'
+                                  ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-800 font-semibold'
+                                  : 'bg-zinc-900 hover:bg-zinc-800 border-zinc-800 text-white'
+                              }`}
+                            >
+                              <Download className="w-3.5 h-3.5" />
+                              <span>Unduh File JSON Lengkap</span>
+                            </button>
+                          </div>
+
+                          <div className={`p-5 rounded-2xl border space-y-3 transition ${
+                            adminTheme === 'light'
+                              ? 'bg-rose-50/70 border-rose-200 text-rose-900'
+                              : 'bg-red-950/20 border-red-900/50 text-white'
+                          }`}>
+                            <div className="font-bold text-rose-700 uppercase">Reset Data Pabrik</div>
+                            <p className={`text-[11px] ${adminTheme === 'light' ? 'text-rose-600' : 'text-zinc-400'}`}>
+                              Kembalikan semua item pakaian, slide showcase hero, dan editorial lookbook ke versi default streetwear Dedicaterealite.
+                            </p>
+                            <button 
+                              onClick={() => {
+                                if (confirm("Reset seluruh data produk, showcase, dan lookbook ke default?")) {
+                                  setProducts(INITIAL_PRODUCTS);
+                                  setShowcaseSlides(INITIAL_SHOWCASE_SLIDES);
+                                  setLookbookItems(INITIAL_LOOKBOOK_ITEMS);
+                                  setWaNumber(OFFICIAL_WA_NUMBER);
+                                  showToast("Data katalog, showcase, & lookbook di-reset ke default", "info");
+                                }
+                              }}
+                              className="px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold transition shadow-xs"
+                            >
+                              Reset ke Default Pabrik
+                            </button>
+                          </div>
+                        </div>
                       </div>
 
                     </div>
