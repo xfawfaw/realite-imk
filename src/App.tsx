@@ -164,18 +164,24 @@ export const INITIAL_PRODUCTS: Product[] = [
     fitType: "Boxy Fit",
     fabricMaterial: "Heavyweight Cotton Combed 16s",
     fabricGsm: 235,
-    printType: "High-Density Plastisol Print",
+    printType: "High-Density Stag Beetle Graphic Print",
     status: "READY",
     colorTheme: "#18181b",
     graphicAccent: "#7A0006",
-    image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
-    description: "Signature boxy cut t-shirt dengan siluet drop shoulder lebar dan potongan crop hem streetwear. Menggunakan katun combed 16s berbobot 235 GSM dan rib leher tebal 3.5 cm tahan melar.",
+    image: "/images/you-are-sick-front.jpg",
+    gallery: [
+      "/images/you-are-sick-front.jpg",
+      "/images/you-are-sick-alley-bike.jpg",
+      "/images/you-are-sick-detail.jpg",
+      "/images/you-are-sick-front.jpg"
+    ],
+    description: "Signature 235 GSM boxy cut t-shirt dengan siluet drop shoulder lebar dan potongan crop hem streetwear. Menggunakan katun combed 16s berbobot 235 GSM dan sablon 'YOU ARE SICK' dengan grafis kumbang tanduk (stag beetle) khas kultur underground Jogja.",
     sizes: [
-      { size: "S", stock: 4, available: true },
-      { size: "M", stock: 8, available: true },
-      { size: "L", stock: 14, available: true },
-      { size: "XL", stock: 6, available: true },
-      { size: "XXL", stock: 0, available: false }
+      { size: "S", stock: 6, available: true },
+      { size: "M", stock: 12, available: true },
+      { size: "L", stock: 18, available: true },
+      { size: "XL", stock: 8, available: true },
+      { size: "XXL", stock: 4, available: true }
     ]
   },
   {
@@ -232,25 +238,31 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: 4,
-    name: "ANXIETY SOCIETY Distressed Heavy Tee",
+    name: "DEDICATE SACRIFICE Red Handprint Tee",
     sku: "DDC-TC-004",
     category: "Heavyweight Tee",
-    price: 180000,
-    fitType: "Regular Boxy",
-    fabricMaterial: "Cotton Combed 20s Solid",
-    fabricGsm: 200,
-    printType: "Vintage Cracked Ink Plastisol",
+    price: 185000,
+    fitType: "Boxy Fit",
+    fabricMaterial: "Heavyweight Cotton Combed 16s",
+    fabricGsm: 235,
+    printType: "High-Density Blood Red Handprint & Typography",
     status: "READY",
     colorTheme: "#1c1917",
     graphicAccent: "#b91c1c",
-    image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=1200&q=80",
-    description: "Grafis distressed angel wing & kawat berduri bertema kesehatan mental urban. Tekstur sablon cracked ink sengaja dibuat retak alami untuk nuansa vintage band tee autentik.",
+    image: "/images/dedicate-sacrifice-vespa.jpg",
+    gallery: [
+      "/images/dedicate-sacrifice-vespa.jpg",
+      "/images/dedicate-sacrifice-skate.jpg",
+      "/images/dedicate-sacrifice-vespa.jpg",
+      "/images/dedicate-sacrifice-skate.jpg"
+    ],
+    description: "Edisi filosofis Dedicaterealite bertema 'Sacrifice'. Menggunakan katun combed 16s 235 GSM tebal dengan artwork sablon cap tangan merah darah dan teks manifestasi dedikasi. Dilengkapi rib leher tebal anti melar.",
     sizes: [
-      { size: "S", stock: 4, available: true },
-      { size: "M", stock: 8, available: true },
-      { size: "L", stock: 6, available: true },
-      { size: "XL", stock: 2, available: true },
-      { size: "XXL", stock: 1, available: true }
+      { size: "S", stock: 5, available: true },
+      { size: "M", stock: 10, available: true },
+      { size: "L", stock: 14, available: true },
+      { size: "XL", stock: 6, available: true },
+      { size: "XXL", stock: 2, available: true }
     ]
   },
   {
@@ -325,28 +337,28 @@ export const INITIAL_SHOWCASE_SLIDES: ShowcaseSlideItem[] = [
     id: "you-are-sick",
     dropCode: "DROP 02 // 235 GSM BOXY",
     title: "YOU ARE SICK — Signature 235 GSM Boxy Cut.",
-    description: "Drop shoulder silhouette with wide 3.5cm neck ribbing and high-density plastisol artwork. Engineered for street aesthetics.",
+    description: "Drop shoulder silhouette dengan grafis kumbang tanduk stag beetle dan tipografi brutalist. 235 GSM heavyweight cotton combed 16s.",
     actionText: "Lihat Detail Kaos",
-    image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/you-are-sick-alley-bike.jpg",
     linkedProductId: 1
   },
   {
+    id: "dedicate-sacrifice",
+    dropCode: "DROP 03 // SACRIFICE EDITION",
+    title: "DEDICATE SACRIFICE — Red Handprint Series.",
+    description: "Eksplorasi kultur skate & urban Jogja dengan artwork cap tangan merah darah berfilosofi dedikasi dan pengorbanan.",
+    actionText: "Lihat Detail Kaos",
+    image: "/images/dedicate-sacrifice-skate.jpg",
+    linkedProductId: 4
+  },
+  {
     id: "system-collapse",
-    dropCode: "DROP 03 // ACID WASH 260 GSM",
+    dropCode: "DROP 04 // ACID WASH 260 GSM",
     title: "SYSTEM COLLAPSE — 260 GSM Acid Washed Vintage Charcoal.",
     description: "14s vintage washed heavyweight cotton with industrial Y2K typography across the back and heavy drape.",
     actionText: "Buka Battle-Room",
     image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=80",
     linkedProductId: 3
-  },
-  {
-    id: "anxiety-society",
-    dropCode: "DROP 04 // CRACKED INK",
-    title: "ANXIETY SOCIETY — Distressed Cracked-Ink Edition.",
-    description: "200 GSM breathable combed cotton exploring urban grunge culture with authentic cracked ink plastisol finish.",
-    actionText: "Pesan Sekarang",
-    image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=1200&q=80",
-    linkedProductId: 4
   },
   {
     id: "cybernetic-ls",
@@ -392,7 +404,37 @@ export const INITIAL_LOOKBOOK_ITEMS: LookbookItem[] = [
   },
   {
     id: "lb-02",
-    tag: "DROP 01 // STUDIO SESSION",
+    tag: "EDITORIAL // YOU ARE SICK",
+    title: "ALLEYWAY MIDNIGHT RIDERS",
+    location: "Lorong Bersejarah, Yogyakarta",
+    specs: "235 GSM • Stag Beetle Boxy Tee",
+    image: "/images/you-are-sick-alley-bike.jpg",
+    caption: "Dua model mengenakan kaos hitam YOU ARE SICK di atas motor trail malam hari.",
+    linkedProductId: 1
+  },
+  {
+    id: "lb-03",
+    tag: "SKATE ARCHIVE // CAR WASH",
+    title: "CAR WASH SKATE SESSION",
+    location: "Laxy Car Wash, Yogyakarta",
+    specs: "Heavyweight Combed 16s • Balaclava Look",
+    image: "/images/dedicate-sacrifice-skate.jpg",
+    caption: "Sesi skate malam hari dengan balaclava dan kaos Dedicate Sacrifice cap tangan merah.",
+    linkedProductId: 4
+  },
+  {
+    id: "lb-04",
+    tag: "SCOOTER CULTURE // NIGHT RUN",
+    title: "VESPA SPRINT MIDNIGHT RUN",
+    location: "Tugu & Malioboro Outer Circle, Yogyakarta",
+    specs: "235 GSM • Red Handprint Backprint",
+    image: "/images/dedicate-sacrifice-vespa.jpg",
+    caption: "Riding santai malam hari mengendarai Vespa Sprint mengenakan kaos Dedicate Sacrifice.",
+    linkedProductId: 4
+  },
+  {
+    id: "lb-05",
+    tag: "STUDIO ARCHIVE // CREW",
     title: "CONCRETE STUDIO & TWO-TONE CREW",
     location: "Underground Creative Studio, Yogyakarta",
     specs: "Heavy Cotton Combed 16s • Bold Back Print",
@@ -401,33 +443,33 @@ export const INITIAL_LOOKBOOK_ITEMS: LookbookItem[] = [
     linkedProductId: 2
   },
   {
-    id: "lb-03",
-    tag: "ARCHIVE // DRAGON SCREENPRINT",
+    id: "lb-06",
+    tag: "FIT CHECK // FULL BODY",
+    title: "YOU ARE SICK FIT CHECK",
+    location: "Billiard Lounge, Yogyakarta",
+    specs: "235 GSM Boxy Cut • Light Blue Denim",
+    image: "/images/you-are-sick-front.jpg",
+    caption: "Proporsi siluet boxy cut jatuh sempurna di bahu dipadukan denim biru terang.",
+    linkedProductId: 1
+  },
+  {
+    id: "lb-07",
+    tag: "DETAIL // STAG BEETLE PRINT",
+    title: "YOU ARE SICK TEXTURE",
+    location: "Dedicate Screenprint Workshop",
+    specs: "High-Density Plastisol • Glossy Beetle Overlay",
+    image: "/images/you-are-sick-detail.jpg",
+    caption: "Close-up tipografi YOU ARE SICK dengan overlay artwork kumbang tanduk hitam mengkilap.",
+    linkedProductId: 1
+  },
+  {
+    id: "lb-08",
+    tag: "PRINT ARCHIVE // DRAGON",
     title: "HIGH-DENSITY HALFTONE DRAGON",
-    location: "Dedicate Screenprint Workshop, Yogyakarta",
+    location: "Screenprint Workshop, Yogyakarta",
     specs: "Plastisol Curing • Halftone Micro Dot-Work",
     image: "/images/nero-dragon-print.jpg",
     caption: "Detail ketajaman sisik naga dengan teknik raster dot-work presisi tinggi pada katun tebal.",
-    linkedProductId: 2
-  },
-  {
-    id: "lb-04",
-    tag: "EDITORIAL // DIRT BIKE",
-    title: "ALLEYWAY MIDNIGHT RIDE",
-    location: "Gang Lorong Malioboro, Yogyakarta",
-    specs: "240 GSM Loose Cut • Motor Culture",
-    image: "/images/nero-alley-motor.jpg",
-    caption: "Eksplorasi lorong malam Jogja memadukan apparel kasual dengan estetika dirtbike kustom.",
-    linkedProductId: 2
-  },
-  {
-    id: "lb-05",
-    tag: "ON-BODY LOOK // RAW FLASH",
-    title: "MIDNIGHT HOMMIES SESSION",
-    location: "Yogyakarta Street Corner",
-    specs: "Front Dragon Artwork • Silver Chain Accent",
-    image: "/images/nero-front-dragon.jpg",
-    caption: "Tampilan on-body kaos dengan kalung rantai dan grafis naga ikonik ONLY FOR NERO HOMMIES.",
     linkedProductId: 2
   }
 ];
@@ -436,16 +478,8 @@ export default function App() {
   // Master State
   const [products, setProducts] = useState<Product[]>(() => {
     try {
-      const saved = localStorage.getItem('dedicaterealite_react_products_v4');
+      const saved = localStorage.getItem('dedicaterealite_react_products_v5');
       if (saved) return JSON.parse(saved);
-      const oldSaved = localStorage.getItem('dedicaterealite_react_products');
-      if (oldSaved) {
-        const parsed: Product[] = JSON.parse(oldSaved);
-        return parsed.map(p => {
-          const init = INITIAL_PRODUCTS.find(ip => ip.id === p.id);
-          return init && init.image.startsWith('/images/') ? { ...p, image: init.image, gallery: init.gallery } : p;
-        });
-      }
       return INITIAL_PRODUCTS;
     } catch {
       return INITIAL_PRODUCTS;
@@ -517,16 +551,8 @@ export default function App() {
   // Showcase CMS State
   const [showcaseSlides, setShowcaseSlides] = useState<ShowcaseSlideItem[]>(() => {
     try {
-      const saved = localStorage.getItem('dedicaterealite_showcase_slides_v4');
+      const saved = localStorage.getItem('dedicaterealite_showcase_slides_v5');
       if (saved) return JSON.parse(saved);
-      const oldSaved = localStorage.getItem('dedicaterealite_showcase_slides');
-      if (oldSaved) {
-        const parsed: ShowcaseSlideItem[] = JSON.parse(oldSaved);
-        return parsed.map(s => {
-          const init = INITIAL_SHOWCASE_SLIDES.find(is => is.id === s.id);
-          return init && init.image.startsWith('/images/') ? { ...s, image: init.image } : s;
-        });
-      }
       return INITIAL_SHOWCASE_SLIDES;
     } catch (e) {
       return INITIAL_SHOWCASE_SLIDES;
@@ -544,7 +570,7 @@ export default function App() {
   // Lookbook CMS State
   const [lookbookItems, setLookbookItems] = useState<LookbookItem[]>(() => {
     try {
-      const saved = localStorage.getItem('dedicaterealite_lookbook_items_v4');
+      const saved = localStorage.getItem('dedicaterealite_lookbook_items_v5');
       if (saved) return JSON.parse(saved);
       return INITIAL_LOOKBOOK_ITEMS;
     } catch (e) {
@@ -587,15 +613,15 @@ export default function App() {
 
   // Sync LocalStorage
   useEffect(() => {
-    localStorage.setItem('dedicaterealite_react_products_v4', JSON.stringify(products));
+    localStorage.setItem('dedicaterealite_react_products_v5', JSON.stringify(products));
   }, [products]);
 
   useEffect(() => {
-    localStorage.setItem('dedicaterealite_showcase_slides_v4', JSON.stringify(showcaseSlides));
+    localStorage.setItem('dedicaterealite_showcase_slides_v5', JSON.stringify(showcaseSlides));
   }, [showcaseSlides]);
 
   useEffect(() => {
-    localStorage.setItem('dedicaterealite_lookbook_items_v4', JSON.stringify(lookbookItems));
+    localStorage.setItem('dedicaterealite_lookbook_items_v5', JSON.stringify(lookbookItems));
   }, [lookbookItems]);
 
   useEffect(() => {
@@ -882,17 +908,44 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
     setIsProductFormOpen(true);
   };
 
-  // Handle local image file upload in Admin CMS
-  const handleLocalImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
+  // Compression helper to ensure clean local storage & fast loading
+  const compressImageFile = (file: File, maxWidth = 1200, quality = 0.85): Promise<string> => {
+    return new Promise((resolve) => {
       const reader = new FileReader();
-      reader.onload = (event) => {
-        const dataUrl = event.target?.result as string;
-        setFormImage(dataUrl);
-        showToast("Foto berhasil dimuat dari perangkat!", "success");
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let width = img.width;
+          let height = img.height;
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          } else {
+            resolve(e.target?.result as string);
+          }
+        };
+        img.onerror = () => resolve(e.target?.result as string);
+        img.src = e.target?.result as string;
       };
       reader.readAsDataURL(file);
+    });
+  };
+
+  // Handle local image file upload in Admin CMS
+  const handleLocalImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const dataUrl = await compressImageFile(file, 1200, 0.85);
+      setFormImage(dataUrl);
+      showToast("Foto berhasil dimuat & dikompres optimal!", "success");
     }
   };
 
@@ -914,6 +967,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
       // Update
       setProducts(prev => prev.map(p => {
         if (p.id === editingProduct.id) {
+          const newImg = formImage || p.image;
           return {
             ...p,
             name: formName,
@@ -925,7 +979,8 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
             fitType: formFit,
             printType: formPrint,
             status: formStatus,
-            image: formImage || p.image,
+            image: newImg,
+            gallery: p.gallery ? [newImg, ...p.gallery.slice(1)] : [newImg],
             description: formDesc,
             sizes: sizesArray
           };
@@ -949,7 +1004,8 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
         status: formStatus,
         colorTheme: "#18181b",
         graphicAccent: "#7A0006",
-        image: formImage || "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+        image: formImage || "/images/you-are-sick-front.jpg",
+        gallery: [formImage || "/images/you-are-sick-front.jpg"],
         description: formDesc,
         sizes: sizesArray
       };
@@ -992,16 +1048,12 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
     setIsShowcaseFormOpen(true);
   };
 
-  const handleShowcaseImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleShowcaseImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const dataUrl = event.target?.result as string;
-        setShowcaseImage(dataUrl);
-        showToast("Foto slide showcase berhasil dimuat!", "success");
-      };
-      reader.readAsDataURL(file);
+      const dataUrl = await compressImageFile(file, 1600, 0.85);
+      setShowcaseImage(dataUrl);
+      showToast("Foto slide showcase berhasil dimuat & dikompres!", "success");
     }
   };
 
@@ -1088,16 +1140,12 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
     setIsLookbookFormOpen(true);
   };
 
-  const handleLookbookImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLookbookImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const dataUrl = event.target?.result as string;
-        setLookbookImage(dataUrl);
-        showToast("Foto editorial lookbook berhasil dimuat!", "success");
-      };
-      reader.readAsDataURL(file);
+      const dataUrl = await compressImageFile(file, 1400, 0.85);
+      setLookbookImage(dataUrl);
+      showToast("Foto editorial lookbook berhasil dimuat & dikompres!", "success");
     }
   };
 
