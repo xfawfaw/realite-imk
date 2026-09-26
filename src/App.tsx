@@ -3784,7 +3784,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                   <div>
                     <label className={`block mb-1 font-semibold ${
                       adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
-                    }`}>Nama Kaos / Item *</label>
+                    }`}>Nama Kaos / Item</label>
                     <input 
                       type="text" 
                       required
@@ -3802,7 +3802,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                   <div>
                     <label className={`block mb-1 font-semibold ${
                       adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
-                    }`}>Kode SKU *</label>
+                    }`}>Kode SKU</label>
                     <input 
                       type="text" 
                       required
@@ -3844,7 +3844,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                   <div>
                     <label className={`block mb-1 font-semibold ${
                       adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
-                    }`}>Harga (Rupiah) *</label>
+                    }`}>Harga (Rupiah)</label>
                     <input 
                       type="number" 
                       required
@@ -4208,7 +4208,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                   <div>
                     <label className={`block mb-1 font-semibold ${
                       adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
-                    }`}>Drop Badge / Kode *</label>
+                    }`}>Drop Badge / Kode</label>
                     <input 
                       type="text" 
                       required
@@ -4226,7 +4226,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                   <div>
                     <label className={`block mb-1 font-semibold ${
                       adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
-                    }`}>Teks Tombol Aksi *</label>
+                    }`}>Teks Tombol Aksi</label>
                     <input 
                       type="text" 
                       required
@@ -4246,7 +4246,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                 <div>
                   <label className={`block mb-1 font-semibold ${
                     adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
-                  }`}>Judul Banner Hero *</label>
+                  }`}>Judul Banner Hero</label>
                   <input 
                     type="text" 
                     required
@@ -4311,7 +4311,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                 <div className="space-y-2">
                   <label className={`block font-semibold ${
                     adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
-                  }`}>Foto Slide Showcase *</label>
+                  }`}>Foto Slide Showcase</label>
                   
                   <div className="flex flex-col sm:flex-row gap-2">
                     <input 
@@ -4438,7 +4438,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                   <div>
                     <label className={`block mb-1 font-semibold ${
                       adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
-                    }`}>Tag / Batch *</label>
+                    }`}>Tag / Batch</label>
                     <input 
                       type="text" 
                       required
@@ -4456,7 +4456,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                   <div>
                     <label className={`block mb-1 font-semibold ${
                       adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
-                    }`}>Judul Editorial *</label>
+                    }`}>Judul Editorial</label>
                     <input 
                       type="text" 
                       required
@@ -4477,7 +4477,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                   <div>
                     <label className={`block mb-1 font-semibold ${
                       adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
-                    }`}>Lokasi Pemotretan *</label>
+                    }`}>Lokasi Pemotretan</label>
                     <input 
                       type="text" 
                       required
@@ -4560,7 +4560,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                 <div className="space-y-2">
                   <label className={`block font-semibold ${
                     adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
-                  }`}>Foto Editorial *</label>
+                  }`}>Foto Editorial</label>
                   
                   <div className="flex flex-col sm:flex-row gap-2">
                     <input 
