@@ -32,7 +32,11 @@ import {
   Sliders,
   Zap,
   Gift,
-  Info
+  Info,
+  ArrowUp,
+  ArrowDown,
+  Eye,
+  Layers
 } from 'lucide-react';
 
 /* =========================================================================
@@ -290,6 +294,137 @@ export const INITIAL_PRODUCTS: Product[] = [
   }
 ];
 
+export type ShowcaseSlideItem = {
+  id: string;
+  dropCode: string;
+  title: string;
+  description: string;
+  actionText: string;
+  image: string;
+  linkedProductId?: number;
+};
+
+export const INITIAL_SHOWCASE_SLIDES: ShowcaseSlideItem[] = [
+  {
+    id: "nero-collab",
+    dropCode: "DROP 01 // NERO COLLAB",
+    title: "NERO X DEDICATE — Heavyweight Collab Drop.",
+    description: "240 GSM ultra-combed cotton with discharge dystopian artwork and chrome foil accents. Limited 100 numbered pieces.",
+    actionText: "Pesan via WhatsApp",
+    image: "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1200&q=80",
+    linkedProductId: 2
+  },
+  {
+    id: "you-are-sick",
+    dropCode: "DROP 02 // 235 GSM BOXY",
+    title: "YOU ARE SICK — Signature 235 GSM Boxy Cut.",
+    description: "Drop shoulder silhouette with wide 3.5cm neck ribbing and high-density plastisol artwork. Engineered for street aesthetics.",
+    actionText: "Lihat Detail Kaos",
+    image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+    linkedProductId: 1
+  },
+  {
+    id: "system-collapse",
+    dropCode: "DROP 03 // ACID WASH 260 GSM",
+    title: "SYSTEM COLLAPSE — 260 GSM Acid Washed Vintage Charcoal.",
+    description: "14s vintage washed heavyweight cotton with industrial Y2K typography across the back and heavy drape.",
+    actionText: "Buka Battle-Room",
+    image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=80",
+    linkedProductId: 3
+  },
+  {
+    id: "anxiety-society",
+    dropCode: "DROP 04 // CRACKED INK",
+    title: "ANXIETY SOCIETY — Distressed Cracked-Ink Edition.",
+    description: "200 GSM breathable combed cotton exploring urban grunge culture with authentic cracked ink plastisol finish.",
+    actionText: "Pesan Sekarang",
+    image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=1200&q=80",
+    linkedProductId: 4
+  },
+  {
+    id: "cybernetic-ls",
+    dropCode: "DROP 05 // CYBERNETIC LS",
+    title: "CYBERNETIC ARCHIVE — Burgundy Crimson Heavy Longsleeve.",
+    description: "Deep burgundy wine heavyweight cotton with high-density tribal sleeves and ribbed cuffs designed for layering.",
+    actionText: "Eksplor Longsleeve",
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
+    linkedProductId: 5
+  },
+  {
+    id: "void-hoodie",
+    dropCode: "DROP 06 // 380 GSM FLEECE",
+    title: "VOID DIVISION — 380 GSM Heavy Boxy Zip Hoodie.",
+    description: "Substantial cotton fleece with tonal 3D puff embroidery and double-lined hood for cold Yogyakarta underground nights.",
+    actionText: "Cek Ketersediaan",
+    image: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=1200&q=80",
+    linkedProductId: 6
+  }
+];
+
+export type LookbookItem = {
+  id: string;
+  tag: string;
+  title: string;
+  location: string;
+  specs: string;
+  image: string;
+  caption?: string;
+  linkedProductId?: number;
+};
+
+export const INITIAL_LOOKBOOK_ITEMS: LookbookItem[] = [
+  {
+    id: "lb-01",
+    tag: "DROP 01 // YK STREETS",
+    title: "UNDERGROUND ALLEY SESSION",
+    location: "Jl. Malioboro Back-Alley, Yogyakarta",
+    specs: "235 GSM • Signature Boxy Cut",
+    image: "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1200&q=80",
+    caption: "Heavyweight silhouette against raw concrete urban walls.",
+    linkedProductId: 1
+  },
+  {
+    id: "lb-02",
+    tag: "DROP 02 // ARCHIVE SERIES",
+    title: "PRAWIROTAMAN NIGHTSCAPE",
+    location: "Prawirotaman Warehouse, Yogyakarta",
+    specs: "240 GSM • Collab Cut",
+    image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+    caption: "Limited dystopia discharge print illuminated by street neon.",
+    linkedProductId: 2
+  },
+  {
+    id: "lb-03",
+    tag: "DROP 03 // VINTAGE HEAVY",
+    title: "ABANDONED TRAIN DEPOT",
+    location: "Lempuyangan Rail Yard, Yogyakarta",
+    specs: "260 GSM • Acid Wash Charcoal",
+    image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=80",
+    caption: "Thick draping fabric engineered for raw industrial environments.",
+    linkedProductId: 3
+  },
+  {
+    id: "lb-04",
+    tag: "DROP 04 // CRACKED FINISH",
+    title: "KOTAGEDE METAL ARCHIVE",
+    location: "Kotagede Silver District, Yogyakarta",
+    specs: "200 GSM • Distressed Grunge",
+    image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=1200&q=80",
+    caption: "Authentic cracked ink texture aged by time and movement.",
+    linkedProductId: 4
+  },
+  {
+    id: "lb-05",
+    tag: "DROP 05 // CRIMSON LAYER",
+    title: "UGM ROOFTOP DUSK",
+    location: "Bulaksumur Elevated Point, Yogyakarta",
+    specs: "Burgundy Heavy Longsleeve",
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
+    caption: "High-density tribal sleeve print made for evening motorcycle runs.",
+    linkedProductId: 5
+  }
+];
+
 export default function App() {
   // Master State
   const [products, setProducts] = useState<Product[]>(() => {
@@ -350,7 +485,7 @@ export default function App() {
   const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState<boolean>(false);
   const [adminPasscode, setAdminPasscode] = useState<string>("");
-  const [adminActiveTab, setAdminActiveTab] = useState<"products" | "settings" | "backup">("products");
+  const [adminActiveTab, setAdminActiveTab] = useState<"products" | "showcase" | "lookbook" | "settings" | "backup">("products");
   const [adminSearch, setAdminSearch] = useState<string>("");
   const [adminStatusFilter, setAdminStatusFilter] = useState<string>("ALL");
   const [isProductFormOpen, setIsProductFormOpen] = useState<boolean>(false);
@@ -358,6 +493,43 @@ export default function App() {
   const [adminTheme, setAdminTheme] = useState<"light" | "dark">(() => {
     return (localStorage.getItem('dedicaterealite_admin_theme') as "light" | "dark") || "light";
   });
+
+  // Showcase CMS State
+  const [showcaseSlides, setShowcaseSlides] = useState<ShowcaseSlideItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('dedicaterealite_showcase_slides');
+      return saved ? JSON.parse(saved) : INITIAL_SHOWCASE_SLIDES;
+    } catch (e) {
+      return INITIAL_SHOWCASE_SLIDES;
+    }
+  });
+  const [isShowcaseFormOpen, setIsShowcaseFormOpen] = useState<boolean>(false);
+  const [editingShowcase, setEditingShowcase] = useState<ShowcaseSlideItem | null>(null);
+  const [showcaseDropCode, setShowcaseDropCode] = useState("");
+  const [showcaseTitle, setShowcaseTitle] = useState("");
+  const [showcaseDesc, setShowcaseDesc] = useState("");
+  const [showcaseActionText, setShowcaseActionText] = useState("Lihat Detail Kaos");
+  const [showcaseImage, setShowcaseImage] = useState("");
+  const [showcaseLinkedId, setShowcaseLinkedId] = useState<number | undefined>(undefined);
+
+  // Lookbook CMS State
+  const [lookbookItems, setLookbookItems] = useState<LookbookItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('dedicaterealite_lookbook_items');
+      return saved ? JSON.parse(saved) : INITIAL_LOOKBOOK_ITEMS;
+    } catch (e) {
+      return INITIAL_LOOKBOOK_ITEMS;
+    }
+  });
+  const [isLookbookFormOpen, setIsLookbookFormOpen] = useState<boolean>(false);
+  const [editingLookbook, setEditingLookbook] = useState<LookbookItem | null>(null);
+  const [lookbookTag, setLookbookTag] = useState("");
+  const [lookbookTitle, setLookbookTitle] = useState("");
+  const [lookbookLocation, setLookbookLocation] = useState("");
+  const [lookbookSpecs, setLookbookSpecs] = useState("");
+  const [lookbookImage, setLookbookImage] = useState("");
+  const [lookbookCaption, setLookbookCaption] = useState("");
+  const [lookbookLinkedId, setLookbookLinkedId] = useState<number | undefined>(undefined);
 
   // Product Form Input State
   const [formName, setFormName] = useState("");
@@ -387,6 +559,14 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('dedicaterealite_react_products', JSON.stringify(products));
   }, [products]);
+
+  useEffect(() => {
+    localStorage.setItem('dedicaterealite_showcase_slides', JSON.stringify(showcaseSlides));
+  }, [showcaseSlides]);
+
+  useEffect(() => {
+    localStorage.setItem('dedicaterealite_lookbook_items', JSON.stringify(lookbookItems));
+  }, [lookbookItems]);
 
   useEffect(() => {
     localStorage.setItem('dedicaterealite_wa_number', waNumber);
@@ -419,81 +599,45 @@ export default function App() {
     </span>
   );
 
-  // Hero Squeeze Slides
-  const heroSlides: SqueezeSlide[] = [
-    {
-      id: "nero-collab",
-      title: "NERO X DEDICATE — Heavyweight Collab Drop.",
-      description: "240 GSM ultra-combed cotton with discharge dystopian artwork and chrome foil accents. Limited 100 numbered pieces.",
-      action: "Pesan via WhatsApp",
-      overlay: mark("DROP 01 // NERO COLLAB"),
-      image: "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1200&q=80",
-      onAction: () => {
-        const p = products.find(x => x.id === 2);
-        if (p) openProductDetail(p);
-      }
-    },
-    {
-      id: "you-are-sick",
-      title: "YOU ARE SICK — Signature 235 GSM Boxy Cut.",
-      description: "Drop shoulder silhouette with wide 3.5cm neck ribbing and high-density plastisol artwork. Engineered for street aesthetics.",
-      action: "Lihat Detail Kaos",
-      overlay: mark("DROP 02 // 235 GSM BOXY"),
-      image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
-      onAction: () => {
-        const p = products.find(x => x.id === 1);
-        if (p) openProductDetail(p);
-      }
-    },
-    {
-      id: "system-collapse",
-      title: "SYSTEM COLLAPSE — 260 GSM Acid Washed Vintage Charcoal.",
-      description: "14s vintage washed heavyweight cotton with industrial Y2K typography across the back and heavy drape.",
-      action: "Buka Battle-Room",
-      overlay: mark("DROP 03 // ACID WASH 260 GSM"),
-      image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=80",
-      onAction: () => {
-        toggleCompare(3);
-        setIsBattleRoomOpen(true);
-      }
-    },
-    {
-      id: "anxiety-society",
-      title: "ANXIETY SOCIETY — Distressed Cracked-Ink Edition.",
-      description: "200 GSM breathable combed cotton exploring urban grunge culture with authentic cracked ink plastisol finish.",
-      action: "Pesan Sekarang",
-      overlay: mark("DROP 04 // CRACKED INK"),
-      image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=1200&q=80",
-      onAction: () => {
-        const p = products.find(x => x.id === 4);
-        if (p) openProductDetail(p);
-      }
-    },
-    {
-      id: "cybernetic-ls",
-      title: "CYBERNETIC ARCHIVE — Burgundy Crimson Heavy Longsleeve.",
-      description: "Deep burgundy wine heavyweight cotton with high-density tribal sleeves and ribbed cuffs designed for layering.",
-      action: "Eksplor Longsleeve",
-      overlay: mark("DROP 05 // CYBERNETIC LS"),
-      image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
-      onAction: () => {
-        const p = products.find(x => x.id === 5);
-        if (p) openProductDetail(p);
-      }
-    },
-    {
-      id: "void-hoodie",
-      title: "VOID DIVISION — 380 GSM Heavy Boxy Zip Hoodie.",
-      description: "Substantial cotton fleece with tonal 3D puff embroidery and double-lined hood for cold Yogyakarta underground nights.",
-      action: "Cek Ketersediaan",
-      overlay: mark("DROP 06 // 380 GSM FLEECE"),
-      image: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=1200&q=80",
-      onAction: () => {
-        const p = products.find(x => x.id === 6);
-        if (p) openProductDetail(p);
-      }
-    }
-  ];
+  // Hero Squeeze Slides (Derived dynamically from showcaseSlides CMS state)
+  const heroSlides: SqueezeSlide[] = showcaseSlides.length > 0
+    ? showcaseSlides.map((slide) => ({
+        id: slide.id,
+        title: slide.title,
+        description: slide.description,
+        action: slide.actionText,
+        overlay: mark(slide.dropCode),
+        image: slide.image,
+        onAction: () => {
+          if (slide.linkedProductId) {
+            const p = products.find(x => x.id === slide.linkedProductId);
+            if (p) {
+              openProductDetail(p);
+              return;
+            }
+          }
+          if (slide.actionText.toLowerCase().includes("battle")) {
+            setIsBattleRoomOpen(true);
+          } else {
+            const el = document.getElementById("catalog-section");
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }))
+    : [
+        {
+          id: "empty-hero",
+          title: "DEDICATEREALITE ARCHIVE",
+          description: "Yogyakarta Underground Heavyweight Streetwear.",
+          action: "Lihat Katalog",
+          overlay: mark("OFFICIAL ARCHIVE"),
+          image: "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1200&q=80",
+          onAction: () => {
+            const el = document.getElementById("catalog-section");
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      ];
 
   // Compare Toggle
   const toggleCompare = (id: number) => {
@@ -793,6 +937,198 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
       setComparisonList(prev => prev.filter(id => id !== productId));
       showToast("Produk berhasil dihapus", "info");
     }
+  };
+
+  // Showcase CMS Handlers
+  const openAddShowcaseModal = () => {
+    setEditingShowcase(null);
+    setShowcaseDropCode(`DROP 0${showcaseSlides.length + 1} // SPECIAL DROP`);
+    setShowcaseTitle("");
+    setShowcaseDesc("");
+    setShowcaseActionText("Lihat Detail Kaos");
+    setShowcaseImage(products[0]?.image || "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1200&q=80");
+    setShowcaseLinkedId(products[0]?.id);
+    setIsShowcaseFormOpen(true);
+  };
+
+  const openEditShowcaseModal = (slide: ShowcaseSlideItem) => {
+    setEditingShowcase(slide);
+    setShowcaseDropCode(slide.dropCode);
+    setShowcaseTitle(slide.title);
+    setShowcaseDesc(slide.description);
+    setShowcaseActionText(slide.actionText);
+    setShowcaseImage(slide.image);
+    setShowcaseLinkedId(slide.linkedProductId);
+    setIsShowcaseFormOpen(true);
+  };
+
+  const handleShowcaseImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const dataUrl = event.target?.result as string;
+        setShowcaseImage(dataUrl);
+        showToast("Foto slide showcase berhasil dimuat!", "success");
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSaveShowcase = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!showcaseTitle.trim()) {
+      showToast("Judul slide showcase wajib diisi!", "warning");
+      return;
+    }
+    if (!showcaseImage.trim()) {
+      showToast("Gambar slide wajib disertakan!", "warning");
+      return;
+    }
+
+    if (editingShowcase) {
+      setShowcaseSlides(prev => prev.map(s => s.id === editingShowcase.id ? {
+        ...s,
+        dropCode: showcaseDropCode.trim() || `DROP // NEW`,
+        title: showcaseTitle.trim(),
+        description: showcaseDesc.trim(),
+        actionText: showcaseActionText.trim() || "Lihat Detail",
+        image: showcaseImage.trim(),
+        linkedProductId: showcaseLinkedId ? Number(showcaseLinkedId) : undefined
+      } : s));
+      showToast("Slide showcase berhasil diperbarui!", "success");
+    } else {
+      const newSlide: ShowcaseSlideItem = {
+        id: "slide-" + Date.now(),
+        dropCode: showcaseDropCode.trim() || `DROP // NEW`,
+        title: showcaseTitle.trim(),
+        description: showcaseDesc.trim(),
+        actionText: showcaseActionText.trim() || "Lihat Detail",
+        image: showcaseImage.trim(),
+        linkedProductId: showcaseLinkedId ? Number(showcaseLinkedId) : undefined
+      };
+      setShowcaseSlides(prev => [...prev, newSlide]);
+      showToast("Slide showcase baru berhasil ditambahkan!", "success");
+    }
+    setIsShowcaseFormOpen(false);
+  };
+
+  const handleDeleteShowcase = (id: string) => {
+    if (showcaseSlides.length <= 1) {
+      showToast("Minimal harus menyisakan 1 slide showcase!", "warning");
+      return;
+    }
+    if (confirm("Hapus slide showcase ini dari Hero banner?")) {
+      setShowcaseSlides(prev => prev.filter(s => s.id !== id));
+      showToast("Slide showcase berhasil dihapus", "info");
+    }
+  };
+
+  const handleMoveShowcase = (index: number, direction: "up" | "down") => {
+    const targetIndex = direction === "up" ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= showcaseSlides.length) return;
+    const updated = [...showcaseSlides];
+    const [moved] = updated.splice(index, 1);
+    updated.splice(targetIndex, 0, moved);
+    setShowcaseSlides(updated);
+  };
+
+  // Lookbook CMS Handlers
+  const openAddLookbookModal = () => {
+    setEditingLookbook(null);
+    setLookbookTag(`DROP 0${lookbookItems.length + 1} // YK STREETS`);
+    setLookbookTitle("");
+    setLookbookLocation("Yogyakarta, Indonesia");
+    setLookbookSpecs("235 GSM • Boxy Cut");
+    setLookbookCaption("");
+    setLookbookImage(products[0]?.image || "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1200&q=80");
+    setLookbookLinkedId(products[0]?.id);
+    setIsLookbookFormOpen(true);
+  };
+
+  const openEditLookbookModal = (item: LookbookItem) => {
+    setEditingLookbook(item);
+    setLookbookTag(item.tag);
+    setLookbookTitle(item.title);
+    setLookbookLocation(item.location);
+    setLookbookSpecs(item.specs);
+    setLookbookCaption(item.caption || "");
+    setLookbookImage(item.image);
+    setLookbookLinkedId(item.linkedProductId);
+    setIsLookbookFormOpen(true);
+  };
+
+  const handleLookbookImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const dataUrl = event.target?.result as string;
+        setLookbookImage(dataUrl);
+        showToast("Foto editorial lookbook berhasil dimuat!", "success");
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSaveLookbook = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!lookbookTitle.trim()) {
+      showToast("Judul editorial lookbook wajib diisi!", "warning");
+      return;
+    }
+    if (!lookbookImage.trim()) {
+      showToast("Foto editorial lookbook wajib disertakan!", "warning");
+      return;
+    }
+
+    if (editingLookbook) {
+      setLookbookItems(prev => prev.map(item => item.id === editingLookbook.id ? {
+        ...item,
+        tag: lookbookTag.trim() || "YK STREETS",
+        title: lookbookTitle.trim(),
+        location: lookbookLocation.trim() || "Yogyakarta",
+        specs: lookbookSpecs.trim(),
+        caption: lookbookCaption.trim(),
+        image: lookbookImage.trim(),
+        linkedProductId: lookbookLinkedId ? Number(lookbookLinkedId) : undefined
+      } : item));
+      showToast("Editorial lookbook berhasil diperbarui!", "success");
+    } else {
+      const newItem: LookbookItem = {
+        id: "lb-" + Date.now(),
+        tag: lookbookTag.trim() || "YK STREETS",
+        title: lookbookTitle.trim(),
+        location: lookbookLocation.trim() || "Yogyakarta",
+        specs: lookbookSpecs.trim(),
+        caption: lookbookCaption.trim(),
+        image: lookbookImage.trim(),
+        linkedProductId: lookbookLinkedId ? Number(lookbookLinkedId) : undefined
+      };
+      setLookbookItems(prev => [...prev, newItem]);
+      showToast("Foto editorial baru berhasil ditambahkan ke Lookbook!", "success");
+    }
+    setIsLookbookFormOpen(false);
+  };
+
+  const handleDeleteLookbook = (id: string) => {
+    if (lookbookItems.length <= 1) {
+      showToast("Minimal harus menyisakan 1 foto editorial lookbook!", "warning");
+      return;
+    }
+    if (confirm("Hapus foto editorial lookbook ini?")) {
+      setLookbookItems(prev => prev.filter(item => item.id !== id));
+      showToast("Foto editorial lookbook berhasil dihapus", "info");
+    }
+  };
+
+  const handleMoveLookbook = (index: number, direction: "left" | "right") => {
+    const targetIndex = direction === "left" ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= lookbookItems.length) return;
+    const updated = [...lookbookItems];
+    const [moved] = updated.splice(index, 1);
+    updated.splice(targetIndex, 0, moved);
+    setLookbookItems(updated);
   };
 
   // Filtered Products for Catalog
@@ -2598,11 +2934,11 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                     </div>
 
                     {/* Navigation Tab Bar */}
-                    <div className="flex items-center justify-between pt-1">
-                      <div className="flex items-center space-x-2 text-xs font-mono">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-1">
+                      <div className="flex items-center space-x-1.5 sm:space-x-2 text-xs font-mono overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
                         <button 
                           onClick={() => setAdminActiveTab("products")}
-                          className={`px-3.5 py-1.5 rounded-xl font-bold transition ${
+                          className={`px-3 py-1.5 rounded-xl font-bold transition shrink-0 ${
                             adminActiveTab === "products" 
                               ? "bg-[#7A0006] text-white shadow-md shadow-[#7A0006]/20" 
                               : adminTheme === 'light'
@@ -2613,8 +2949,32 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                           Katalog ({products.length})
                         </button>
                         <button 
+                          onClick={() => setAdminActiveTab("showcase")}
+                          className={`px-3 py-1.5 rounded-xl font-bold transition shrink-0 ${
+                            adminActiveTab === "showcase" 
+                              ? "bg-[#7A0006] text-white shadow-md shadow-[#7A0006]/20" 
+                              : adminTheme === 'light'
+                                ? "bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/80"
+                                : "bg-zinc-900 text-zinc-400 hover:text-white"
+                          }`}
+                        >
+                          Showcase ({showcaseSlides.length})
+                        </button>
+                        <button 
+                          onClick={() => setAdminActiveTab("lookbook")}
+                          className={`px-3 py-1.5 rounded-xl font-bold transition shrink-0 ${
+                            adminActiveTab === "lookbook" 
+                              ? "bg-[#7A0006] text-white shadow-md shadow-[#7A0006]/20" 
+                              : adminTheme === 'light'
+                                ? "bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/80"
+                                : "bg-zinc-900 text-zinc-400 hover:text-white"
+                          }`}
+                        >
+                          Lookbook ({lookbookItems.length})
+                        </button>
+                        <button 
                           onClick={() => setAdminActiveTab("settings")}
-                          className={`px-3.5 py-1.5 rounded-xl font-bold transition ${
+                          className={`px-3 py-1.5 rounded-xl font-bold transition shrink-0 ${
                             adminActiveTab === "settings" 
                               ? "bg-[#7A0006] text-white shadow-md shadow-[#7A0006]/20" 
                               : adminTheme === 'light'
@@ -2622,11 +2982,11 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                                 : "bg-zinc-900 text-zinc-400 hover:text-white"
                           }`}
                         >
-                          Pengaturan WhatsApp
+                          Pengaturan WA
                         </button>
                         <button 
                           onClick={() => setAdminActiveTab("backup")}
-                          className={`px-3.5 py-1.5 rounded-xl font-bold transition ${
+                          className={`px-3 py-1.5 rounded-xl font-bold transition shrink-0 ${
                             adminActiveTab === "backup" 
                               ? "bg-[#7A0006] text-white shadow-md shadow-[#7A0006]/20" 
                               : adminTheme === 'light'
@@ -2638,15 +2998,35 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                         </button>
                       </div>
 
-                      {adminActiveTab === "products" && (
-                        <button 
-                          onClick={openAddProductModal}
-                          className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-600/20 transition active:scale-95"
-                        >
-                          <Plus className="w-3.5 h-3.5" />
-                          <span>+ Tambah Produk</span>
-                        </button>
-                      )}
+                      <div className="shrink-0 flex items-center justify-end">
+                        {adminActiveTab === "products" && (
+                          <button 
+                            onClick={openAddProductModal}
+                            className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-600/20 transition active:scale-95"
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                            <span>+ Tambah Produk</span>
+                          </button>
+                        )}
+                        {adminActiveTab === "showcase" && (
+                          <button 
+                            onClick={openAddShowcaseModal}
+                            className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-600/20 transition active:scale-95"
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                            <span>+ Tambah Slide Showcase</span>
+                          </button>
+                        )}
+                        {adminActiveTab === "lookbook" && (
+                          <button 
+                            onClick={openAddLookbookModal}
+                            className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-600/20 transition active:scale-95"
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                            <span>+ Tambah Lookbook</span>
+                          </button>
+                        )}
+                      </div>
                     </div>
 
                   </div>
@@ -2827,6 +3207,319 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                     </div>
                   )}
 
+                  {/* Tab: Showcase Squeeze Carousel CMS */}
+                  {adminActiveTab === "showcase" && (
+                    <div className={`flex-1 flex flex-col overflow-hidden p-4 sm:p-5 space-y-4 ${
+                      adminTheme === 'light' ? 'bg-slate-50' : 'bg-transparent'
+                    }`}>
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 shrink-0">
+                        <div>
+                          <h3 className={`text-sm font-bold uppercase tracking-wider ${
+                            adminTheme === 'light' ? 'text-slate-900' : 'text-white'
+                          }`}>
+                            Hero Squeeze Carousel Drops ({showcaseSlides.length} Slide)
+                          </h3>
+                          <p className={`text-[11px] ${
+                            adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'
+                          }`}>
+                            Slide banner utama interaktif di beranda. Geser urutan dengan tombol panah untuk mengubah tata letak hero drop.
+                          </p>
+                        </div>
+                        <button 
+                          onClick={openAddShowcaseModal}
+                          className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-600/20 transition active:scale-95 shrink-0"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                          <span>+ Tambah Slide</span>
+                        </button>
+                      </div>
+
+                      {/* Showcase Slides Table */}
+                      <div className={`flex-1 overflow-y-auto rounded-2xl border shadow-xs transition ${
+                        adminTheme === 'light' ? 'bg-white border-slate-200' : 'bg-zinc-950 border-zinc-800'
+                      }`}>
+                        <table className="w-full text-left text-xs font-mono">
+                          <thead className={`border-b sticky top-0 z-10 backdrop-blur ${
+                            adminTheme === 'light' 
+                              ? 'bg-slate-100/90 text-slate-600 border-slate-200 font-bold' 
+                              : 'bg-black/60 text-zinc-400 border-zinc-800'
+                          }`}>
+                            <tr>
+                              <th className="py-3 px-3 w-16 text-center">Urutan</th>
+                              <th className="py-3 px-4">Slide & Drop Badge</th>
+                              <th className="py-3 px-3">Tautan Produk</th>
+                              <th className="py-3 px-3">Tombol Aksi</th>
+                              <th className="py-3 px-4 text-right">Aksi</th>
+                            </tr>
+                          </thead>
+                          <tbody className={`divide-y ${
+                            adminTheme === 'light' ? 'divide-slate-100 text-slate-800' : 'divide-zinc-800 text-white'
+                          }`}>
+                            {showcaseSlides.map((slide, idx) => {
+                              const linkedProd = products.find(p => p.id === slide.linkedProductId);
+                              return (
+                                <tr key={slide.id} className={`transition ${
+                                  adminTheme === 'light' ? 'hover:bg-slate-50/90' : 'hover:bg-zinc-900/40'
+                                }`}>
+                                  {/* Reorder Buttons */}
+                                  <td className="py-3.5 px-3 text-center">
+                                    <div className="flex flex-col items-center space-y-1">
+                                      <button 
+                                        onClick={() => handleMoveShowcase(idx, "up")}
+                                        disabled={idx === 0}
+                                        className={`p-1 rounded hover:bg-black/10 transition disabled:opacity-20 disabled:cursor-not-allowed ${
+                                          adminTheme === 'light' ? 'text-slate-600 hover:text-slate-900' : 'text-zinc-400 hover:text-white'
+                                        }`}
+                                        title="Geser ke Atas"
+                                      >
+                                        <ArrowUp className="w-3.5 h-3.5" />
+                                      </button>
+                                      <span className="font-bold text-[11px] text-[#A60009]">#{idx + 1}</span>
+                                      <button 
+                                        onClick={() => handleMoveShowcase(idx, "down")}
+                                        disabled={idx === showcaseSlides.length - 1}
+                                        className={`p-1 rounded hover:bg-black/10 transition disabled:opacity-20 disabled:cursor-not-allowed ${
+                                          adminTheme === 'light' ? 'text-slate-600 hover:text-slate-900' : 'text-zinc-400 hover:text-white'
+                                        }`}
+                                        title="Geser ke Bawah"
+                                      >
+                                        <ArrowDown className="w-3.5 h-3.5" />
+                                      </button>
+                                    </div>
+                                  </td>
+
+                                  {/* Thumbnail & Title */}
+                                  <td className="py-3.5 px-4 flex items-center space-x-3">
+                                    <img 
+                                      src={slide.image} 
+                                      alt={slide.title} 
+                                      className={`w-16 h-12 rounded-xl object-cover border shrink-0 ${
+                                        adminTheme === 'light' ? 'border-slate-200' : 'border-zinc-800'
+                                      }`}
+                                    />
+                                    <div className="min-w-0">
+                                      <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-[#7A0006]/15 text-[#A60009] border border-[#7A0006]/30 mb-1">
+                                        {slide.dropCode}
+                                      </span>
+                                      <div className={`font-bold uppercase line-clamp-1 ${
+                                        adminTheme === 'light' ? 'text-slate-900' : 'text-white'
+                                      }`}>{slide.title}</div>
+                                      <div className={`text-[11px] line-clamp-1 ${
+                                        adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'
+                                      }`}>{slide.description}</div>
+                                    </div>
+                                  </td>
+
+                                  {/* Linked Product */}
+                                  <td className="py-3.5 px-3">
+                                    {linkedProd ? (
+                                      <div className="flex items-center space-x-1.5">
+                                        <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+                                        <div>
+                                          <div className={`font-bold line-clamp-1 ${
+                                            adminTheme === 'light' ? 'text-slate-900' : 'text-white'
+                                          }`}>{linkedProd.name}</div>
+                                          <div className="text-[10px] text-emerald-600 font-bold">{linkedProd.sku} • {formatRupiah(linkedProd.price)}</div>
+                                        </div>
+                                      </div>
+                                    ) : (
+                                      <span className={`text-[10px] italic ${
+                                        adminTheme === 'light' ? 'text-slate-400' : 'text-zinc-500'
+                                      }`}>Tanpa tautan (Scroll Katalog)</span>
+                                    )}
+                                  </td>
+
+                                  {/* CTA Action */}
+                                  <td className="py-3.5 px-3">
+                                    <span className={`px-2.5 py-1 rounded-lg border text-[11px] font-bold inline-block ${
+                                      adminTheme === 'light' 
+                                        ? 'border-slate-200 bg-slate-100 text-slate-700' 
+                                        : 'border-zinc-800 bg-zinc-900 text-zinc-300'
+                                    }`}>
+                                      {slide.actionText}
+                                    </span>
+                                  </td>
+
+                                  {/* Action Buttons */}
+                                  <td className="py-3.5 px-4 text-right space-x-1.5 whitespace-nowrap">
+                                    <button 
+                                      onClick={() => openEditShowcaseModal(slide)}
+                                      className={`p-2 rounded-lg border transition ${
+                                        adminTheme === 'light'
+                                          ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700 hover:text-slate-900'
+                                          : 'bg-zinc-900 hover:bg-zinc-800 border-zinc-800 text-zinc-300 hover:text-white'
+                                      }`}
+                                      title="Edit Slide"
+                                    >
+                                      <Edit3 className="w-3.5 h-3.5" />
+                                    </button>
+                                    <button 
+                                      onClick={() => handleDeleteShowcase(slide.id)}
+                                      className={`p-2 rounded-lg border transition ${
+                                        adminTheme === 'light'
+                                          ? 'bg-slate-100 hover:bg-rose-50 border-slate-200 text-slate-500 hover:text-rose-600 hover:border-rose-200'
+                                          : 'bg-zinc-900 hover:bg-red-950/60 border-zinc-800 text-zinc-400 hover:text-red-400'
+                                      }`}
+                                      title="Hapus Slide"
+                                    >
+                                      <Trash2 className="w-3.5 h-3.5" />
+                                    </button>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tab: Lookbook CMS */}
+                  {adminActiveTab === "lookbook" && (
+                    <div className={`flex-1 flex flex-col overflow-hidden p-4 sm:p-5 space-y-4 ${
+                      adminTheme === 'light' ? 'bg-slate-50' : 'bg-transparent'
+                    }`}>
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 shrink-0">
+                        <div>
+                          <h3 className={`text-sm font-bold uppercase tracking-wider ${
+                            adminTheme === 'light' ? 'text-slate-900' : 'text-white'
+                          }`}>
+                            Street Style Editorial Lookbook ({lookbookItems.length} Foto)
+                          </h3>
+                          <p className={`text-[11px] ${
+                            adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'
+                          }`}>
+                            Galeri foto editorial jalanan Yogyakarta. Tautkan lookbook ke item katalog agar pembeli bisa langsung melihat produknya.
+                          </p>
+                        </div>
+                        <button 
+                          onClick={openAddLookbookModal}
+                          className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-600/20 transition active:scale-95 shrink-0"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                          <span>+ Tambah Lookbook</span>
+                        </button>
+                      </div>
+
+                      {/* Lookbook Cards Grid */}
+                      <div className="flex-1 overflow-y-auto">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
+                          {lookbookItems.map((item, idx) => {
+                            const linkedProd = products.find(p => p.id === item.linkedProductId);
+                            return (
+                              <div 
+                                key={item.id}
+                                className={`rounded-2xl border overflow-hidden flex flex-col transition shadow-xs ${
+                                  adminTheme === 'light' ? 'bg-white border-slate-200' : 'bg-zinc-950 border-zinc-800'
+                                }`}
+                              >
+                                <div className="relative aspect-[4/3] overflow-hidden bg-black/20">
+                                  <img 
+                                    src={item.image} 
+                                    alt={item.title} 
+                                    className="w-full h-full object-cover" 
+                                  />
+                                  <div className="absolute top-2.5 left-2.5 flex items-center space-x-1.5">
+                                    <span className="px-2 py-0.5 rounded bg-black/80 backdrop-blur font-mono text-[9px] text-white uppercase border border-white/10 font-bold">
+                                      {item.tag}
+                                    </span>
+                                    <span className="px-1.5 py-0.5 rounded bg-[#7A0006] text-white font-mono text-[9px] font-bold">
+                                      #{idx + 1}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="p-3.5 flex-1 flex flex-col justify-between space-y-2">
+                                  <div className="space-y-1">
+                                    <h4 className={`font-black text-xs uppercase line-clamp-1 ${
+                                      adminTheme === 'light' ? 'text-slate-900' : 'text-white'
+                                    }`}>
+                                      {item.title}
+                                    </h4>
+                                    <div className="flex items-center space-x-1 text-[10px] text-[#A60009] font-semibold truncate">
+                                      <MapPin className="w-3 h-3 shrink-0" />
+                                      <span className="truncate">{item.location}</span>
+                                    </div>
+                                    {item.specs && (
+                                      <div className={`text-[10px] font-mono ${
+                                        adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'
+                                      }`}>
+                                        {item.specs}
+                                      </div>
+                                    )}
+                                    {item.caption && (
+                                      <p className={`text-[10px] line-clamp-2 italic ${
+                                        adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'
+                                      }`}>
+                                        "{item.caption}"
+                                      </p>
+                                    )}
+                                  </div>
+
+                                  <div className={`pt-2 border-t flex items-center justify-between ${
+                                    adminTheme === 'light' ? 'border-slate-100' : 'border-zinc-800'
+                                  }`}>
+                                    <div className="text-[10px]">
+                                      {linkedProd ? (
+                                        <span className="text-emerald-600 font-bold flex items-center space-x-1">
+                                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                          <span className="truncate max-w-[110px]">{linkedProd.sku}</span>
+                                        </span>
+                                      ) : (
+                                        <span className={adminTheme === 'light' ? 'text-slate-400' : 'text-zinc-500'}>Tanpa link</span>
+                                      )}
+                                    </div>
+
+                                    <div className="flex items-center space-x-1">
+                                      <button 
+                                        onClick={() => handleMoveLookbook(idx, "left")}
+                                        disabled={idx === 0}
+                                        className={`p-1.5 rounded-lg border transition disabled:opacity-20 ${
+                                          adminTheme === 'light' ? 'border-slate-200 hover:bg-slate-100 text-slate-700' : 'border-zinc-800 hover:bg-zinc-900 text-zinc-300'
+                                        }`}
+                                        title="Geser ke Kiri"
+                                      >
+                                        <ArrowUp className="w-3 h-3 -rotate-90" />
+                                      </button>
+                                      <button 
+                                        onClick={() => handleMoveLookbook(idx, "right")}
+                                        disabled={idx === lookbookItems.length - 1}
+                                        className={`p-1.5 rounded-lg border transition disabled:opacity-20 ${
+                                          adminTheme === 'light' ? 'border-slate-200 hover:bg-slate-100 text-slate-700' : 'border-zinc-800 hover:bg-zinc-900 text-zinc-300'
+                                        }`}
+                                        title="Geser ke Kanan"
+                                      >
+                                        <ArrowDown className="w-3 h-3 -rotate-90" />
+                                      </button>
+                                      <button 
+                                        onClick={() => openEditLookbookModal(item)}
+                                        className={`p-1.5 rounded-lg border transition ${
+                                          adminTheme === 'light' ? 'border-slate-200 hover:bg-slate-100 text-slate-700' : 'border-zinc-800 hover:bg-zinc-900 text-zinc-300'
+                                        }`}
+                                        title="Edit Lookbook"
+                                      >
+                                        <Edit3 className="w-3 h-3" />
+                                      </button>
+                                      <button 
+                                        onClick={() => handleDeleteLookbook(item.id)}
+                                        className={`p-1.5 rounded-lg border transition ${
+                                          adminTheme === 'light' ? 'border-slate-200 hover:bg-rose-50 text-rose-600' : 'border-zinc-800 hover:bg-red-950/50 text-red-400'
+                                        }`}
+                                        title="Hapus Lookbook"
+                                      >
+                                        <Trash2 className="w-3 h-3" />
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Tab 2: WhatsApp & Store Settings */}
                   {adminActiveTab === "settings" && (
                     <div className={`p-6 overflow-y-auto space-y-6 max-w-xl ${
@@ -2936,16 +3629,25 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                           Download Backup Master Data (JSON)
                         </div>
                         <p className={`text-[11px] ${adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-400'}`}>
-                          Unduh seluruh arsip data pakaian dan stok katalog sebagai cadangan offline.
+                          Unduh seluruh arsip data pakaian, slide showcase hero, editorial lookbook, dan pengaturan toko sebagai cadangan JSON.
                         </p>
                         <button 
                           onClick={() => {
-                            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(products, null, 2));
+                            const payload = {
+                              version: "2.1",
+                              exportedAt: new Date().toISOString(),
+                              products,
+                              showcaseSlides,
+                              lookbookItems,
+                              waNumber,
+                              announcementText
+                            };
+                            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
                             const anchor = document.createElement('a');
                             anchor.setAttribute("href", dataStr);
-                            anchor.setAttribute("download", `dedicaterealite_backup_${new Date().toISOString().slice(0, 10)}.json`);
+                            anchor.setAttribute("download", `dedicaterealite_full_backup_${new Date().toISOString().slice(0, 10)}.json`);
                             anchor.click();
-                            showToast("Backup JSON berhasil diunduh!", "success");
+                            showToast("Backup JSON lengkap berhasil diunduh!", "success");
                           }}
                           className={`px-3.5 py-2.5 rounded-xl border flex items-center space-x-1.5 transition ${
                             adminTheme === 'light'
@@ -2954,7 +3656,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                           }`}
                         >
                           <Download className="w-3.5 h-3.5" />
-                          <span>Unduh File JSON</span>
+                          <span>Unduh File JSON Lengkap</span>
                         </button>
                       </div>
 
@@ -2965,14 +3667,16 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                       }`}>
                         <div className="font-bold text-rose-700 uppercase">Reset Data Pabrik</div>
                         <p className={`text-[11px] ${adminTheme === 'light' ? 'text-rose-600' : 'text-zinc-400'}`}>
-                          Kembalikan semua item pakaian ke katalog awal streetwear Dedicaterealite default.
+                          Kembalikan semua item pakaian, slide showcase hero, dan editorial lookbook ke versi default streetwear Dedicaterealite.
                         </p>
                         <button 
                           onClick={() => {
-                            if (confirm("Reset seluruh data produk ke awal?")) {
+                            if (confirm("Reset seluruh data produk, showcase, dan lookbook ke default?")) {
                               setProducts(INITIAL_PRODUCTS);
+                              setShowcaseSlides(INITIAL_SHOWCASE_SLIDES);
+                              setLookbookItems(INITIAL_LOOKBOOK_ITEMS);
                               setWaNumber(OFFICIAL_WA_NUMBER);
-                              showToast("Data katalog di-reset ke default", "info");
+                              showToast("Data katalog, showcase, & lookbook di-reset ke default", "info");
                             }
                           }}
                           className="px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold transition shadow-xs"
@@ -3416,6 +4120,488 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
         </div>
       )}
 
+      {/* SHOWCASE SLIDE MODAL (ADD / EDIT) */}
+      {isShowcaseFormOpen && (
+        <div className="fixed inset-0 z-50 overflow-y-auto">
+          <div 
+            className={`fixed inset-0 backdrop-blur-sm transition-colors ${
+              adminTheme === 'light' ? 'bg-slate-900/50' : 'bg-black/85'
+            }`} 
+            onClick={() => setIsShowcaseFormOpen(false)}
+          ></div>
+          <div className="min-h-full flex items-center justify-center p-3 sm:p-6 relative z-10">
+            <div className={`w-full max-w-2xl rounded-3xl border shadow-2xl p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto transition-all ${
+              adminTheme === 'light' 
+                ? 'bg-white text-slate-800 border-slate-200' 
+                : 'bg-zinc-950 text-white border-zinc-800'
+            }`}>
+              
+              <button 
+                onClick={() => setIsShowcaseFormOpen(false)} 
+                className={`absolute top-5 right-5 transition ${
+                  adminTheme === 'light' ? 'text-slate-400 hover:text-slate-700' : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="flex items-center space-x-3 mb-5">
+                <img 
+                  src="/dedicate-logo.png" 
+                  alt="Logo Dedicate" 
+                  className="w-8 h-8 rounded-full object-cover border border-[#7A0006]/50 shadow-xs" 
+                />
+                <h4 className={`text-xl font-black uppercase tracking-tight ${
+                  adminTheme === 'light' ? 'text-slate-900' : 'text-white'
+                }`}>
+                  {editingShowcase ? `Edit Slide Showcase // ${editingShowcase.dropCode}` : "Tambah Slide Showcase Hero"}
+                </h4>
+              </div>
+
+              <form onSubmit={handleSaveShowcase} className="space-y-4 text-xs font-mono">
+                
+                {/* Row 1: Drop Badge & Action Button Text */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className={`block mb-1 font-semibold ${
+                      adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
+                    }`}>Drop Badge / Kode *</label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="cth: DROP 01 // NERO COLLAB" 
+                      value={showcaseDropCode}
+                      onChange={(e) => setShowcaseDropCode(e.target.value)}
+                      className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                        adminTheme === 'light'
+                          ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                          : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                      }`}
+                    />
+                  </div>
+
+                  <div>
+                    <label className={`block mb-1 font-semibold ${
+                      adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
+                    }`}>Teks Tombol Aksi *</label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="cth: Pesan via WhatsApp / Lihat Detail Kaos" 
+                      value={showcaseActionText}
+                      onChange={(e) => setShowcaseActionText(e.target.value)}
+                      className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                        adminTheme === 'light'
+                          ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                          : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                      }`}
+                    />
+                  </div>
+                </div>
+
+                {/* Judul Banner */}
+                <div>
+                  <label className={`block mb-1 font-semibold ${
+                    adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
+                  }`}>Judul Banner Hero *</label>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="cth: NERO X DEDICATE — Heavyweight Collab Drop." 
+                    value={showcaseTitle}
+                    onChange={(e) => setShowcaseTitle(e.target.value)}
+                    className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                      adminTheme === 'light'
+                        ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                        : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                    }`}
+                  />
+                </div>
+
+                {/* Deskripsi */}
+                <div>
+                  <label className={`block mb-1 font-semibold ${
+                    adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
+                  }`}>Deskripsi Banner</label>
+                  <textarea 
+                    rows={2}
+                    placeholder="Deskripsi singkat spesifikasi katun, artwork sablon, atau kuota edisi..."
+                    value={showcaseDesc}
+                    onChange={(e) => setShowcaseDesc(e.target.value)}
+                    className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                      adminTheme === 'light'
+                        ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                        : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                    }`}
+                  ></textarea>
+                </div>
+
+                {/* Tautan Produk Katalog */}
+                <div>
+                  <label className={`block mb-1 font-semibold ${
+                    adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
+                  }`}>Tautkan ke Produk Katalog (Opsional)</label>
+                  <select 
+                    value={showcaseLinkedId || ""}
+                    onChange={(e) => setShowcaseLinkedId(e.target.value ? Number(e.target.value) : undefined)}
+                    className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                      adminTheme === 'light'
+                        ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                        : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                    }`}
+                  >
+                    <option value="">-- Tanpa Tautan Produk Langsung (Scroll Katalog) --</option>
+                    {products.map(p => (
+                      <option key={p.id} value={p.id}>
+                        {p.sku} — {p.name} ({p.status} - {formatRupiah(p.price)})
+                      </option>
+                    ))}
+                  </select>
+                  <p className={`text-[10px] mt-1 ${
+                    adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-500'
+                  }`}>
+                    Jika produk dipilih, saat pembeli mengklik tombol aksi di carousel hero, modal detail kaos akan langsung terbuka.
+                  </p>
+                </div>
+
+                {/* Image URL & File Upload */}
+                <div className="space-y-2">
+                  <label className={`block font-semibold ${
+                    adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
+                  }`}>Foto Slide Showcase *</label>
+                  
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="https://images.unsplash.com/... atau unggah file foto"
+                      value={showcaseImage}
+                      onChange={(e) => setShowcaseImage(e.target.value)}
+                      className={`flex-1 px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                        adminTheme === 'light'
+                          ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                          : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                      }`}
+                    />
+                    <label className={`px-4 py-2.5 rounded-xl border cursor-pointer font-bold flex items-center justify-center space-x-1.5 transition shrink-0 ${
+                      adminTheme === 'light'
+                        ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
+                        : 'bg-zinc-900 hover:bg-zinc-800 border-zinc-800 text-white'
+                    }`}>
+                      <Upload className="w-3.5 h-3.5" />
+                      <span>Upload Foto</span>
+                      <input 
+                        type="file" 
+                        accept="image/*" 
+                        className="hidden" 
+                        onChange={handleShowcaseImageUpload}
+                      />
+                    </label>
+                  </div>
+
+                  {/* Live Preview */}
+                  {showcaseImage && (
+                    <div className="relative aspect-[16/9] max-h-48 rounded-2xl overflow-hidden border border-zinc-800 mt-2 bg-black">
+                      <img 
+                        src={showcaseImage} 
+                        alt="Preview" 
+                        className="w-full h-full object-cover" 
+                      />
+                      <div className="absolute top-3 left-3">
+                        <span className="text-xs font-mono font-bold tracking-wider text-white bg-black/80 px-2.5 py-1 rounded backdrop-blur border border-white/10 uppercase">
+                          {showcaseDropCode || "PREVIEW DROP"}
+                        </span>
+                      </div>
+                      <div className="absolute bottom-3 left-3 right-3 bg-black/70 backdrop-blur p-2.5 rounded-xl">
+                        <div className="font-bold text-white uppercase text-xs truncate">{showcaseTitle || "Judul Banner"}</div>
+                        <div className="text-[10px] text-zinc-300 truncate">{showcaseDesc || "Deskripsi Banner"}</div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Form Buttons */}
+                <div className={`flex justify-end space-x-2.5 pt-3 border-t ${
+                  adminTheme === 'light' ? 'border-slate-200' : 'border-zinc-800'
+                }`}>
+                  <button 
+                    type="button" 
+                    onClick={() => setIsShowcaseFormOpen(false)}
+                    className={`px-4 py-2 rounded-xl border text-xs transition ${
+                      adminTheme === 'light'
+                        ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
+                        : 'bg-zinc-900 hover:bg-zinc-800 border-zinc-800 text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    Batal
+                  </button>
+                  <button 
+                    type="submit" 
+                    className="px-5 py-2.5 rounded-xl bg-[#7A0006] hover:bg-[#991b1b] text-white font-bold uppercase shadow-md shadow-[#7A0006]/20 transition active:scale-95"
+                  >
+                    Simpan Slide Showcase
+                  </button>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* LOOKBOOK EDITORIAL MODAL (ADD / EDIT) */}
+      {isLookbookFormOpen && (
+        <div className="fixed inset-0 z-50 overflow-y-auto">
+          <div 
+            className={`fixed inset-0 backdrop-blur-sm transition-colors ${
+              adminTheme === 'light' ? 'bg-slate-900/50' : 'bg-black/85'
+            }`} 
+            onClick={() => setIsLookbookFormOpen(false)}
+          ></div>
+          <div className="min-h-full flex items-center justify-center p-3 sm:p-6 relative z-10">
+            <div className={`w-full max-w-2xl rounded-3xl border shadow-2xl p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto transition-all ${
+              adminTheme === 'light' 
+                ? 'bg-white text-slate-800 border-slate-200' 
+                : 'bg-zinc-950 text-white border-zinc-800'
+            }`}>
+              
+              <button 
+                onClick={() => setIsLookbookFormOpen(false)} 
+                className={`absolute top-5 right-5 transition ${
+                  adminTheme === 'light' ? 'text-slate-400 hover:text-slate-700' : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="flex items-center space-x-3 mb-5">
+                <img 
+                  src="/dedicate-logo.png" 
+                  alt="Logo Dedicate" 
+                  className="w-8 h-8 rounded-full object-cover border border-[#7A0006]/50 shadow-xs" 
+                />
+                <h4 className={`text-xl font-black uppercase tracking-tight ${
+                  adminTheme === 'light' ? 'text-slate-900' : 'text-white'
+                }`}>
+                  {editingLookbook ? `Edit Foto Editorial // ${editingLookbook.title}` : "Tambah Foto Editorial Lookbook"}
+                </h4>
+              </div>
+
+              <form onSubmit={handleSaveLookbook} className="space-y-4 text-xs font-mono">
+                
+                {/* Row 1: Tag & Title */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className={`block mb-1 font-semibold ${
+                      adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
+                    }`}>Tag / Batch *</label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="cth: DROP 01 // YK STREETS" 
+                      value={lookbookTag}
+                      onChange={(e) => setLookbookTag(e.target.value)}
+                      className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                        adminTheme === 'light'
+                          ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                          : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                      }`}
+                    />
+                  </div>
+
+                  <div>
+                    <label className={`block mb-1 font-semibold ${
+                      adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
+                    }`}>Judul Editorial *</label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="cth: UNDERGROUND ALLEY SESSION" 
+                      value={lookbookTitle}
+                      onChange={(e) => setLookbookTitle(e.target.value)}
+                      className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                        adminTheme === 'light'
+                          ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                          : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                      }`}
+                    />
+                  </div>
+                </div>
+
+                {/* Row 2: Location & Specs */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className={`block mb-1 font-semibold ${
+                      adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
+                    }`}>Lokasi Pemotretan *</label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="cth: Jl. Malioboro Back-Alley, Yogyakarta" 
+                      value={lookbookLocation}
+                      onChange={(e) => setLookbookLocation(e.target.value)}
+                      className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                        adminTheme === 'light'
+                          ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                          : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                      }`}
+                    />
+                  </div>
+
+                  <div>
+                    <label className={`block mb-1 font-semibold ${
+                      adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
+                    }`}>Spesifikasi / Detail Kain</label>
+                    <input 
+                      type="text" 
+                      placeholder="cth: 235 GSM • Signature Boxy Cut" 
+                      value={lookbookSpecs}
+                      onChange={(e) => setLookbookSpecs(e.target.value)}
+                      className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                        adminTheme === 'light'
+                          ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                          : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                      }`}
+                    />
+                  </div>
+                </div>
+
+                {/* Caption */}
+                <div>
+                  <label className={`block mb-1 font-semibold ${
+                    adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
+                  }`}>Narasi / Caption Editorial</label>
+                  <textarea 
+                    rows={2}
+                    placeholder="Narasi estetika street photography..."
+                    value={lookbookCaption}
+                    onChange={(e) => setLookbookCaption(e.target.value)}
+                    className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                      adminTheme === 'light'
+                        ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                        : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                    }`}
+                  ></textarea>
+                </div>
+
+                {/* Tautan Produk */}
+                <div>
+                  <label className={`block mb-1 font-semibold ${
+                    adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
+                  }`}>Tautkan ke Produk Kaos (Direct Shop-Look)</label>
+                  <select 
+                    value={lookbookLinkedId || ""}
+                    onChange={(e) => setLookbookLinkedId(e.target.value ? Number(e.target.value) : undefined)}
+                    className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                      adminTheme === 'light'
+                        ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                        : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                    }`}
+                  >
+                    <option value="">-- Tanpa Tautan Produk --</option>
+                    {products.map(p => (
+                      <option key={p.id} value={p.id}>
+                        {p.sku} — {p.name} ({formatRupiah(p.price)})
+                      </option>
+                    ))}
+                  </select>
+                  <p className={`text-[10px] mt-1 ${
+                    adminTheme === 'light' ? 'text-slate-500' : 'text-zinc-500'
+                  }`}>
+                    Saat pengunjung mengklik foto editorial lookbook ini di website, produk yang ditautkan dapat langsung dilihat detailnya.
+                  </p>
+                </div>
+
+                {/* Foto Lookbook */}
+                <div className="space-y-2">
+                  <label className={`block font-semibold ${
+                    adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-400'
+                  }`}>Foto Editorial *</label>
+                  
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="https://images.unsplash.com/... atau unggah dari perangkat"
+                      value={lookbookImage}
+                      onChange={(e) => setLookbookImage(e.target.value)}
+                      className={`flex-1 px-3.5 py-2.5 rounded-xl outline-none border transition ${
+                        adminTheme === 'light'
+                          ? 'bg-slate-50 border-slate-300 text-slate-900 focus:bg-white focus:border-[#7A0006]'
+                          : 'bg-zinc-900 border-zinc-800 text-white focus:border-[#7A0006]'
+                      }`}
+                    />
+                    <label className={`px-4 py-2.5 rounded-xl border cursor-pointer font-bold flex items-center justify-center space-x-1.5 transition shrink-0 ${
+                      adminTheme === 'light'
+                        ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
+                        : 'bg-zinc-900 hover:bg-zinc-800 border-zinc-800 text-white'
+                    }`}>
+                      <Upload className="w-3.5 h-3.5" />
+                      <span>Upload Foto</span>
+                      <input 
+                        type="file" 
+                        accept="image/*" 
+                        className="hidden" 
+                        onChange={handleLookbookImageUpload}
+                      />
+                    </label>
+                  </div>
+
+                  {/* Live Preview */}
+                  {lookbookImage && (
+                    <div className="relative aspect-[4/3] max-h-48 rounded-2xl overflow-hidden border border-zinc-800 mt-2 bg-black">
+                      <img 
+                        src={lookbookImage} 
+                        alt="Preview" 
+                        className="w-full h-full object-cover" 
+                      />
+                      <div className="absolute top-3 left-3">
+                        <span className="text-[10px] font-mono font-bold text-white bg-black/80 px-2 py-0.5 rounded backdrop-blur border border-white/10 uppercase">
+                          {lookbookTag || "PREVIEW TAG"}
+                        </span>
+                      </div>
+                      <div className="absolute bottom-3 left-3 right-3 bg-black/75 backdrop-blur p-2.5 rounded-xl">
+                        <div className="font-bold text-white uppercase text-xs truncate">{lookbookTitle || "Judul Editorial"}</div>
+                        <div className="text-[10px] text-[#A60009] flex items-center space-x-1 truncate font-semibold">
+                          <MapPin className="w-3 h-3 shrink-0" />
+                          <span>{lookbookLocation || "Lokasi"}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Form Buttons */}
+                <div className={`flex justify-end space-x-2.5 pt-3 border-t ${
+                  adminTheme === 'light' ? 'border-slate-200' : 'border-zinc-800'
+                }`}>
+                  <button 
+                    type="button" 
+                    onClick={() => setIsLookbookFormOpen(false)}
+                    className={`px-4 py-2 rounded-xl border text-xs transition ${
+                      adminTheme === 'light'
+                        ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
+                        : 'bg-zinc-900 hover:bg-zinc-800 border-zinc-800 text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    Batal
+                  </button>
+                  <button 
+                    type="submit" 
+                    className="px-5 py-2.5 rounded-xl bg-[#7A0006] hover:bg-[#991b1b] text-white font-bold uppercase shadow-md shadow-[#7A0006]/20 transition active:scale-95"
+                  >
+                    Simpan Foto Lookbook
+                  </button>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* 11. LOOKBOOK SECTION */}
       <section id="lookbook-section" className="py-12 border-t border-zinc-800/80 bg-black">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 mb-6 flex items-end justify-between">
@@ -3426,26 +4612,63 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
             </div>
             <h2 className="font-black text-2xl md:text-3xl text-white uppercase">YOGYAKARTA UNDERGROUND LOOKBOOK</h2>
           </div>
+          <div className="hidden sm:block text-xs font-mono text-zinc-500">
+            {lookbookItems.length} Editorial Shots
+          </div>
         </div>
 
         <div className="flex overflow-x-auto space-x-4 px-4 lg:px-8 max-w-7xl mx-auto pb-4">
-          {products.slice(0, 4).map((p, idx) => (
-            <div key={p.id} className="shrink-0 w-72 sm:w-80 rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800">
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                <div className="absolute top-3 left-3">
-                  <span className="px-2 py-1 rounded bg-black/70 backdrop-blur font-mono text-[10px] text-white uppercase border border-white/10">
-                    DROP 0{idx + 1} // YK STREETS
-                  </span>
-                </div>
-                <div className="absolute bottom-3 left-3 right-3">
-                  <div className="font-bold text-sm text-white uppercase">{p.name}</div>
-                  <div className="text-[11px] font-mono text-zinc-300">{p.fabricGsm} GSM • {p.fitType}</div>
+          {lookbookItems.map((item, idx) => {
+            const linkedProd = products.find(p => p.id === item.linkedProductId);
+            return (
+              <div 
+                key={item.id} 
+                onClick={() => {
+                  if (linkedProd) openProductDetail(linkedProd);
+                }}
+                className={`shrink-0 w-72 sm:w-80 rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800 hover:border-zinc-700 transition group ${
+                  linkedProd ? 'cursor-pointer' : ''
+                }`}
+              >
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-85 group-hover:opacity-75 transition"></div>
+                  
+                  {/* Top Badges */}
+                  <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                    <span className="px-2 py-0.5 rounded bg-black/80 backdrop-blur font-mono text-[10px] text-white uppercase border border-white/10 font-bold">
+                      {item.tag || `LOOK 0${idx + 1}`}
+                    </span>
+                    {linkedProd && (
+                      <span className="px-2 py-0.5 rounded bg-[#7A0006]/90 backdrop-blur font-mono text-[10px] text-white uppercase flex items-center space-x-1 shadow-xs border border-red-500/20">
+                        <ShoppingBag className="w-2.5 h-2.5 mr-1" />
+                        <span>Shop Look</span>
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Bottom Info */}
+                  <div className="absolute bottom-3 left-3 right-3 space-y-1">
+                    <div className="font-bold text-sm text-white uppercase tracking-tight">{item.title}</div>
+                    <div className="text-[11px] font-mono text-zinc-300 flex items-center space-x-1">
+                      <MapPin className="w-3 h-3 text-[#A60009] shrink-0" />
+                      <span className="truncate">{item.location}</span>
+                    </div>
+                    {item.specs && (
+                      <div className="text-[10px] font-mono text-zinc-400">{item.specs}</div>
+                    )}
+                    {item.caption && (
+                      <p className="text-[10px] text-zinc-400 line-clamp-2 italic pt-0.5">"{item.caption}"</p>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
