@@ -215,30 +215,36 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: 3,
-    name: "SYSTEM COLLAPSE Acid Washed Boxy Tee",
+    name: "DEDICATEREALITE Noir Sacrifice Boxy Tee",
     sku: "DDC-TC-003",
     category: "Boxy Tee",
     price: 195000,
     fitType: "Boxy Fit",
-    fabricMaterial: "Vintage Washed Cotton 14s",
-    fabricGsm: 260,
-    printType: "Plastisol Curing with Grayscale Halftone",
+    fabricMaterial: "Heavyweight Cotton Combed 16s",
+    fabricGsm: 240,
+    printType: "High-Density Blood Red Handprint & Minimal Typography",
     status: "READY",
-    colorTheme: "#27272a",
-    graphicAccent: "#e4e4e7",
-    image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=80",
-    description: "Katun super tebal 14s seberat 260 GSM melalui pencucian acid wash manual. Tekstur warna arang vintage berkarakter dengan tipografi Y2K industrial di punggung.",
+    colorTheme: "#0d0d0f",
+    graphicAccent: "#7A0006",
+    image: "/images/dedicate-black-front.png",
+    gallery: [
+      "/images/dedicate-black-front.png",
+      "/images/dedicate-black-back.png",
+      "/images/dedicate-duo-street.jpg",
+      "/images/dedicate-sacrifice-vespa.jpg"
+    ],
+    description: "Siluet signature boxy cut dengan katun combed 16s warna hitam pekat 240 GSM. Menampilkan logo minimal Dëdicaté di dada kiri dan sablon cap tangan merah darah 'Sacrifice' di punggung lengkap dengan teks filosofi brand.",
     sizes: [
-      { size: "S", stock: 2, available: true },
-      { size: "M", stock: 5, available: true },
-      { size: "L", stock: 9, available: true },
-      { size: "XL", stock: 4, available: true },
-      { size: "XXL", stock: 0, available: false }
+      { size: "S", stock: 6, available: true },
+      { size: "M", stock: 12, available: true },
+      { size: "L", stock: 16, available: true },
+      { size: "XL", stock: 8, available: true },
+      { size: "XXL", stock: 3, available: true }
     ]
   },
   {
     id: 4,
-    name: "DEDICATE SACRIFICE Red Handprint Tee",
+    name: "DEDICATE SACRIFICE Limited White Tee",
     sku: "DDC-TC-004",
     category: "Heavyweight Tee",
     price: 185000,
@@ -247,16 +253,16 @@ export const INITIAL_PRODUCTS: Product[] = [
     fabricGsm: 235,
     printType: "High-Density Blood Red Handprint & Typography",
     status: "READY",
-    colorTheme: "#1c1917",
+    colorTheme: "#f4f4f0",
     graphicAccent: "#b91c1c",
-    image: "/images/dedicate-sacrifice-vespa.jpg",
+    image: "/images/dedicate-white-flatlay.png",
     gallery: [
-      "/images/dedicate-sacrifice-vespa.jpg",
-      "/images/dedicate-sacrifice-skate.jpg",
+      "/images/dedicate-white-flatlay.png",
+      "/images/dedicate-duo-street.jpg",
       "/images/dedicate-sacrifice-vespa.jpg",
       "/images/dedicate-sacrifice-skate.jpg"
     ],
-    description: "Edisi filosofis Dedicaterealite bertema 'Sacrifice'. Menggunakan katun combed 16s 235 GSM tebal dengan artwork sablon cap tangan merah darah dan teks manifestasi dedikasi. Dilengkapi rib leher tebal anti melar.",
+    description: "Edisi filosofis terbatas Dedicaterealite 'Sacrifice' warna putih. Menggunakan katun combed 16s 235 GSM tebal dengan artwork sablon cap tangan merah darah dan teks manifestasi dedikasi. Dilengkapi rib leher tebal anti melar.",
     sizes: [
       { size: "S", stock: 5, available: true },
       { size: "M", stock: 10, available: true },
@@ -471,6 +477,26 @@ export const INITIAL_LOOKBOOK_ITEMS: LookbookItem[] = [
     image: "/images/nero-dragon-print.jpg",
     caption: "Detail ketajaman sisik naga dengan teknik raster dot-work presisi tinggi pada katun tebal.",
     linkedProductId: 2
+  },
+  {
+    id: "lb-09",
+    tag: "STREET ARCHIVE // DUO",
+    title: "SACRIFICE STREET SESSION",
+    location: "Malioboro Outer Streets, Yogyakarta",
+    specs: "Front Chest Minimal & Back Blood Handprint",
+    image: "/images/dedicate-duo-street.jpg",
+    caption: "Dua model menampilkan tampak depan minimal dan tampak punggung cap tangan merah berfilosofi dedikasi.",
+    linkedProductId: 4
+  },
+  {
+    id: "lb-10",
+    tag: "NOIR ARCHIVE // BACKPRINT",
+    title: "NOIR SACRIFICE MANIFEST",
+    location: "Dedicate Creative Archive, Yogyakarta",
+    specs: "240 GSM Boxy • Blood Red Handprint",
+    image: "/images/dedicate-black-back.png",
+    caption: "Karya tipografi manifestasi dedikasi dengan latar grafis cap tangan merah darah di atas katun hitam.",
+    linkedProductId: 3
   }
 ];
 
@@ -478,7 +504,7 @@ export default function App() {
   // Master State
   const [products, setProducts] = useState<Product[]>(() => {
     try {
-      const saved = localStorage.getItem('dedicaterealite_react_products_v5');
+      const saved = localStorage.getItem('dedicaterealite_react_products_v6');
       if (saved) return JSON.parse(saved);
       return INITIAL_PRODUCTS;
     } catch {
@@ -551,7 +577,7 @@ export default function App() {
   // Showcase CMS State
   const [showcaseSlides, setShowcaseSlides] = useState<ShowcaseSlideItem[]>(() => {
     try {
-      const saved = localStorage.getItem('dedicaterealite_showcase_slides_v5');
+      const saved = localStorage.getItem('dedicaterealite_showcase_slides_v6');
       if (saved) return JSON.parse(saved);
       return INITIAL_SHOWCASE_SLIDES;
     } catch (e) {
@@ -570,7 +596,7 @@ export default function App() {
   // Lookbook CMS State
   const [lookbookItems, setLookbookItems] = useState<LookbookItem[]>(() => {
     try {
-      const saved = localStorage.getItem('dedicaterealite_lookbook_items_v5');
+      const saved = localStorage.getItem('dedicaterealite_lookbook_items_v6');
       if (saved) return JSON.parse(saved);
       return INITIAL_LOOKBOOK_ITEMS;
     } catch (e) {
@@ -613,15 +639,15 @@ export default function App() {
 
   // Sync LocalStorage
   useEffect(() => {
-    localStorage.setItem('dedicaterealite_react_products_v5', JSON.stringify(products));
+    localStorage.setItem('dedicaterealite_react_products_v6', JSON.stringify(products));
   }, [products]);
 
   useEffect(() => {
-    localStorage.setItem('dedicaterealite_showcase_slides_v5', JSON.stringify(showcaseSlides));
+    localStorage.setItem('dedicaterealite_showcase_slides_v6', JSON.stringify(showcaseSlides));
   }, [showcaseSlides]);
 
   useEffect(() => {
-    localStorage.setItem('dedicaterealite_lookbook_items_v5', JSON.stringify(lookbookItems));
+    localStorage.setItem('dedicaterealite_lookbook_items_v6', JSON.stringify(lookbookItems));
   }, [lookbookItems]);
 
   useEffect(() => {
@@ -2941,7 +2967,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                     onChange={(e) => setAdminPasscode(e.target.value)}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
-                        if (adminPasscode === "dedicate2024" || adminPasscode === "admin123") {
+                        if (adminPasscode === "IMK-PROJEK") {
                           setIsAdminLoggedIn(true);
                           showToast("Login Admin Berhasil", "success");
                         } else {
@@ -2957,7 +2983,7 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                   />
                   <button 
                     onClick={() => {
-                      if (adminPasscode === "dedicate2024" || adminPasscode === "admin123") {
+                      if (adminPasscode === "IMK-PROJEK") {
                         setIsAdminLoggedIn(true);
                         showToast("Login Admin Berhasil", "success");
                       } else {
@@ -2968,10 +2994,11 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                   >
                     Masuk ke Dasbor
                   </button>
-                  <div className={`text-[11px] font-mono ${
+                  <div className={`text-[11px] font-mono flex items-center justify-center gap-1.5 ${
                     adminTheme === 'light' ? 'text-slate-400' : 'text-zinc-500'
                   }`}>
-                    Passcode Default: <code className="text-[#A60009] font-bold">dedicate2024</code>
+                    <Lock className="w-3 h-3 text-[#A60009]" />
+                    <span>Area terproteksi khusus pengelola toko</span>
                   </div>
                 </div>
               ) : (
