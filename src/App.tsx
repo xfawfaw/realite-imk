@@ -60,6 +60,7 @@ export type Product = {
   graphicAccent: string;
   description: string;
   image: string;
+  gallery?: string[];
   sizes: { size: string; stock: number; available: boolean }[];
   measurements?: { size: string; ld: number; pb: number; pl: number }[];
 };
@@ -186,18 +187,24 @@ export const INITIAL_PRODUCTS: Product[] = [
     fitType: "Loose Oversized",
     fabricMaterial: "Ultra-Combed Cotton Heavy 16s",
     fabricGsm: 240,
-    printType: "Discharge Screenprint with Chrome Foil Accents",
-    status: "PREORDER",
+    printType: "High-Density Halftone Screenprint + Bold Typography",
+    status: "READY",
     colorTheme: "#0d0d0f",
-    graphicAccent: "#c0c0c0",
-    image: "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1200&q=80",
-    description: "Kolaborasi eksklusif dengan kolektif NERO. Siluet loose oversized dengan sablon discharge menyatu serat kain ditambah aksen foil krom tahan panas. Edisi bernomor 100 pcs.",
+    graphicAccent: "#A60009",
+    image: "/images/nero-front-dragon.jpg",
+    gallery: [
+      "/images/nero-front-dragon.jpg",
+      "/images/nero-crew-studio.jpg",
+      "/images/nero-dragon-print.jpg",
+      "/images/nero-alley-motor.jpg"
+    ],
+    description: "Kolaborasi orisinal eksklusif dengan NERO CREW. Katun combed 16s seberat 240 GSM yang kokoh dengan drape jatuh sempurna. Menampilkan grafis naga ikonik 'ONLY FOR NERO HOMMIES' di bagian depan dan tipografi bold 'N.E.R.O CREW' di punggung. Sablon teknik raster dot-work tahan cuci berkali-kali.",
     sizes: [
-      { size: "S", stock: 15, available: true },
-      { size: "M", stock: 20, available: true },
-      { size: "L", stock: 25, available: true },
-      { size: "XL", stock: 15, available: true },
-      { size: "XXL", stock: 10, available: true }
+      { size: "S", stock: 8, available: true },
+      { size: "M", stock: 15, available: true },
+      { size: "L", stock: 20, available: true },
+      { size: "XL", stock: 12, available: true },
+      { size: "XXL", stock: 6, available: true }
     ]
   },
   {
@@ -307,11 +314,11 @@ export type ShowcaseSlideItem = {
 export const INITIAL_SHOWCASE_SLIDES: ShowcaseSlideItem[] = [
   {
     id: "nero-collab",
-    dropCode: "DROP 01 // NERO COLLAB",
+    dropCode: "DROP 01 // NERO CREW COLLAB",
     title: "NERO X DEDICATE — Heavyweight Collab Drop.",
-    description: "240 GSM ultra-combed cotton with discharge dystopian artwork and chrome foil accents. Limited 100 numbered pieces.",
-    actionText: "Pesan via WhatsApp",
-    image: "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1200&q=80",
+    description: "240 GSM ultra-combed cotton with front dragon artwork & bold N.E.R.O CREW backprint. Edisi kolaborasi terbatas Yogyakarta streetwear.",
+    actionText: "Lihat Detail Kaos",
+    image: "/images/nero-rooftop-duo.png",
     linkedProductId: 2
   },
   {
@@ -375,61 +382,74 @@ export type LookbookItem = {
 export const INITIAL_LOOKBOOK_ITEMS: LookbookItem[] = [
   {
     id: "lb-01",
-    tag: "DROP 01 // YK STREETS",
-    title: "UNDERGROUND ALLEY SESSION",
-    location: "Jl. Malioboro Back-Alley, Yogyakarta",
-    specs: "235 GSM • Signature Boxy Cut",
-    image: "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1200&q=80",
-    caption: "Heavyweight silhouette against raw concrete urban walls.",
-    linkedProductId: 1
+    tag: "DROP 01 // ROOFTOP SESSION",
+    title: "NERO CREW MIDNIGHT HANGOUT",
+    location: "Rooftop Lounge, Yogyakarta",
+    specs: "240 GSM • Front Dragon & Back Bold Print",
+    image: "/images/nero-rooftop-duo.png",
+    caption: "Suasana santai malam hari menampilkan siluet depan naga dan sablon punggung N.E.R.O CREW.",
+    linkedProductId: 2
   },
   {
     id: "lb-02",
-    tag: "DROP 02 // ARCHIVE SERIES",
-    title: "PRAWIROTAMAN NIGHTSCAPE",
-    location: "Prawirotaman Warehouse, Yogyakarta",
-    specs: "240 GSM • Collab Cut",
-    image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
-    caption: "Limited dystopia discharge print illuminated by street neon.",
+    tag: "DROP 01 // STUDIO SESSION",
+    title: "CONCRETE STUDIO & TWO-TONE CREW",
+    location: "Underground Creative Studio, Yogyakarta",
+    specs: "Heavy Cotton Combed 16s • Bold Back Print",
+    image: "/images/nero-crew-studio.jpg",
+    caption: "Dua model menampilkan artwork punggung N.E.R.O CREW dengan kontras warna merah dan hitam.",
     linkedProductId: 2
   },
   {
     id: "lb-03",
-    tag: "DROP 03 // VINTAGE HEAVY",
-    title: "ABANDONED TRAIN DEPOT",
-    location: "Lempuyangan Rail Yard, Yogyakarta",
-    specs: "260 GSM • Acid Wash Charcoal",
-    image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=80",
-    caption: "Thick draping fabric engineered for raw industrial environments.",
-    linkedProductId: 3
+    tag: "ARCHIVE // DRAGON SCREENPRINT",
+    title: "HIGH-DENSITY HALFTONE DRAGON",
+    location: "Dedicate Screenprint Workshop, Yogyakarta",
+    specs: "Plastisol Curing • Halftone Micro Dot-Work",
+    image: "/images/nero-dragon-print.jpg",
+    caption: "Detail ketajaman sisik naga dengan teknik raster dot-work presisi tinggi pada katun tebal.",
+    linkedProductId: 2
   },
   {
     id: "lb-04",
-    tag: "DROP 04 // CRACKED FINISH",
-    title: "KOTAGEDE METAL ARCHIVE",
-    location: "Kotagede Silver District, Yogyakarta",
-    specs: "200 GSM • Distressed Grunge",
-    image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=1200&q=80",
-    caption: "Authentic cracked ink texture aged by time and movement.",
-    linkedProductId: 4
+    tag: "EDITORIAL // DIRT BIKE",
+    title: "ALLEYWAY MIDNIGHT RIDE",
+    location: "Gang Lorong Malioboro, Yogyakarta",
+    specs: "240 GSM Loose Cut • Motor Culture",
+    image: "/images/nero-alley-motor.jpg",
+    caption: "Eksplorasi lorong malam Jogja memadukan apparel kasual dengan estetika dirtbike kustom.",
+    linkedProductId: 2
   },
   {
     id: "lb-05",
-    tag: "DROP 05 // CRIMSON LAYER",
-    title: "UGM ROOFTOP DUSK",
-    location: "Bulaksumur Elevated Point, Yogyakarta",
-    specs: "Burgundy Heavy Longsleeve",
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
-    caption: "High-density tribal sleeve print made for evening motorcycle runs.",
-    linkedProductId: 5
+    tag: "ON-BODY LOOK // RAW FLASH",
+    title: "MIDNIGHT HOMMIES SESSION",
+    location: "Yogyakarta Street Corner",
+    specs: "Front Dragon Artwork • Silver Chain Accent",
+    image: "/images/nero-front-dragon.jpg",
+    caption: "Tampilan on-body kaos dengan kalung rantai dan grafis naga ikonik ONLY FOR NERO HOMMIES.",
+    linkedProductId: 2
   }
 ];
 
 export default function App() {
   // Master State
   const [products, setProducts] = useState<Product[]>(() => {
-    const saved = localStorage.getItem('dedicaterealite_react_products');
-    return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
+    try {
+      const saved = localStorage.getItem('dedicaterealite_react_products_v4');
+      if (saved) return JSON.parse(saved);
+      const oldSaved = localStorage.getItem('dedicaterealite_react_products');
+      if (oldSaved) {
+        const parsed: Product[] = JSON.parse(oldSaved);
+        return parsed.map(p => {
+          const init = INITIAL_PRODUCTS.find(ip => ip.id === p.id);
+          return init && init.image.startsWith('/images/') ? { ...p, image: init.image, gallery: init.gallery } : p;
+        });
+      }
+      return INITIAL_PRODUCTS;
+    } catch {
+      return INITIAL_PRODUCTS;
+    }
   });
 
   const [waNumber, setWaNumber] = useState<string>(() => {
@@ -497,8 +517,17 @@ export default function App() {
   // Showcase CMS State
   const [showcaseSlides, setShowcaseSlides] = useState<ShowcaseSlideItem[]>(() => {
     try {
-      const saved = localStorage.getItem('dedicaterealite_showcase_slides');
-      return saved ? JSON.parse(saved) : INITIAL_SHOWCASE_SLIDES;
+      const saved = localStorage.getItem('dedicaterealite_showcase_slides_v4');
+      if (saved) return JSON.parse(saved);
+      const oldSaved = localStorage.getItem('dedicaterealite_showcase_slides');
+      if (oldSaved) {
+        const parsed: ShowcaseSlideItem[] = JSON.parse(oldSaved);
+        return parsed.map(s => {
+          const init = INITIAL_SHOWCASE_SLIDES.find(is => is.id === s.id);
+          return init && init.image.startsWith('/images/') ? { ...s, image: init.image } : s;
+        });
+      }
+      return INITIAL_SHOWCASE_SLIDES;
     } catch (e) {
       return INITIAL_SHOWCASE_SLIDES;
     }
@@ -515,8 +544,9 @@ export default function App() {
   // Lookbook CMS State
   const [lookbookItems, setLookbookItems] = useState<LookbookItem[]>(() => {
     try {
-      const saved = localStorage.getItem('dedicaterealite_lookbook_items');
-      return saved ? JSON.parse(saved) : INITIAL_LOOKBOOK_ITEMS;
+      const saved = localStorage.getItem('dedicaterealite_lookbook_items_v4');
+      if (saved) return JSON.parse(saved);
+      return INITIAL_LOOKBOOK_ITEMS;
     } catch (e) {
       return INITIAL_LOOKBOOK_ITEMS;
     }
@@ -557,15 +587,15 @@ export default function App() {
 
   // Sync LocalStorage
   useEffect(() => {
-    localStorage.setItem('dedicaterealite_react_products', JSON.stringify(products));
+    localStorage.setItem('dedicaterealite_react_products_v4', JSON.stringify(products));
   }, [products]);
 
   useEffect(() => {
-    localStorage.setItem('dedicaterealite_showcase_slides', JSON.stringify(showcaseSlides));
+    localStorage.setItem('dedicaterealite_showcase_slides_v4', JSON.stringify(showcaseSlides));
   }, [showcaseSlides]);
 
   useEffect(() => {
-    localStorage.setItem('dedicaterealite_lookbook_items', JSON.stringify(lookbookItems));
+    localStorage.setItem('dedicaterealite_lookbook_items_v4', JSON.stringify(lookbookItems));
   }, [lookbookItems]);
 
   useEffect(() => {
@@ -1587,7 +1617,15 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                 <div className="md:col-span-5 bg-black p-5 sm:p-6 flex flex-col justify-between border-b md:border-b-0 md:border-r border-zinc-800">
                   <div>
                     <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800">
-                      <img src={detailProduct.image} alt={detailProduct.name} className="w-full h-full object-cover" />
+                      <img 
+                        src={
+                          detailProduct.gallery && detailProduct.gallery[activeAngleIndex] 
+                            ? detailProduct.gallery[activeAngleIndex] 
+                            : detailProduct.image
+                        } 
+                        alt={detailProduct.name} 
+                        className="w-full h-full object-cover transition duration-300" 
+                      />
                       <div className="absolute top-3 left-3">
                         <span className="px-2.5 py-1 rounded bg-black/75 backdrop-blur font-mono text-[10px] text-white uppercase border border-white/10">
                           {activeAngleIndex === 0 ? "Depan" : activeAngleIndex === 1 ? "Belakang" : activeAngleIndex === 2 ? "Detail Sablon" : "On-Body Look"}
@@ -1597,13 +1635,13 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
 
                     {/* Minimal Thumbnail Angle Selectors */}
                     <div className="grid grid-cols-4 gap-2 mt-3">
-                      {[0, 1, 2, 3].map(idx => (
+                      {(detailProduct.gallery || [detailProduct.image, detailProduct.image, detailProduct.image, detailProduct.image]).map((thumbImg, idx) => (
                         <button 
                           key={idx}
                           onClick={() => setActiveAngleIndex(idx)}
                           className={`aspect-square rounded-lg overflow-hidden border transition ${activeAngleIndex === idx ? 'border-2 border-[#7A0006]' : 'border-zinc-800 opacity-60 hover:opacity-100'}`}
                         >
-                          <img src={detailProduct.image} alt="thumbnail" className="w-full h-full object-cover" />
+                          <img src={thumbImg} alt={`angle-${idx}`} className="w-full h-full object-cover" />
                         </button>
                       ))}
                     </div>
