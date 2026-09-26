@@ -5,9 +5,6 @@ import {
   Swords, 
   ShieldAlert, 
   Ruler, 
-  Layers, 
-  Maximize2, 
-  Sparkles, 
   MessageCircle, 
   ArrowRight, 
   X, 
@@ -1000,43 +997,6 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
             />
           </div>
 
-        </div>
-      </section>
-
-      {/* 03. BRAND HIGHLIGHT BAR */}
-      <section className="border-b border-zinc-800/80 bg-zinc-950 py-4 px-4 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div className="flex items-center space-x-3 p-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800">
-            <div className="p-2 rounded bg-[#7A0006]/20 text-[#A60009]"><Layers className="w-4 h-4" /></div>
-            <div>
-              <div className="font-bold text-xs uppercase text-zinc-200">Heavyweight GSM</div>
-              <div className="font-mono text-[10px] text-zinc-400">Katun 16s (235-260 GSM)</div>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-3 p-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800">
-            <div className="p-2 rounded bg-[#7A0006]/20 text-[#A60009]"><Maximize2 className="w-4 h-4" /></div>
-            <div>
-              <div className="font-bold text-xs uppercase text-zinc-200">Boxy Silhouette</div>
-              <div className="font-mono text-[10px] text-zinc-400">Drop shoulder & rib leher lebar</div>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-3 p-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800">
-            <div className="p-2 rounded bg-[#7A0006]/20 text-[#A60009]"><Sparkles className="w-4 h-4" /></div>
-            <div>
-              <div className="font-bold text-xs uppercase text-zinc-200">High-Density Print</div>
-              <div className="font-mono text-[10px] text-zinc-400">Plastisol & cracked ink awet</div>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-3 p-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800">
-            <div className="p-2 rounded bg-[#7A0006]/20 text-emerald-400"><MessageCircle className="w-4 h-4" /></div>
-            <div>
-              <div className="font-bold text-xs uppercase text-zinc-200">Direct WA Order</div>
-              <div className="font-mono text-[10px] text-emerald-400 font-bold">+62 821-1407-2159</div>
-            </div>
-          </div>
         </div>
       </section>
 
