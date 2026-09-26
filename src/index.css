@@ -49,3 +49,8 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #7A0006;
 }
+
+/* Touch Friendly Tap Highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
