@@ -30,7 +30,11 @@ import {
   ChevronUp,
   Image as ImageIcon,
   Sun,
-  Moon
+  Moon,
+  ShoppingBag,
+  Sliders,
+  Zap,
+  Gift
 } from 'lucide-react';
 
 /* =========================================================================
@@ -56,6 +60,19 @@ export type Product = {
   image: string;
   sizes: { size: string; stock: number; available: boolean }[];
   measurements: { size: string; ld: number; pb: number; pl: number }[];
+};
+
+export type CartItem = {
+  id: string;
+  productId: number;
+  name: string;
+  sku: string;
+  price: number;
+  size: string;
+  qty: number;
+  image: string;
+  fitType: string;
+  fabricGsm: number;
 };
 
 export const INITIAL_PRODUCTS: Product[] = [
@@ -265,6 +282,22 @@ export default function App() {
   const [statusFilter, setStatusFilter] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showSearch, setShowSearch] = useState<boolean>(false);
+  // Shopping Bag / Multi-Item Cart State
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('dedicaterealite_cart');
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      return [];
+    }
+  });
+  const [isBagOpen, setIsBagOpen] = useState<boolean>(false);
+
+  // Smart Fit & Size Recommendation Calculator State
+  const [userHeight, setUserHeight] = useState<number>(172); // cm
+  const [userWeight, setUserWeight] = useState<number>(65); // kg
+  const [fitPreference, setFitPreference] = useState<"boxy" | "baggy">("boxy");
+  const [sizeGuideTab, setSizeGuideTab] = useState<"calculator" | "table">("calculator");
 
   // Modals State
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
@@ -333,6 +366,10 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('dedicaterealite_admin_theme', adminTheme);
   }, [adminTheme]);
+
+  useEffect(() => {
+    localStorage.setItem('dedicaterealite_cart', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   // Helpers
   const formatRupiah = (val: number) => {
@@ -480,6 +517,110 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
     const encoded = encodeURIComponent(payload);
     window.open(`https://wa.me/${waNumber}?text=${encoded}`, '_blank');
     showToast("Membuka WhatsApp Admin Dedicaterealite...", "success");
+  };
+
+  // Cart Actions
+  const addToCart = (product: Product, size: string, qty: number) => {
+    const itemId = `${product.id}-${size}`;
+    setCartItems(prev => {
+      const existing = prev.find(item => item.id === itemId);
+      if (existing) {
+        return prev.map(item => item.id === itemId ? { ...item, qty: item.qty + qty } : item);
+      }
+      return [...prev, {
+        id: itemId,
+        productId: product.id,
+        name: product.name,
+        sku: product.sku,
+        price: product.price,
+        size: size,
+        qty: qty,
+        image: product.image,
+        fitType: product.fitType,
+        fabricGsm: product.fabricGsm
+      }];
+    });
+    showToast(`${product.name} (${size}) ditambahkan ke Bag!`, "success");
+  };
+
+  const updateCartQty = (itemId: string, delta: number) => {
+    setCartItems(prev => prev.map(item => {
+      if (item.id === itemId) {
+        const newQty = item.qty + delta;
+        return newQty > 0 ? { ...item, qty: newQty } : null;
+      }
+      return item;
+    }).filter(Boolean) as CartItem[]);
+  };
+
+  const removeFromCart = (itemId: string) => {
+    setCartItems(prev => prev.filter(item => item.id !== itemId));
+    showToast("Item dihapus dari Shopping Bag", "info");
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+    showToast("Shopping Bag telah dikosongkan", "info");
+  };
+
+  // Multi-Item Cart WhatsApp Checkout
+  const handleBagCheckoutWA = () => {
+    if (cartItems.length === 0) {
+      showToast("Shopping Bag masih kosong!", "warning");
+      return;
+    }
+
+    const totalQty = cartItems.reduce((acc, item) => acc + item.qty, 0);
+    const totalPrice = cartItems.reduce((acc, item) => acc + (item.price * item.qty), 0);
+    const hasBundleGift = totalQty >= 2;
+
+    const itemsText = cartItems.map((item, idx) => {
+      return `${idx + 1}. *${item.name}*\n   - SKU: ${item.sku}\n   - Size: *${item.size}* | Qty: ${item.qty} pcs\n   - Subtotal: ${formatRupiah(item.price * item.qty)}`;
+    }).join('\n\n');
+
+    const msg = `Halo Admin Dedicaterealite! 🔥\n` +
+      `Saya ingin checkout pesanan dari Shopping Bag web katalog:\n\n` +
+      `🛍️ *DAFTAR ITEM PESANAN:*\n` +
+      `${itemsText}\n\n` +
+      `━━━━━━━━━━━━━━━━━━━━\n` +
+      `💰 *TOTAL ITEM :* ${totalQty} pcs\n` +
+      `💰 *TOTAL HARGA:* *${formatRupiah(totalPrice)}*\n` +
+      (hasBundleGift ? `🎁 *BONUS STREETWEAR:* Free Exclusive Sticker Pack & Ziplock Bag (KLAIM)\n` : ``) +
+      `━━━━━━━━━━━━━━━━━━━━\n\n` +
+      `👤 *DATA PENGIRIMAN:*\n` +
+      `• Nama Lengkap : ${buyerName.trim() || "[Belum diisi]"}\n` +
+      `• Kota / Alamat : ${buyerCity.trim() || "[Belum diisi]"}\n` +
+      (buyerNotes.trim() ? `• Catatan      : ${buyerNotes.trim()}\n` : "") +
+      `\nMohon info ketersediaan stok & nomor rekening pembayaran. Terima kasih! 🙏`;
+
+    const encoded = encodeURIComponent(msg);
+    window.open(`https://wa.me/${waNumber}?text=${encoded}`, '_blank');
+    showToast("Membuka WhatsApp untuk checkout Shopping Bag...", "success");
+  };
+
+  // Smart Fit & Size Recommendation Calculator Engine
+  const getRecommendedSize = (h: number, w: number, pref: "boxy" | "baggy") => {
+    let size = "M";
+    let desc = "";
+
+    if (h < 163 && w < 52) {
+      size = pref === "baggy" ? "M" : "S";
+      desc = "Proporsi bahu dan panjang baju pas di garis pinggang untuk siluet boxy clean streetwear.";
+    } else if (h <= 170 && w <= 63) {
+      size = pref === "baggy" ? "L" : "M";
+      desc = "Lebar dada 57 cm memberikan ruang gerak nyaman tanpa terasa kepanjangan.";
+    } else if (h <= 178 && w <= 75) {
+      size = pref === "baggy" ? "XL" : "L";
+      desc = "Lebar dada 60 cm & panjang 74 cm menghasilkan efek drop shoulder 3-4 cm khas streetwear Yogyakarta.";
+    } else if (h <= 185 && w <= 86) {
+      size = pref === "baggy" ? "XXL" : "XL";
+      desc = "Siluet lebar 63 cm dengan drape katun tebal 16s/14s yang jatuh kokoh dan gagah.";
+    } else {
+      size = "XXL";
+      desc = "Ukuran terbesar dengan lebar 66 cm untuk siluet maksimal bagi postur tinggi atau berisi.";
+    }
+
+    return { size, desc };
   };
 
   // Quick 1-Click Status Switcher in Admin
@@ -712,6 +853,19 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
               title="Cari Kaos"
             >
               <Search className="w-4 h-4" />
+            </button>
+
+            <button 
+              onClick={() => setIsBagOpen(true)} 
+              className="relative p-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-400 hover:text-white transition"
+              title="Shopping Bag (Multi-Item Checkout)"
+            >
+              <ShoppingBag className="w-4 h-4 text-emerald-400" />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-black font-mono text-[10px] font-bold px-1.5 py-0.2 rounded-full border border-black shadow-[0_0_8px_rgba(16,185,129,0.8)] animate-pulse">
+                  {cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                </span>
+              )}
             </button>
 
             <button 
@@ -1168,10 +1322,31 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                     <div className="space-y-2 pt-2">
                       <div className="flex items-center justify-between text-xs font-mono">
                         <span className="text-zinc-300 font-bold uppercase text-[11px]">Pilih Ukuran:</span>
-                        <button onClick={() => setIsSizeGuideOpen(true)} className="text-[#A60009] hover:underline flex items-center space-x-1 text-[11px]">
-                          <Ruler className="w-3 h-3" />
-                          <span>Size Chart (cm)</span>
-                        </button>
+                        <div className="flex items-center space-x-2">
+                          <button 
+                            type="button" 
+                            onClick={() => {
+                              setSizeGuideTab("calculator");
+                              setIsSizeGuideOpen(true);
+                            }} 
+                            className="text-amber-400 hover:text-amber-300 flex items-center space-x-1 text-[11px] font-bold transition"
+                          >
+                            <Zap className="w-3 h-3 text-amber-400" />
+                            <span>Kalkulator TB/BB</span>
+                          </button>
+                          <span className="text-zinc-700">•</span>
+                          <button 
+                            type="button" 
+                            onClick={() => {
+                              setSizeGuideTab("table");
+                              setIsSizeGuideOpen(true);
+                            }} 
+                            className="text-[#A60009] hover:underline flex items-center space-x-1 text-[11px]"
+                          >
+                            <Ruler className="w-3 h-3" />
+                            <span>Size Chart</span>
+                          </button>
+                        </div>
                       </div>
 
                       <div className="grid grid-cols-5 gap-2">
@@ -1260,15 +1435,25 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
 
                   </div>
 
-                  {/* Single Clean Primary Action Button */}
+                  {/* Dual Action Buttons: Add to Bag & Direct WA */}
                   <div className="space-y-2 pt-2 border-t border-zinc-800">
-                    <button 
-                      onClick={handleDirectCheckoutWA}
-                      className="w-full py-3.5 px-4 rounded-xl bg-[#7A0006] hover:bg-[#991b1b] text-white font-bold text-sm uppercase tracking-wider transition shadow-[0_0_20px_rgba(122,0,6,0.6)] flex items-center justify-center space-x-2 active:scale-95"
-                    >
-                      <MessageCircle className="w-4 h-4 text-emerald-400" />
-                      <span>Pesan via WhatsApp ({formatRupiah(detailProduct.price * selectedQty)})</span>
-                    </button>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      <button 
+                        onClick={() => addToCart(detailProduct, selectedSize, selectedQty)}
+                        className="py-3.5 px-4 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-zinc-500 text-white font-bold text-xs uppercase tracking-wider transition flex items-center justify-center space-x-2 active:scale-95 shadow-md"
+                      >
+                        <ShoppingBag className="w-4 h-4 text-emerald-400" />
+                        <span>+ Masukkan ke Bag</span>
+                      </button>
+
+                      <button 
+                        onClick={handleDirectCheckoutWA}
+                        className="py-3.5 px-4 rounded-xl bg-[#7A0006] hover:bg-[#991b1b] text-white font-bold text-xs uppercase tracking-wider transition shadow-[0_0_20px_rgba(122,0,6,0.6)] flex items-center justify-center space-x-2 active:scale-95"
+                      >
+                        <MessageCircle className="w-4 h-4 text-emerald-400" />
+                        <span>Pesan Langsung WA</span>
+                      </button>
+                    </div>
 
                     <div className="grid grid-cols-2 gap-2 text-xs font-mono">
                       <button 
@@ -1400,36 +1585,423 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
         </div>
       )}
 
-      {/* 08. SIZE GUIDE MODAL */}
-      {isSizeGuideOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
-          <div className="fixed inset-0 bg-black/85 backdrop-blur-sm" onClick={() => setIsSizeGuideOpen(false)}></div>
-          <div className="min-h-full flex items-center justify-center p-3 sm:p-6 relative z-10">
-            <div className="w-full max-w-2xl bg-zinc-950 rounded-2xl border border-zinc-800 p-5 sm:p-7 relative">
-              <button onClick={() => setIsSizeGuideOpen(false)} className="absolute top-4 right-4 text-zinc-400 hover:text-white"><X className="w-5 h-5" /></button>
+      {/* 08. INTERACTIVE SMART SIZE FINDER & SIZE CHART MODAL */}
+      {isSizeGuideOpen && (() => {
+        const recommendation = getRecommendedSize(userHeight, userWeight, fitPreference);
+        return (
+          <div className="fixed inset-0 z-50 overflow-y-auto">
+            <div className="fixed inset-0 bg-black/85 backdrop-blur-sm" onClick={() => setIsSizeGuideOpen(false)}></div>
+            <div className="min-h-full flex items-center justify-center p-3 sm:p-6 relative z-10">
+              <div className="w-full max-w-2xl bg-zinc-950 rounded-2xl border border-zinc-800 p-5 sm:p-7 relative shadow-2xl">
+                <button onClick={() => setIsSizeGuideOpen(false)} className="absolute top-4 right-4 text-zinc-400 hover:text-white p-1 rounded-lg hover:bg-zinc-800 transition">
+                  <X className="w-5 h-5" />
+                </button>
 
-              <h3 className="font-black text-xl text-white uppercase mb-1">STANDAR SIZE CHART (CENTIMETER)</h3>
-              <p className="text-xs font-mono text-zinc-400 mb-4">Pola boxy modern drop shoulder dengan toleransi ±1-2 cm.</p>
+                {/* Modal Title & Tab Switcher */}
+                <div className="mb-5">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 bg-amber-950/60 border border-amber-800/60 px-2 py-0.5 rounded-full inline-block mb-1.5">
+                    FITTING LAB & METRIC
+                  </span>
+                  <h3 className="font-black text-xl text-white uppercase tracking-tight">PANDUAN & KALKULATOR UKURAN</h3>
+                  <p className="text-xs font-mono text-zinc-400 mt-1">Dapatkan siluet boxy drop shoulder khas streetwear Yogyakarta yang presisi.</p>
+                </div>
 
-              <div className="overflow-x-auto rounded-xl border border-zinc-800">
-                <table className="w-full text-xs font-mono text-left">
-                  <thead className="bg-black/60 text-zinc-400 border-b border-zinc-800">
-                    <tr>
-                      <th className="py-2.5 px-3">Size</th>
-                      <th className="py-2.5 px-3">Lebar Dada (LD)</th>
-                      <th className="py-2.5 px-3">Panjang Baju (PB)</th>
-                      <th className="py-2.5 px-3">Fitting Look</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-zinc-800 text-white">
-                    <tr><td className="py-2.5 px-3 font-bold">S</td><td className="py-2.5 px-3">54 cm</td><td className="py-2.5 px-3">68 cm</td><td className="py-2.5 px-3 text-zinc-400">TB 155-165 cm / BB 45-55 kg</td></tr>
-                    <tr><td className="py-2.5 px-3 font-bold">M</td><td className="py-2.5 px-3">57 cm</td><td className="py-2.5 px-3">71 cm</td><td className="py-2.5 px-3 text-zinc-400">TB 165-172 cm / BB 55-65 kg</td></tr>
-                    <tr><td className="py-2.5 px-3 font-bold">L</td><td className="py-2.5 px-3">60 cm</td><td className="py-2.5 px-3">74 cm</td><td className="py-2.5 px-3 text-zinc-400">TB 172-178 cm / BB 65-75 kg</td></tr>
-                    <tr><td className="py-2.5 px-3 font-bold">XL</td><td className="py-2.5 px-3">63 cm</td><td className="py-2.5 px-3">77 cm</td><td className="py-2.5 px-3 text-zinc-400">TB 178-185 cm / BB 75-85 kg</td></tr>
-                    <tr><td className="py-2.5 px-3 font-bold">XXL</td><td className="py-2.5 px-3">66 cm</td><td className="py-2.5 px-3">80 cm</td><td className="py-2.5 px-3 text-zinc-400">TB &gt; 185 cm / BB &gt; 85 kg</td></tr>
-                  </tbody>
-                </table>
+                {/* Tabs */}
+                <div className="flex rounded-xl bg-zinc-900/90 p-1 border border-zinc-800 mb-6">
+                  <button
+                    onClick={() => setSizeGuideTab("calculator")}
+                    className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-1.5 ${
+                      sizeGuideTab === "calculator"
+                        ? "bg-[#7A0006] text-white shadow-md"
+                        : "text-zinc-400 hover:text-white"
+                    }`}
+                  >
+                    <Zap className="w-3.5 h-3.5" />
+                    <span>Smart Size Finder (TB/BB)</span>
+                  </button>
+                  <button
+                    onClick={() => setSizeGuideTab("table")}
+                    className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-1.5 ${
+                      sizeGuideTab === "table"
+                        ? "bg-zinc-800 text-white shadow-md"
+                        : "text-zinc-400 hover:text-white"
+                    }`}
+                  >
+                    <Ruler className="w-3.5 h-3.5" />
+                    <span>Size Chart Standar (cm)</span>
+                  </button>
+                </div>
+
+                {sizeGuideTab === "calculator" ? (
+                  <div className="space-y-6">
+                    {/* Controls: Sliders for Height & Weight */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 bg-zinc-900/60 border border-zinc-800/80 rounded-xl p-4">
+                      {/* Height Slider */}
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center text-xs font-mono">
+                          <span className="text-zinc-400">Tinggi Badan (TB):</span>
+                          <span className="text-amber-400 font-bold text-sm">{userHeight} cm</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="150"
+                          max="200"
+                          value={userHeight}
+                          onChange={(e) => setUserHeight(Number(e.target.value))}
+                          className="w-full accent-amber-400 cursor-pointer h-2 bg-zinc-800 rounded-lg appearance-none"
+                        />
+                        <div className="flex justify-between text-[10px] font-mono text-zinc-500">
+                          <span>150 cm</span>
+                          <span>175 cm</span>
+                          <span>200 cm</span>
+                        </div>
+                      </div>
+
+                      {/* Weight Slider */}
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center text-xs font-mono">
+                          <span className="text-zinc-400">Berat Badan (BB):</span>
+                          <span className="text-amber-400 font-bold text-sm">{userWeight} kg</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="40"
+                          max="115"
+                          value={userWeight}
+                          onChange={(e) => setUserWeight(Number(e.target.value))}
+                          className="w-full accent-amber-400 cursor-pointer h-2 bg-zinc-800 rounded-lg appearance-none"
+                        />
+                        <div className="flex justify-between text-[10px] font-mono text-zinc-500">
+                          <span>40 kg</span>
+                          <span>75 kg</span>
+                          <span>115 kg</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Fit Preference Radio */}
+                    <div className="space-y-2">
+                      <label className="text-xs font-mono text-zinc-400 uppercase tracking-wider block">Preferensi Siluet:</label>
+                      <div className="grid grid-cols-2 gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setFitPreference("boxy")}
+                          className={`p-3 rounded-xl border text-left transition ${
+                            fitPreference === "boxy"
+                              ? "bg-zinc-800/90 border-amber-400/80 text-white shadow-[0_0_12px_rgba(251,191,36,0.15)]"
+                              : "bg-zinc-900/40 border-zinc-800 text-zinc-400 hover:border-zinc-700"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="font-bold text-xs uppercase">True Boxy Fit</span>
+                            <span className={`w-2.5 h-2.5 rounded-full ${fitPreference === "boxy" ? "bg-amber-400" : "bg-zinc-700"}`} />
+                          </div>
+                          <p className="text-[11px] text-zinc-400 font-mono">Drop shoulder proporsional & jatuh rapi di pinggang.</p>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => setFitPreference("baggy")}
+                          className={`p-3 rounded-xl border text-left transition ${
+                            fitPreference === "baggy"
+                              ? "bg-zinc-800/90 border-amber-400/80 text-white shadow-[0_0_12px_rgba(251,191,36,0.15)]"
+                              : "bg-zinc-900/40 border-zinc-800 text-zinc-400 hover:border-zinc-700"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="font-bold text-xs uppercase">Baggy / Loose Oversized</span>
+                            <span className={`w-2.5 h-2.5 rounded-full ${fitPreference === "baggy" ? "bg-amber-400" : "bg-zinc-700"}`} />
+                          </div>
+                          <p className="text-[11px] text-zinc-400 font-mono">Ekstra lebar, santai, dan menjuntai melampaui pinggul.</p>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Recommendation Card */}
+                    <div className="bg-gradient-to-r from-amber-950/30 via-zinc-900 to-zinc-900 border border-amber-500/30 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-16 h-16 rounded-2xl bg-amber-400 text-zinc-950 font-black text-2xl flex items-center justify-center shadow-lg shrink-0">
+                          {recommendation.size}
+                        </div>
+                        <div>
+                          <div className="flex items-center space-x-2">
+                            <span className="text-[11px] font-mono uppercase text-amber-400 font-bold">Rekomendasi Terbaik</span>
+                            <span className="text-zinc-600">•</span>
+                            <span className="text-xs text-white font-bold">{fitPreference === "boxy" ? "True Boxy" : "Baggy Oversize"}</span>
+                          </div>
+                          <p className="text-xs text-zinc-300 mt-0.5 leading-relaxed">
+                            {recommendation.desc}
+                          </p>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedSize(recommendation.size);
+                          setIsSizeGuideOpen(false);
+                          showToast(`Ukuran ${recommendation.size} berhasil dipilih!`, "success");
+                        }}
+                        className="w-full sm:w-auto shrink-0 py-2.5 px-4 rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-950 font-black text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center space-x-1.5"
+                      >
+                        <Check className="w-3.5 h-3.5" />
+                        <span>Gunakan Ukuran {recommendation.size}</span>
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <div className="overflow-x-auto rounded-xl border border-zinc-800">
+                      <table className="w-full text-xs font-mono text-left">
+                        <thead className="bg-black/60 text-zinc-400 border-b border-zinc-800">
+                          <tr>
+                            <th className="py-2.5 px-3">Size</th>
+                            <th className="py-2.5 px-3">Lebar Dada (LD)</th>
+                            <th className="py-2.5 px-3">Panjang Baju (PB)</th>
+                            <th className="py-2.5 px-3">Panjang Lengan</th>
+                            <th className="py-2.5 px-3">Saran Postur</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-zinc-800 text-white">
+                          <tr className={selectedSize === "S" ? "bg-amber-950/20" : ""}>
+                            <td className="py-2.5 px-3 font-bold text-amber-400">S</td>
+                            <td className="py-2.5 px-3">54 cm</td>
+                            <td className="py-2.5 px-3">68 cm</td>
+                            <td className="py-2.5 px-3 text-zinc-400">23 cm</td>
+                            <td className="py-2.5 px-3 text-zinc-400">TB 155-165 cm / BB 45-55 kg</td>
+                          </tr>
+                          <tr className={selectedSize === "M" ? "bg-amber-950/20" : ""}>
+                            <td className="py-2.5 px-3 font-bold text-amber-400">M</td>
+                            <td className="py-2.5 px-3">57 cm</td>
+                            <td className="py-2.5 px-3">71 cm</td>
+                            <td className="py-2.5 px-3 text-zinc-400">24 cm</td>
+                            <td className="py-2.5 px-3 text-zinc-400">TB 165-172 cm / BB 55-65 kg</td>
+                          </tr>
+                          <tr className={selectedSize === "L" ? "bg-amber-950/20" : ""}>
+                            <td className="py-2.5 px-3 font-bold text-amber-400">L</td>
+                            <td className="py-2.5 px-3">60 cm</td>
+                            <td className="py-2.5 px-3">74 cm</td>
+                            <td className="py-2.5 px-3 text-zinc-400">25 cm</td>
+                            <td className="py-2.5 px-3 text-zinc-400">TB 172-178 cm / BB 65-75 kg</td>
+                          </tr>
+                          <tr className={selectedSize === "XL" ? "bg-amber-950/20" : ""}>
+                            <td className="py-2.5 px-3 font-bold text-amber-400">XL</td>
+                            <td className="py-2.5 px-3">63 cm</td>
+                            <td className="py-2.5 px-3">77 cm</td>
+                            <td className="py-2.5 px-3 text-zinc-400">26 cm</td>
+                            <td className="py-2.5 px-3 text-zinc-400">TB 178-185 cm / BB 75-85 kg</td>
+                          </tr>
+                          <tr className={selectedSize === "XXL" ? "bg-amber-950/20" : ""}>
+                            <td className="py-2.5 px-3 font-bold text-amber-400">XXL</td>
+                            <td className="py-2.5 px-3">66 cm</td>
+                            <td className="py-2.5 px-3">80 cm</td>
+                            <td className="py-2.5 px-3 text-zinc-400">27 cm</td>
+                            <td className="py-2.5 px-3 text-zinc-400">TB &gt; 185 cm / BB &gt; 85 kg</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <p className="text-[11px] font-mono text-zinc-500 mt-3">
+                      *Toleransi ukuran jahitan manual ±1-2 cm. Menggunakan rib leher tebal anti-melar.
+                    </p>
+                  </div>
+                )}
               </div>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* 08b. SHOPPING BAG / MULTI-ITEM CHECKOUT SLIDE-OVER DRAWER */}
+      {isBagOpen && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          <div 
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity" 
+            onClick={() => setIsBagOpen(false)}
+          ></div>
+          <div className="fixed inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
+            <div className="w-screen max-w-md bg-zinc-950 border-l border-zinc-800 text-white flex flex-col shadow-2xl relative">
+              {/* Drawer Header */}
+              <div className="p-4 sm:p-5 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/60">
+                <div className="flex items-center space-x-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                    <ShoppingBag className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="font-black text-sm uppercase tracking-wider text-white">SHOPPING BAG</h3>
+                    <p className="text-[11px] font-mono text-zinc-400">
+                      {cartItems.reduce((acc, it) => acc + it.qty, 0)} item terpilih
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  {cartItems.length > 0 && (
+                    <button
+                      onClick={clearCart}
+                      className="text-[10px] font-mono text-zinc-400 hover:text-red-400 px-2 py-1 rounded hover:bg-zinc-800 transition"
+                      title="Kosongkan Bag"
+                    >
+                      Kosongkan
+                    </button>
+                  )}
+                  <button 
+                    onClick={() => setIsBagOpen(false)}
+                    className="p-1 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Bundle Perk Notification Banner */}
+              {cartItems.length > 0 && (
+                <div className="p-3 bg-gradient-to-r from-emerald-950/40 via-zinc-900 to-zinc-900 border-b border-emerald-900/40">
+                  {cartItems.reduce((acc, it) => acc + it.qty, 0) >= 2 ? (
+                    <div className="flex items-center space-x-2 text-xs text-emerald-300">
+                      <Gift className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <span className="font-mono font-bold text-[11px]">
+                        🎉 BONUS STREETWEAR: Free Exclusive Sticker Pack & Ziplock aktif!
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center space-x-2 text-xs text-zinc-400">
+                      <Gift className="w-4 h-4 text-amber-400 shrink-0" />
+                      <span className="font-mono text-[11px]">
+                        Beli minimal <strong className="text-white">2 kaos</strong> untuk dapatkan <strong className="text-amber-400">Free Sticker Pack & Ziplock Bag</strong>!
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Items List */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                {cartItems.length === 0 ? (
+                  <div className="h-full flex flex-col items-center justify-center text-center p-6 text-zinc-500">
+                    <div className="w-16 h-16 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-3 text-zinc-600">
+                      <ShoppingBag className="w-8 h-8" />
+                    </div>
+                    <p className="font-bold text-sm text-zinc-400 uppercase">Shopping Bag Masih Kosong</p>
+                    <p className="text-xs font-mono text-zinc-600 mt-1 max-w-[240px]">
+                      Pilih kaos favoritmu di katalog lalu klik tombol "+ Masukkan ke Bag".
+                    </p>
+                    <button
+                      onClick={() => setIsBagOpen(false)}
+                      className="mt-4 px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-mono text-xs border border-zinc-800 transition"
+                    >
+                      Mulai Eksplor Katalog
+                    </button>
+                  </div>
+                ) : (
+                  cartItems.map((item) => (
+                    <div 
+                      key={`${item.productId}-${item.size}`} 
+                      className="p-3 rounded-xl bg-zinc-900/60 border border-zinc-800/80 flex items-center space-x-3 group hover:border-zinc-700 transition"
+                    >
+                      <img 
+                        src={item.image} 
+                        alt={item.name} 
+                        className="w-16 h-16 rounded-lg object-cover bg-zinc-950 shrink-0 border border-zinc-800"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-bold text-xs text-white truncate">{item.name}</h4>
+                        <div className="flex items-center space-x-2 mt-1">
+                          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-amber-400 font-bold border border-zinc-700">
+                            Size: {item.size}
+                          </span>
+                          <span className="text-[11px] font-mono text-zinc-400">
+                            {formatRupiah(item.price)}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between mt-2">
+                          <div className="flex items-center border border-zinc-700 rounded-lg overflow-hidden bg-zinc-950">
+                            <button
+                              onClick={() => updateCartQty(item.id, -1)}
+                              className="px-2 py-0.5 text-zinc-400 hover:text-white hover:bg-zinc-800 transition text-xs"
+                            >
+                              -
+                            </button>
+                            <span className="px-2 py-0.5 text-xs font-mono font-bold text-white min-w-[24px] text-center">
+                              {item.qty}
+                            </span>
+                            <button
+                              onClick={() => updateCartQty(item.id, 1)}
+                              className="px-2 py-0.5 text-zinc-400 hover:text-white hover:bg-zinc-800 transition text-xs"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <span className="text-xs font-mono font-bold text-white">
+                            {formatRupiah(item.price * item.qty)}
+                          </span>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="text-zinc-500 hover:text-red-400 p-1 rounded transition opacity-60 group-hover:opacity-100"
+                        title="Hapus"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
+
+              {/* Drawer Footer & Checkout */}
+              {cartItems.length > 0 && (
+                <div className="p-4 border-t border-zinc-800 bg-zinc-900/80 space-y-3">
+                  {/* Optional Delivery Information Accordion */}
+                  <div className="space-y-2 bg-zinc-950/60 p-3 rounded-xl border border-zinc-800/80">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 block font-bold">
+                      Data Pengiriman (Opsional / Praktis):
+                    </span>
+                    <div className="grid grid-cols-2 gap-2">
+                      <input 
+                        type="text"
+                        placeholder="Nama Pembeli"
+                        value={buyerName}
+                        onChange={(e) => setBuyerName(e.target.value)}
+                        className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-600"
+                      />
+                      <input 
+                        type="text"
+                        placeholder="Kota / Kecamatan"
+                        value={buyerCity}
+                        onChange={(e) => setBuyerCity(e.target.value)}
+                        className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-600"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Pricing Breakdown */}
+                  <div className="space-y-1.5 font-mono text-xs">
+                    <div className="flex justify-between text-zinc-400">
+                      <span>Total Jumlah:</span>
+                      <span className="text-white font-bold">{cartItems.reduce((acc, it) => acc + it.qty, 0)} pcs</span>
+                    </div>
+                    <div className="flex justify-between text-zinc-400">
+                      <span>Total Harga:</span>
+                      <span className="text-lg font-bold text-white">
+                        {formatRupiah(cartItems.reduce((acc, it) => acc + (it.price * it.qty), 0))}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Primary Checkout WA Button */}
+                  <button
+                    onClick={handleBagCheckoutWA}
+                    className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider transition shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center space-x-2 active:scale-95"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Checkout Semua via WhatsApp ({cartItems.reduce((acc, it) => acc + it.qty, 0)} Pcs)</span>
+                  </button>
+
+                  <p className="text-[10px] font-mono text-center text-zinc-500">
+                    Format pesanan dikirim otomatis ke WA Admin (+62 821-1407-2159)
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
