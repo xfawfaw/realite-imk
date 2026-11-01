@@ -1,12 +1,10 @@
 -- =========================================================================
--- DEDICATEREALITE SUPABASE DATABASE & STORAGE SCHEMA
--- Run this script in your Supabase Project: SQL Editor -> New Query -> Run
+-- DEDICATEREALITE - SUPABASE DATABASE & STORAGE SETUP
+-- Petunjuk: Pastikan TIDAK ADA teks yang ter-blok/ter-highlight sebelum klik RUN
+-- (Tekan Ctrl+A untuk memilih semua, lalu klik tombol RUN)
 -- =========================================================================
 
--- 1. Enable UUID Extension (if not already enabled)
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
--- 2. CREATE TABLE: products
+-- 1. TABEL: products (Katalog Kaos & Apparel)
 CREATE TABLE IF NOT EXISTS public.products (
     id BIGINT PRIMARY KEY,
     name TEXT NOT NULL,
@@ -28,7 +26,7 @@ CREATE TABLE IF NOT EXISTS public.products (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 3. CREATE TABLE: showcase_slides
+-- 2. TABEL: showcase_slides (Hero Squeeze Carousel)
 CREATE TABLE IF NOT EXISTS public.showcase_slides (
     id TEXT PRIMARY KEY,
     drop_code TEXT NOT NULL,
@@ -41,7 +39,7 @@ CREATE TABLE IF NOT EXISTS public.showcase_slides (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 4. CREATE TABLE: lookbook_items
+-- 3. TABEL: lookbook_items (Galeri Editorial Jalanan)
 CREATE TABLE IF NOT EXISTS public.lookbook_items (
     id TEXT PRIMARY KEY,
     tag TEXT NOT NULL,
@@ -56,29 +54,29 @@ CREATE TABLE IF NOT EXISTS public.lookbook_items (
 );
 
 -- =========================================================================
--- ROW LEVEL SECURITY (RLS) POLICIES
--- Allows public read & full admin CRUD access via anon public API key
+-- HAK AKSES & KEAMANAN (Row Level Security - RLS)
+-- Mengizinkan akses baca publik & izin modifikasi via anon API key
 -- =========================================================================
 
 ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.showcase_slides ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.lookbook_items ENABLE ROW LEVEL SECURITY;
 
--- Products Policies
+-- Policy Products
 DROP POLICY IF EXISTS "Public can view products" ON public.products;
 CREATE POLICY "Public can view products" ON public.products FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Public can modify products" ON public.products;
 CREATE POLICY "Public can modify products" ON public.products FOR ALL USING (true) WITH CHECK (true);
 
--- Showcase Slides Policies
+-- Policy Showcase
 DROP POLICY IF EXISTS "Public can view showcase" ON public.showcase_slides;
 CREATE POLICY "Public can view showcase" ON public.showcase_slides FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Public can modify showcase" ON public.showcase_slides;
 CREATE POLICY "Public can modify showcase" ON public.showcase_slides FOR ALL USING (true) WITH CHECK (true);
 
--- Lookbook Items Policies
+-- Policy Lookbook
 DROP POLICY IF EXISTS "Public can view lookbook" ON public.lookbook_items;
 CREATE POLICY "Public can view lookbook" ON public.lookbook_items FOR SELECT USING (true);
 
@@ -93,7 +91,6 @@ INSERT INTO storage.buckets (id, name, public)
 VALUES ('dedicate-media', 'dedicate-media', true)
 ON CONFLICT (id) DO UPDATE SET public = true;
 
--- Storage bucket access policies
 DROP POLICY IF EXISTS "Public Access to dedicate-media" ON storage.objects;
 CREATE POLICY "Public Access to dedicate-media" ON storage.objects
 FOR SELECT USING (bucket_id = 'dedicate-media');
@@ -111,11 +108,11 @@ CREATE POLICY "Allow Public Delete in dedicate-media" ON storage.objects
 FOR DELETE USING (bucket_id = 'dedicate-media');
 
 -- =========================================================================
--- INITIAL SEED DATA
--- Populates the database with existing authentic products, showcase & lookbook
+-- DATA AWAL (SEED DATA)
+-- Mengisi produk, showcase, dan lookbook secara otomatis
 -- =========================================================================
 
--- Seed Products
+-- 1. Seed Products
 INSERT INTO public.products (id, name, sku, category, price, fit_type, fabric_material, fabric_gsm, print_type, status, color_theme, graphic_accent, image, gallery, description, sizes)
 VALUES
 (
@@ -169,7 +166,7 @@ VALUES
   '#7A0006',
   '/images/dedicate-black-front.png',
   '["/images/dedicate-black-front.png", "/images/dedicate-black-back.png", "/images/dedicate-duo-street.jpg", "/images/dedicate-sacrifice-vespa.jpg"]'::jsonb,
-  'Siluet signature boxy cut dengan katun combed 16s warna hitam pekat 240 GSM. Menampilkan logo minimal Dëdicaté di dada kiri dan sablon cap tangan merah darah Sacrifice di punggung lengkap dengan teks filosofi brand.',
+  'Siluet signature boxy cut dengan katun combed 16s warna hitam pekat 240 GSM. Menampilkan logo minimal Dedicate di dada kiri dan sablon cap tangan merah darah Sacrifice di punggung lengkap dengan teks filosofi brand.',
   '[{"size": "S", "stock": 6, "available": true}, {"size": "M", "stock": 12, "available": true}, {"size": "L", "stock": 16, "available": true}, {"size": "XL", "stock": 8, "available": true}, {"size": "XXL", "stock": 3, "available": true}]'::jsonb
 ),
 (
@@ -244,13 +241,13 @@ ON CONFLICT (id) DO UPDATE SET
   sizes = EXCLUDED.sizes,
   updated_at = NOW();
 
--- Seed Showcase Slides
+-- 2. Seed Showcase Slides
 INSERT INTO public.showcase_slides (id, drop_code, title, description, action_text, image, linked_product_id)
 VALUES
 (
   'nero-collab',
   'DROP 01 // NERO CREW COLLAB',
-  'NERO X DEDICATE — Heavyweight Collab Drop.',
+  'NERO X DEDICATE - Heavyweight Collab Drop.',
   '240 GSM ultra-combed cotton with front dragon artwork & bold N.E.R.O CREW backprint. Edisi kolaborasi terbatas Yogyakarta streetwear.',
   'Lihat Detail Kaos',
   '/images/nero-rooftop-duo.png',
@@ -259,7 +256,7 @@ VALUES
 (
   'you-are-sick',
   'DROP 02 // 235 GSM BOXY',
-  'YOU ARE SICK — Signature 235 GSM Boxy Cut.',
+  'YOU ARE SICK - Signature 235 GSM Boxy Cut.',
   'Drop shoulder silhouette dengan grafis kumbang tanduk stag beetle dan tipografi brutalist. 235 GSM heavyweight cotton combed 16s.',
   'Lihat Detail Kaos',
   '/images/you-are-sick-alley-bike.jpg',
@@ -268,7 +265,7 @@ VALUES
 (
   'sacrifice-drop',
   'DROP 03 // SACRIFICE COLLECTION',
-  'SACRIFICE — Manifestasi Dedikasi & Passion.',
+  'SACRIFICE - Manifestasi Dedikasi & Passion.',
   'Heavyweight 16s cotton dengan artwork cap tangan merah darah dan teks manifesto keteguhan hati di jalanan.',
   'Lihat Detail Kaos',
   '/images/dedicate-sacrifice-skate.jpg',
@@ -283,7 +280,7 @@ ON CONFLICT (id) DO UPDATE SET
   linked_product_id = EXCLUDED.linked_product_id,
   updated_at = NOW();
 
--- Seed Lookbook Items
+-- 3. Seed Lookbook Items
 INSERT INTO public.lookbook_items (id, tag, title, location, specs, image, caption, linked_product_id)
 VALUES
 (
@@ -291,7 +288,7 @@ VALUES
   'DROP 01 // ROOFTOP SESSION',
   'NERO CREW MIDNIGHT HANGOUT',
   'Rooftop Lounge, Yogyakarta',
-  '240 GSM • Front Dragon & Back Bold Print',
+  '240 GSM - Front Dragon & Back Bold Print',
   '/images/nero-rooftop-duo.png',
   'Suasana santai malam hari menampilkan siluet depan naga dan sablon punggung N.E.R.O CREW.',
   2
@@ -301,7 +298,7 @@ VALUES
   'EDITORIAL // YOU ARE SICK',
   'ALLEYWAY MIDNIGHT RIDERS',
   'Lorong Bersejarah, Yogyakarta',
-  '235 GSM • Stag Beetle Boxy Tee',
+  '235 GSM - Stag Beetle Boxy Tee',
   '/images/you-are-sick-alley-bike.jpg',
   'Dua model mengenakan kaos hitam YOU ARE SICK di atas motor trail malam hari.',
   1
@@ -311,7 +308,7 @@ VALUES
   'SKATE ARCHIVE // CAR WASH',
   'CAR WASH SKATE SESSION',
   'Laxy Car Wash, Yogyakarta',
-  'Heavyweight Combed 16s • Balaclava Look',
+  'Heavyweight Combed 16s - Balaclava Look',
   '/images/dedicate-sacrifice-skate.jpg',
   'Sesi skate malam hari dengan balaclava dan kaos Dedicate Sacrifice cap tangan merah.',
   4
@@ -321,7 +318,7 @@ VALUES
   'SCOOTER CULTURE // NIGHT RUN',
   'VESPA SPRINT MIDNIGHT RUN',
   'Tugu & Malioboro Outer Circle, Yogyakarta',
-  '235 GSM • Red Handprint Backprint',
+  '235 GSM - Red Handprint Backprint',
   '/images/dedicate-sacrifice-vespa.jpg',
   'Riding santai malam hari mengendarai Vespa Sprint mengenakan kaos Dedicate Sacrifice.',
   4
@@ -331,7 +328,7 @@ VALUES
   'STUDIO ARCHIVE // CREW',
   'CONCRETE STUDIO & TWO-TONE CREW',
   'Underground Creative Studio, Yogyakarta',
-  'Heavy Cotton Combed 16s • Bold Back Print',
+  'Heavy Cotton Combed 16s - Bold Back Print',
   '/images/nero-crew-studio.jpg',
   'Dua model menampilkan artwork punggung N.E.R.O CREW dengan kontras warna merah dan hitam.',
   2
@@ -341,7 +338,7 @@ VALUES
   'FIT CHECK // FULL BODY',
   'YOU ARE SICK FIT CHECK',
   'Billiard Lounge, Yogyakarta',
-  '235 GSM Boxy Cut • Light Blue Denim',
+  '235 GSM Boxy Cut - Light Blue Denim',
   '/images/you-are-sick-front.jpg',
   'Proporsi siluet boxy cut jatuh sempurna di bahu dipadukan denim biru terang.',
   1
@@ -351,7 +348,7 @@ VALUES
   'DETAIL // STAG BEETLE PRINT',
   'YOU ARE SICK TEXTURE',
   'Dedicate Screenprint Workshop',
-  'High-Density Plastisol • Glossy Beetle Overlay',
+  'High-Density Plastisol - Glossy Beetle Overlay',
   '/images/you-are-sick-detail.jpg',
   'Close-up tipografi YOU ARE SICK dengan overlay artwork kumbang tanduk hitam mengkilap.',
   1
@@ -361,7 +358,7 @@ VALUES
   'PRINT ARCHIVE // DRAGON',
   'HIGH-DENSITY HALFTONE DRAGON',
   'Screenprint Workshop, Yogyakarta',
-  'Plastisol Curing • Halftone Micro Dot-Work',
+  'Plastisol Curing - Halftone Micro Dot-Work',
   '/images/nero-dragon-print.jpg',
   'Detail ketajaman sisik naga dengan teknik raster dot-work presisi tinggi pada katun tebal.',
   2
@@ -381,7 +378,7 @@ VALUES
   'NOIR ARCHIVE // BACKPRINT',
   'NOIR SACRIFICE MANIFEST',
   'Dedicate Creative Archive, Yogyakarta',
-  '240 GSM Boxy • Blood Red Handprint',
+  '240 GSM Boxy - Blood Red Handprint',
   '/images/dedicate-black-back.png',
   'Karya tipografi manifestasi dedikasi dengan latar grafis cap tangan merah darah di atas katun hitam.',
   3
