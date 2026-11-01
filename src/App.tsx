@@ -36,8 +36,32 @@ import {
   ArrowUp,
   ArrowDown,
   Eye,
-  Layers
+  Layers,
+  Cloud,
+  Database,
+  RefreshCw,
+  CheckCircle2,
+  AlertTriangle,
+  Globe,
+  Key
 } from 'lucide-react';
+import {
+  isSupabaseConfigured,
+  getSupabaseConfig,
+  saveSupabaseConfig,
+  clearSupabaseConfig,
+  testSupabaseConnection,
+  uploadImageToSupabase,
+  syncProductsFromSupabase,
+  saveProductToSupabase,
+  deleteProductFromSupabase,
+  syncShowcaseFromSupabase,
+  saveShowcaseToSupabase,
+  deleteShowcaseFromSupabase,
+  syncLookbookFromSupabase,
+  saveLookbookToSupabase,
+  deleteLookbookFromSupabase
+} from './lib/supabase';
 
 /* =========================================================================
    OFFICIAL CONFIGURATION & VERIFIED WHATSAPP NUMBER
@@ -565,7 +589,14 @@ export default function App() {
   const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState<boolean>(false);
   const [adminPasscode, setAdminPasscode] = useState<string>("");
-  const [adminActiveTab, setAdminActiveTab] = useState<"products" | "showcase" | "lookbook" | "settings" | "backup">("products");
+  const [adminActiveTab, setAdminActiveTab] = useState<"products" | "showcase" | "lookbook" | "cloud" | "settings" | "backup">("products");
+  
+  // Cloud Database (Supabase) Integration State
+  const [isCloudSyncing, setIsCloudSyncing] = useState<boolean>(false);
+  const [cloudStatus, setCloudStatus] = useState<"connected" | "offline" | "syncing">("offline");
+  const [supabaseUrlInput, setSupabaseUrlInput] = useState<string>(() => getSupabaseConfig().url);
+  const [supabaseKeyInput, setSupabaseKeyInput] = useState<string>(() => getSupabaseConfig().anonKey);
+  const [connectionTestMsg, setConnectionTestMsg] = useState<{ success: boolean; message: string } | null>(null);
   const [adminSearch, setAdminSearch] = useState<string>("");
   const [adminStatusFilter, setAdminStatusFilter] = useState<string>("ALL");
   const [isProductFormOpen, setIsProductFormOpen] = useState<boolean>(false);
@@ -665,6 +696,44 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('dedicaterealite_cart', JSON.stringify(cartItems));
   }, [cartItems]);
+
+  // Initial Sync from Supabase Cloud on Load (if configured)
+  useEffect(() => {
+    let isMounted = true;
+    async function loadCloudData() {
+      if (isSupabaseConfigured()) {
+        setIsCloudSyncing(true);
+        setCloudStatus("syncing");
+        try {
+          const [cloudProducts, cloudShowcase, cloudLookbook] = await Promise.all([
+            syncProductsFromSupabase(),
+            syncShowcaseFromSupabase(),
+            syncLookbookFromSupabase()
+          ]);
+          if (!isMounted) return;
+          if (cloudProducts && cloudProducts.length > 0) {
+            setProducts(cloudProducts);
+          }
+          if (cloudShowcase && cloudShowcase.length > 0) {
+            setShowcaseSlides(cloudShowcase);
+          }
+          if (cloudLookbook && cloudLookbook.length > 0) {
+            setLookbookItems(cloudLookbook);
+          }
+          setCloudStatus("connected");
+        } catch (err) {
+          console.warn("Supabase initial sync error:", err);
+          if (isMounted) setCloudStatus("offline");
+        } finally {
+          if (isMounted) setIsCloudSyncing(false);
+        }
+      } else {
+        if (isMounted) setCloudStatus("offline");
+      }
+    }
+    loadCloudData();
+    return () => { isMounted = false; };
+  }, []);
 
   // Helpers
   const formatRupiah = (val: number) => {
@@ -969,6 +1038,15 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
   const handleLocalImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (isSupabaseConfigured()) {
+        showToast("Mengunggah foto ke Supabase Cloud Storage...", "info");
+        const cloudUrl = await uploadImageToSupabase(file, 'products');
+        if (cloudUrl) {
+          setFormImage(cloudUrl);
+          showToast("Foto berhasil diunggah ke Supabase CDN!", "success");
+          return;
+        }
+      }
       const dataUrl = await compressImageFile(file, 1200, 0.85);
       setFormImage(dataUrl);
       showToast("Foto berhasil dimuat & dikompres optimal!", "success");
@@ -991,29 +1069,28 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
 
     if (editingProduct) {
       // Update
-      setProducts(prev => prev.map(p => {
-        if (p.id === editingProduct.id) {
-          const newImg = formImage || p.image;
-          return {
-            ...p,
-            name: formName,
-            sku: formSku,
-            category: formCategory,
-            price: Number(formPrice),
-            fabricGsm: Number(formGsm),
-            fabricMaterial: formMaterial,
-            fitType: formFit,
-            printType: formPrint,
-            status: formStatus,
-            image: newImg,
-            gallery: p.gallery ? [newImg, ...p.gallery.slice(1)] : [newImg],
-            description: formDesc,
-            sizes: sizesArray
-          };
-        }
-        return p;
-      }));
+      const newImg = formImage || editingProduct.image;
+      const updatedProduct: Product = {
+        ...editingProduct,
+        name: formName,
+        sku: formSku,
+        category: formCategory,
+        price: Number(formPrice),
+        fabricGsm: Number(formGsm),
+        fabricMaterial: formMaterial,
+        fitType: formFit,
+        printType: formPrint,
+        status: formStatus,
+        image: newImg,
+        gallery: editingProduct.gallery ? [newImg, ...editingProduct.gallery.slice(1)] : [newImg],
+        description: formDesc,
+        sizes: sizesArray
+      };
+      setProducts(prev => prev.map(p => p.id === editingProduct.id ? updatedProduct : p));
       showToast(`Produk ${formSku} berhasil diperbarui!`, "success");
+      if (isSupabaseConfigured()) {
+        saveProductToSupabase(updatedProduct).catch(console.error);
+      }
     } else {
       // Create
       const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
@@ -1037,6 +1114,9 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
       };
       setProducts(prev => [newProd, ...prev]);
       showToast(`Produk baru ${formSku} berhasil ditambahkan!`, "success");
+      if (isSupabaseConfigured()) {
+        saveProductToSupabase(newProd).catch(console.error);
+      }
     }
 
     setIsProductFormOpen(false);
@@ -1048,6 +1128,9 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
       setProducts(prev => prev.filter(p => p.id !== productId));
       setComparisonList(prev => prev.filter(id => id !== productId));
       showToast("Produk berhasil dihapus", "info");
+      if (isSupabaseConfigured()) {
+        deleteProductFromSupabase(productId).catch(console.error);
+      }
     }
   };
 
@@ -1077,6 +1160,15 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
   const handleShowcaseImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (isSupabaseConfigured()) {
+        showToast("Mengunggah foto ke Supabase Storage...", "info");
+        const cloudUrl = await uploadImageToSupabase(file, 'showcase');
+        if (cloudUrl) {
+          setShowcaseImage(cloudUrl);
+          showToast("Foto showcase berhasil diunggah ke Supabase CDN!", "success");
+          return;
+        }
+      }
       const dataUrl = await compressImageFile(file, 1600, 0.85);
       setShowcaseImage(dataUrl);
       showToast("Foto slide showcase berhasil dimuat & dikompres!", "success");
@@ -1095,16 +1187,20 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
     }
 
     if (editingShowcase) {
-      setShowcaseSlides(prev => prev.map(s => s.id === editingShowcase.id ? {
-        ...s,
+      const updatedSlide: ShowcaseSlideItem = {
+        ...editingShowcase,
         dropCode: showcaseDropCode.trim() || `DROP // NEW`,
         title: showcaseTitle.trim(),
         description: showcaseDesc.trim(),
         actionText: showcaseActionText.trim() || "Lihat Detail",
         image: showcaseImage.trim(),
         linkedProductId: showcaseLinkedId ? Number(showcaseLinkedId) : undefined
-      } : s));
+      };
+      setShowcaseSlides(prev => prev.map(s => s.id === editingShowcase.id ? updatedSlide : s));
       showToast("Slide showcase berhasil diperbarui!", "success");
+      if (isSupabaseConfigured()) {
+        saveShowcaseToSupabase(updatedSlide).catch(console.error);
+      }
     } else {
       const newSlide: ShowcaseSlideItem = {
         id: "slide-" + Date.now(),
@@ -1117,6 +1213,9 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
       };
       setShowcaseSlides(prev => [...prev, newSlide]);
       showToast("Slide showcase baru berhasil ditambahkan!", "success");
+      if (isSupabaseConfigured()) {
+        saveShowcaseToSupabase(newSlide).catch(console.error);
+      }
     }
     setIsShowcaseFormOpen(false);
   };
@@ -1129,6 +1228,9 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
     if (confirm("Hapus slide showcase ini dari Hero banner?")) {
       setShowcaseSlides(prev => prev.filter(s => s.id !== id));
       showToast("Slide showcase berhasil dihapus", "info");
+      if (isSupabaseConfigured()) {
+        deleteShowcaseFromSupabase(id).catch(console.error);
+      }
     }
   };
 
@@ -1169,6 +1271,15 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
   const handleLookbookImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (isSupabaseConfigured()) {
+        showToast("Mengunggah foto ke Supabase Storage...", "info");
+        const cloudUrl = await uploadImageToSupabase(file, 'lookbook');
+        if (cloudUrl) {
+          setLookbookImage(cloudUrl);
+          showToast("Foto lookbook berhasil diunggah ke Supabase CDN!", "success");
+          return;
+        }
+      }
       const dataUrl = await compressImageFile(file, 1400, 0.85);
       setLookbookImage(dataUrl);
       showToast("Foto editorial lookbook berhasil dimuat & dikompres!", "success");
@@ -1187,8 +1298,8 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
     }
 
     if (editingLookbook) {
-      setLookbookItems(prev => prev.map(item => item.id === editingLookbook.id ? {
-        ...item,
+      const updatedItem: LookbookItem = {
+        ...editingLookbook,
         tag: lookbookTag.trim() || "YK STREETS",
         title: lookbookTitle.trim(),
         location: lookbookLocation.trim() || "Yogyakarta",
@@ -1196,8 +1307,12 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
         caption: lookbookCaption.trim(),
         image: lookbookImage.trim(),
         linkedProductId: lookbookLinkedId ? Number(lookbookLinkedId) : undefined
-      } : item));
+      };
+      setLookbookItems(prev => prev.map(item => item.id === editingLookbook.id ? updatedItem : item));
       showToast("Editorial lookbook berhasil diperbarui!", "success");
+      if (isSupabaseConfigured()) {
+        saveLookbookToSupabase(updatedItem).catch(console.error);
+      }
     } else {
       const newItem: LookbookItem = {
         id: "lb-" + Date.now(),
@@ -1211,6 +1326,9 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
       };
       setLookbookItems(prev => [...prev, newItem]);
       showToast("Foto editorial baru berhasil ditambahkan ke Lookbook!", "success");
+      if (isSupabaseConfigured()) {
+        saveLookbookToSupabase(newItem).catch(console.error);
+      }
     }
     setIsLookbookFormOpen(false);
   };
@@ -1223,8 +1341,119 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
     if (confirm("Hapus foto editorial lookbook ini?")) {
       setLookbookItems(prev => prev.filter(item => item.id !== id));
       showToast("Foto editorial lookbook berhasil dihapus", "info");
+      if (isSupabaseConfigured()) {
+        deleteLookbookFromSupabase(id).catch(console.error);
+      }
     }
   };
+  // Supabase Cloud Sync Actions
+  const handleSaveSupabaseCredentials = async () => {
+    if (!supabaseUrlInput.trim() || !supabaseKeyInput.trim()) {
+      showToast("URL dan Anon Key Supabase wajib diisi!", "warning");
+      return;
+    }
+    saveSupabaseConfig(supabaseUrlInput, supabaseKeyInput);
+    showToast("Konfigurasi Supabase disimpan! Menguji koneksi...", "info");
+    const res = await testSupabaseConnection();
+    setConnectionTestMsg(res);
+    if (res.success) {
+      setCloudStatus("connected");
+      showToast("Koneksi Supabase aktif & terhubung!", "success");
+      handleFetchAllFromSupabase();
+    } else {
+      setCloudStatus("offline");
+      showToast("Gagal terhubung ke Supabase. Periksa URL dan Key.", "warning");
+    }
+  };
+
+  const handleTestSupabaseConnection = async () => {
+    setConnectionTestMsg(null);
+    showToast("Menguji koneksi ke server Supabase...", "info");
+    const res = await testSupabaseConnection();
+    setConnectionTestMsg(res);
+    if (res.success) {
+      setCloudStatus("connected");
+      showToast(res.message, "success");
+    } else {
+      setCloudStatus("offline");
+      showToast(res.message, "warning");
+    }
+  };
+
+  const handleResetSupabaseCredentials = () => {
+    if (confirm("Putuskan koneksi Supabase dan kembali ke mode offline lokal?")) {
+      clearSupabaseConfig();
+      setSupabaseUrlInput("");
+      setSupabaseKeyInput("");
+      setConnectionTestMsg(null);
+      setCloudStatus("offline");
+      showToast("Koneksi Cloud diputus. Beralih ke penyimpanan lokal.", "info");
+    }
+  };
+
+  const handleSyncAllToSupabase = async () => {
+    if (!isSupabaseConfigured()) {
+      showToast("Hubungkan ke Supabase terlebih dahulu!", "warning");
+      return;
+    }
+    setIsCloudSyncing(true);
+    showToast("Mengunggah seluruh data lokal ke Cloud Supabase...", "info");
+    try {
+      let pCount = 0;
+      for (const p of products) {
+        const ok = await saveProductToSupabase(p);
+        if (ok) pCount++;
+      }
+      let sCount = 0;
+      for (const s of showcaseSlides) {
+        const ok = await saveShowcaseToSupabase(s);
+        if (ok) sCount++;
+      }
+      let lCount = 0;
+      for (const l of lookbookItems) {
+        const ok = await saveLookbookToSupabase(l);
+        if (ok) lCount++;
+      }
+      showToast(`Sinkronisasi sukses! ${pCount} Kaos, ${sCount} Showcase, ${lCount} Lookbook tersimpan di Cloud.`, "success");
+      setCloudStatus("connected");
+    } catch (err: any) {
+      showToast(`Gagal sinkronisasi: ${err.message}`, "warning");
+    } finally {
+      setIsCloudSyncing(false);
+    }
+  };
+
+  const handleFetchAllFromSupabase = async () => {
+    if (!isSupabaseConfigured()) {
+      showToast("Hubungkan ke Supabase terlebih dahulu!", "warning");
+      return;
+    }
+    setIsCloudSyncing(true);
+    showToast("Mengunduh data terbaru dari Cloud Supabase...", "info");
+    try {
+      const [cloudProducts, cloudShowcase, cloudLookbook] = await Promise.all([
+        syncProductsFromSupabase(),
+        syncShowcaseFromSupabase(),
+        syncLookbookFromSupabase()
+      ]);
+      if (cloudProducts && cloudProducts.length > 0) {
+        setProducts(cloudProducts);
+      }
+      if (cloudShowcase && cloudShowcase.length > 0) {
+        setShowcaseSlides(cloudShowcase);
+      }
+      if (cloudLookbook && cloudLookbook.length > 0) {
+        setLookbookItems(cloudLookbook);
+      }
+      showToast("Data katalog, showcase & lookbook berhasil diperbarui dari Cloud!", "success");
+      setCloudStatus("connected");
+    } catch (err: any) {
+      showToast(`Gagal mengambil data dari cloud: ${err.message}`, "warning");
+    } finally {
+      setIsCloudSyncing(false);
+    }
+  };
+
 
   const handleMoveLookbook = (index: number, direction: "left" | "right") => {
     const targetIndex = direction === "left" ? index - 1 : index + 1;
@@ -2908,6 +3137,29 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                 </div>
 
                 <div className="flex items-center space-x-2">
+                  {/* Cloud Status Badge */}
+                  {isAdminLoggedIn && (
+                    <button
+                      onClick={() => setAdminActiveTab("cloud")}
+                      className={`px-2.5 py-1.5 rounded-xl border text-xs font-mono flex items-center space-x-1.5 transition ${
+                        cloudStatus === "connected"
+                          ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400"
+                          : "bg-amber-500/10 border-amber-500/30 text-amber-600 dark:text-amber-400"
+                      }`}
+                      title="Status Sinkronisasi Cloud Supabase"
+                    >
+                      <Cloud className="w-3.5 h-3.5" />
+                      <span className="hidden md:inline font-bold">
+                        {cloudStatus === "connected" ? "Cloud Aktif" : "Mode Offline"}
+                      </span>
+                      {cloudStatus === "connected" ? (
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      ) : (
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                      )}
+                    </button>
+                  )}
+
                   {/* Theme Switcher: Rileks (Light) vs Dark */}
                   <button 
                     onClick={() => setAdminTheme(adminTheme === "light" ? "dark" : "light")}
@@ -3084,6 +3336,24 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                           }`}
                         >
                           Lookbook ({lookbookItems.length})
+                        </button>
+                        <button 
+                          onClick={() => setAdminActiveTab("cloud")}
+                          className={`px-3 py-1.5 rounded-xl font-bold transition shrink-0 flex items-center space-x-1.5 ${
+                            adminActiveTab === "cloud" 
+                              ? "bg-[#7A0006] text-white shadow-md shadow-[#7A0006]/20" 
+                              : adminTheme === 'light'
+                                ? "bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/80"
+                                : "bg-zinc-900 text-zinc-400 hover:text-white"
+                          }`}
+                        >
+                          <Cloud className="w-3.5 h-3.5" />
+                          <span>Cloud Sync</span>
+                          {cloudStatus === "connected" ? (
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-0.5" title="Supabase Aktif"></span>
+                          ) : (
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 ml-0.5" title="Mode Offline"></span>
+                          )}
                         </button>
                         <button 
                           onClick={() => setAdminActiveTab("settings")}
@@ -3630,6 +3900,256 @@ Apakah varian ini masih tersedia untuk diproses? Terima kasih!`;
                           })}
                         </div>
                       </div>
+                    </div>
+                  )}
+
+                  {/* Tab: Supabase Cloud Real-Time Database */}
+                  {adminActiveTab === "cloud" && (
+                    <div className={`flex-1 flex flex-col overflow-hidden p-4 sm:p-5 space-y-3.5 ${
+                      adminTheme === 'light' ? 'bg-slate-50' : 'bg-transparent'
+                    }`}>
+                      <div className="flex items-center justify-between text-xs font-mono shrink-0 py-0.5">
+                        <div className="flex items-center space-x-2">
+                          <Cloud className="w-4 h-4 text-sky-500" />
+                          <span className={`font-bold uppercase text-xs ${
+                            adminTheme === 'light' ? 'text-slate-900' : 'text-white'
+                          }`}>
+                            Supabase Cloud Database & Storage (Sinkronisasi Publik)
+                          </span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          {isCloudSyncing && (
+                            <span className="flex items-center space-x-1 text-xs text-sky-500 font-mono animate-pulse">
+                              <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                              <span>Sinkronisasi...</span>
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className={`flex-1 overflow-y-auto rounded-2xl border shadow-xs p-5 sm:p-6 transition-colors ${
+                        adminTheme === 'light' ? 'bg-white border-slate-200' : 'bg-zinc-950 border-zinc-800'
+                      }`}>
+                        <div className="max-w-3xl space-y-6">
+
+                          {/* Connection Status Banner */}
+                          <div className={`p-4 sm:p-5 rounded-2xl border flex items-start space-x-3.5 font-mono text-xs transition ${
+                            cloudStatus === 'connected'
+                              ? adminTheme === 'light'
+                                ? 'bg-emerald-50 border-emerald-200 text-emerald-950'
+                                : 'bg-emerald-950/30 border-emerald-900/60 text-emerald-300'
+                              : adminTheme === 'light'
+                                ? 'bg-amber-50 border-amber-200 text-amber-950'
+                                : 'bg-amber-950/30 border-amber-900/60 text-amber-300'
+                          }`}>
+                            {cloudStatus === 'connected' ? (
+                              <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                            ) : (
+                              <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
+                            )}
+                            <div className="space-y-1 flex-1">
+                              <div className="font-bold uppercase tracking-wider text-sm flex items-center justify-between">
+                                <span>
+                                  {cloudStatus === 'connected'
+                                    ? "🟢 STATUS CLOUD: TERHUBUNG & REALTIME PUBLIK AKTIF"
+                                    : "🟡 STATUS CLOUD: MODE LOKAL / OFFLINE"}
+                                </span>
+                                <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/10 border border-current">
+                                  {cloudStatus === 'connected' ? "Supabase Live" : "Local Browser"}
+                                </span>
+                              </div>
+                              <p className="text-[11px] leading-relaxed opacity-90">
+                                {cloudStatus === 'connected'
+                                  ? "Katalog pakaian, showcase hero banner, foto editorial lookbook, dan media storage tersambung langsung ke cloud Supabase. Setiap perubahan CRUD yang Anda lakukan langsung terlihat otomatis oleh seluruh pengunjung website/publik di seluruh dunia."
+                                  : "Data website saat ini hanya tersimpan di memori browser lokal perangkat ini. Untuk membuat hasil CRUD dapat dilihat oleh publik/pengunjung website di Vercel, hubungkan URL & Anon Key Supabase di bawah ini."}
+                              </p>
+                              {connectionTestMsg && (
+                                <div className={`mt-2 p-2.5 rounded-xl border text-[11px] font-semibold ${
+                                  connectionTestMsg.success
+                                    ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600'
+                                    : 'bg-rose-500/10 border-rose-500/30 text-rose-500'
+                                }`}>
+                                  {connectionTestMsg.message}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Credentials Input Card */}
+                          <div className={`p-5 rounded-2xl border space-y-4 font-mono text-xs transition shadow-xs ${
+                            adminTheme === 'light'
+                              ? 'bg-slate-50 border-slate-200 text-slate-800'
+                              : 'bg-zinc-900/60 border-zinc-800 text-white'
+                          }`}>
+                            <div className="flex items-center justify-between">
+                              <h5 className={`font-bold text-sm uppercase flex items-center space-x-2 ${
+                                adminTheme === 'light' ? 'text-slate-900' : 'text-white'
+                              }`}>
+                                <Key className="w-4 h-4 text-sky-500" />
+                                <span>Konfigurasi Kunci API Supabase</span>
+                              </h5>
+                              <span className="text-[10px] text-slate-400">Tersimpan aman di browser / .env</span>
+                            </div>
+
+                            <div className="space-y-3">
+                              <div>
+                                <label className={`block text-[11px] mb-1.5 font-bold ${
+                                  adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-300'
+                                }`}>
+                                  Supabase Project URL:
+                                </label>
+                                <input 
+                                  type="text" 
+                                  placeholder="https://xyzprojectname.supabase.co"
+                                  value={supabaseUrlInput}
+                                  onChange={(e) => setSupabaseUrlInput(e.target.value)}
+                                  className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition text-xs font-mono ${
+                                    adminTheme === 'light'
+                                      ? 'bg-white border-slate-300 text-slate-900 focus:border-sky-500 focus:ring-1 focus:ring-sky-500/20'
+                                      : 'bg-zinc-900 border-zinc-800 text-white focus:border-sky-500'
+                                  }`}
+                                />
+                              </div>
+
+                              <div>
+                                <label className={`block text-[11px] mb-1.5 font-bold ${
+                                  adminTheme === 'light' ? 'text-slate-700' : 'text-zinc-300'
+                                }`}>
+                                  Supabase Anon (Public) Key:
+                                </label>
+                                <input 
+                                  type="password" 
+                                  placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                  value={supabaseKeyInput}
+                                  onChange={(e) => setSupabaseKeyInput(e.target.value)}
+                                  className={`w-full px-3.5 py-2.5 rounded-xl outline-none border transition text-xs font-mono ${
+                                    adminTheme === 'light'
+                                      ? 'bg-white border-slate-300 text-slate-900 focus:border-sky-500 focus:ring-1 focus:ring-sky-500/20'
+                                      : 'bg-zinc-900 border-zinc-800 text-white focus:border-sky-500'
+                                  }`}
+                                />
+                              </div>
+                            </div>
+
+                            <div className="flex flex-wrap items-center gap-2 pt-2">
+                              <button 
+                                onClick={handleSaveSupabaseCredentials}
+                                className="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs uppercase flex items-center space-x-1.5 shadow-sm transition active:scale-[0.99]"
+                              >
+                                <Cloud className="w-3.5 h-3.5" />
+                                <span>Simpan & Hubungkan Cloud</span>
+                              </button>
+
+                              <button 
+                                onClick={handleTestSupabaseConnection}
+                                className={`px-3.5 py-2.5 rounded-xl border text-xs font-bold flex items-center space-x-1.5 transition ${
+                                  adminTheme === 'light'
+                                    ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
+                                    : 'bg-zinc-900 hover:bg-zinc-800 border-zinc-800 text-zinc-300 hover:text-white'
+                                }`}
+                              >
+                                <RefreshCw className={`w-3.5 h-3.5 ${isCloudSyncing ? 'animate-spin' : ''}`} />
+                                <span>Tes Koneksi</span>
+                              </button>
+
+                              {isSupabaseConfigured() && (
+                                <button 
+                                  onClick={handleResetSupabaseCredentials}
+                                  className="px-3 py-2 rounded-xl text-xs text-rose-500 hover:text-rose-600 hover:bg-rose-500/10 transition"
+                                >
+                                  Putuskan Koneksi
+                                </button>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Cloud Sync Actions */}
+                          <div className={`p-5 rounded-2xl border space-y-4 font-mono text-xs transition shadow-xs ${
+                            adminTheme === 'light'
+                              ? 'bg-slate-50 border-slate-200 text-slate-800'
+                              : 'bg-zinc-900/60 border-zinc-800 text-white'
+                          }`}>
+                            <h5 className={`font-bold text-sm uppercase flex items-center space-x-2 ${
+                              adminTheme === 'light' ? 'text-slate-900' : 'text-white'
+                            }`}>
+                              <Database className="w-4 h-4 text-emerald-500" />
+                              <span>Sinkronisasi Data Dua Arah</span>
+                            </h5>
+                            <p className={`text-[11px] leading-relaxed ${
+                              adminTheme === 'light' ? 'text-slate-600' : 'text-zinc-400'
+                            }`}>
+                              Gunakan tombol di bawah untuk menyelaraskan data antara database lokal browser dan server cloud Supabase:
+                            </p>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                              <div className={`p-4 rounded-xl border space-y-2 ${
+                                adminTheme === 'light' ? 'bg-white border-slate-200' : 'bg-zinc-900 border-zinc-800'
+                              }`}>
+                                <div className="font-bold text-xs uppercase flex items-center space-x-1.5 text-emerald-600">
+                                  <Upload className="w-3.5 h-3.5" />
+                                  <span>Upload Lokal -&gt; Cloud</span>
+                                </div>
+                                <p className="text-[10px] text-zinc-500">
+                                  Kirim seluruh {products.length} kaos, {showcaseSlides.length} showcase, dan {lookbookItems.length} lookbook lokal saat ini ke server Supabase.
+                                </p>
+                                <button 
+                                  onClick={handleSyncAllToSupabase}
+                                  disabled={!isSupabaseConfigured() || isCloudSyncing}
+                                  className="w-full py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-bold text-xs uppercase transition shadow-xs flex items-center justify-center space-x-1.5"
+                                >
+                                  <Upload className="w-3.5 h-3.5" />
+                                  <span>Upload ke Cloud</span>
+                                </button>
+                              </div>
+
+                              <div className={`p-4 rounded-xl border space-y-2 ${
+                                adminTheme === 'light' ? 'bg-white border-slate-200' : 'bg-zinc-900 border-zinc-800'
+                              }`}>
+                                <div className="font-bold text-xs uppercase flex items-center space-x-1.5 text-sky-600">
+                                  <Download className="w-3.5 h-3.5" />
+                                  <span>Unduh Cloud -&gt; Lokal</span>
+                                </div>
+                                <p className="text-[10px] text-zinc-500">
+                                  Ambil pembaruan katalog dan editorial terbaru dari cloud Supabase untuk ditampilkan di layar ini.
+                                </p>
+                                <button 
+                                  onClick={handleFetchAllFromSupabase}
+                                  disabled={!isSupabaseConfigured() || isCloudSyncing}
+                                  className="w-full py-2 px-3 rounded-lg bg-sky-600 hover:bg-sky-500 disabled:opacity-50 text-white font-bold text-xs uppercase transition shadow-xs flex items-center justify-center space-x-1.5"
+                                >
+                                  <Download className="w-3.5 h-3.5" />
+                                  <span>Tarik dari Cloud</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Quick 3-Step Setup Guide */}
+                          <div className={`p-5 rounded-2xl border space-y-3 font-mono text-xs transition ${
+                            adminTheme === 'light'
+                              ? 'bg-slate-100/60 border-slate-200 text-slate-700'
+                              : 'bg-zinc-900/40 border-zinc-800 text-zinc-300'
+                          }`}>
+                            <div className="font-bold text-xs uppercase flex items-center space-x-2 text-sky-500">
+                              <Globe className="w-4 h-4" />
+                              <span>Panduan Cepat Setup Supabase (3 Langkah)</span>
+                            </div>
+                            <ol className="list-decimal list-inside space-y-1.5 text-[11px] leading-relaxed">
+                              <li>
+                                Buka <a href="https://supabase.com" target="_blank" rel="noreferrer" className="text-sky-500 underline font-bold">supabase.com</a>, daftar secara gratis, lalu buat project baru (pilih region terdekat misal Singapore).
+                              </li>
+                              <li>
+                                Buka menu <strong>SQL Editor</strong> di dashboard Supabase Anda, salin isi file <code className="px-1.5 py-0.5 rounded bg-black/10 dark:bg-white/10 font-bold">supabase-schema.sql</code> dari proyek ini, lalu klik <strong>Run</strong>. (Tabel & storage bucket <code className="text-[#A60009] font-bold">dedicate-media</code> akan terbuat otomatis).
+                              </li>
+                              <li>
+                                Buka <strong>Project Settings -&gt; API</strong>, salin <em>Project URL</em> dan <em>anon public key</em>, lalu tempel pada form di atas atau masukkan ke Environment Variables Vercel (<code className="font-bold">VITE_SUPABASE_URL</code> dan <code className="font-bold">VITE_SUPABASE_ANON_KEY</code>).
+                              </li>
+                            </ol>
+                          </div>
+
+                        </div>
+                      </div>
+
                     </div>
                   )}
 
