@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" style="background:#e5e7eb; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="flowShadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- Slide Canvas Background -->
+  <rect x="50" y="50" width="1500" height="800" rx="20" fill="#ffffff" filter="url(#flowShadow)"/>
+
+  <!-- Top Slide Label -->
+  <text x="110" y="115" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="1">3 · USER FLOW</text>
+
+  <!-- Slide Title -->
+  <text x="110" y="175" font-family="Georgia, serif" font-size="44" font-weight="normal" fill="#18181b">User Flow: mencari, membandingkan &amp; memesan kaos</text>
+
+  <!-- ========================================== -->
+  <!-- ROW 1: EKSPLORASI & FILTER                 -->
+  <!-- ========================================== -->
+  <g transform="translate(110, 260)">
+    
+    <!-- Step 1: Mulai (Black) -->
+    <rect x="0" y="0" width="180" height="80" rx="4" fill="#18181b"/>
+    <text x="90" y="47" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">Mulai</text>
+
+    <!-- Arrow 1 -->
+    <text x="212" y="47" font-size="22" font-weight="300" fill="#9ca3af">→</text>
+
+    <!-- Step 2: Buka Beranda -->
+    <rect x="250" y="0" width="220" height="80" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="360" y="47" font-size="15" font-weight="500" fill="#27272a" text-anchor="middle">Buka Beranda</text>
+
+    <!-- Arrow 2 -->
+    <text x="502" y="47" font-size="22" font-weight="300" fill="#9ca3af">→</text>
+
+    <!-- Step 3: Cari / Kategori -->
+    <rect x="540" y="0" width="240" height="80" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="660" y="38" font-size="14" font-weight="500" fill="#27272a" text-anchor="middle">Cari kata kunci atau</text>
+    <text x="660" y="58" font-size="14" font-weight="500" fill="#27272a" text-anchor="middle">pilih kategori kaos</text>
+
+    <!-- Arrow 3 -->
+    <text x="812" y="47" font-size="22" font-weight="300" fill="#9ca3af">→</text>
+
+    <!-- Step 4: Atur Filter -->
+    <rect x="850" y="0" width="240" height="80" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="970" y="38" font-size="14" font-weight="500" fill="#27272a" text-anchor="middle">Atur filter GSM,</text>
+    <text x="970" y="58" font-size="14" font-weight="500" fill="#27272a" text-anchor="middle">karakter fit &amp; stok</text>
+
+    <!-- Arrow 4 -->
+    <text x="1122" y="47" font-size="22" font-weight="300" fill="#9ca3af">→</text>
+
+    <!-- Step 5: Lihat Daftar Produk -->
+    <rect x="1160" y="0" width="220" height="80" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="1270" y="47" font-size="15" font-weight="500" fill="#27272a" text-anchor="middle">Lihat daftar produk</text>
+  </g>
+
+  <!-- CONNECTOR LABEL BETWEEN ROWS -->
+  <text x="110" y="405" font-size="13" font-weight="500" fill="#71717a">↓ lanjut ke detail &amp; evaluasi</text>
+
+  <!-- ========================================== -->
+  <!-- ROW 2: DETAIL, EVALUASI & CHECKOUT         -->
+  <!-- ========================================== -->
+  <g transform="translate(110, 440)">
+    
+    <!-- Step 6: Buka Detail / Battle-Room -->
+    <rect x="0" y="0" width="230" height="92" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="115" y="42" font-size="14" font-weight="500" fill="#27272a" text-anchor="middle">Buka detail produk</text>
+    <text x="115" y="62" font-size="14" font-weight="500" fill="#27272a" text-anchor="middle">atau Battle-Room</text>
+
+    <!-- Arrow 5 -->
+    <text x="257" y="53" font-size="22" font-weight="300" fill="#9ca3af">→</text>
+
+    <!-- Step 7: Cek Spek & Size Guide -->
+    <rect x="295" y="0" width="245" height="92" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="417" y="34" font-size="14" font-weight="500" fill="#27272a" text-anchor="middle">Cek foto multi-sudut,</text>
+    <text x="417" y="54" font-size="14" font-weight="500" fill="#27272a" text-anchor="middle">bahan katun 16s &amp;</text>
+    <text x="417" y="74" font-size="14" font-weight="500" fill="#27272a" text-anchor="middle">rekomendasi Size Guide</text>
+
+    <!-- Arrow 6 -->
+    <text x="567" y="53" font-size="22" font-weight="300" fill="#9ca3af">→</text>
+
+    <!-- Step 8: Keputusan / Cocok? -->
+    <rect x="605" y="0" width="250" height="92" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="730" y="34" font-size="14" font-weight="600" fill="#18181b" text-anchor="middle">Cocok? Tidak:</text>
+    <text x="730" y="54" font-size="14" font-weight="500" fill="#52525b" text-anchor="middle">kembali ke katalog</text>
+    <text x="730" y="74" font-size="14" font-weight="500" fill="#52525b" text-anchor="middle">atau bandingkan kaos lain</text>
+
+    <!-- Arrow 7 -->
+    <text x="882" y="53" font-size="22" font-weight="300" fill="#9ca3af">→</text>
+
+    <!-- Step 9: Ya -> Simpan / WhatsApp -->
+    <rect x="920" y="0" width="260" height="92" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="1050" y="34" font-size="14" font-weight="600" fill="#18181b" text-anchor="middle">Ya: Tambah ke bag</text>
+    <text x="1050" y="54" font-size="14" font-weight="500" fill="#27272a" text-anchor="middle">&amp; Checkout terformat</text>
+    <text x="1050" y="74" font-size="14" font-weight="500" fill="#15803d" text-anchor="middle">via WhatsApp Otomatis</text>
+
+    <!-- Arrow 8 -->
+    <text x="1207" y="53" font-size="22" font-weight="300" fill="#9ca3af">→</text>
+
+    <!-- Step 10: Selesai (Black) -->
+    <rect x="1245" y="0" width="135" height="92" rx="4" fill="#18181b"/>
+    <text x="1312" y="53" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">Selesai</text>
+  </g>
+</svg>

@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" style="background:#e5e7eb; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="cardShadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- Slide Canvas Background -->
+  <rect x="50" y="50" width="1500" height="800" rx="20" fill="#ffffff" filter="url(#cardShadow)"/>
+
+  <!-- Top Slide Label -->
+  <text x="110" y="115" font-size="14" font-weight="600" fill="#9ca3af" letter-spacing="1">2 · INFORMATION ARCHITECTURE</text>
+
+  <!-- Slide Title -->
+  <text x="110" y="175" font-family="Georgia, serif" font-size="44" font-weight="normal" fill="#18181b">Information Architecture</text>
+
+  <!-- COLUMN 1: LEVEL 1 -->
+  <g transform="translate(110, 230)">
+    <text x="0" y="0" font-size="11" font-weight="700" fill="#71717a" letter-spacing="1.5">LEVEL 1</text>
+    
+    <!-- Level 1 Card (Black) -->
+    <rect x="0" y="18" width="230" height="52" rx="4" fill="#18181b"/>
+    <text x="24" y="49" font-size="15" font-weight="600" fill="#ffffff">Beranda (Homepage)</text>
+  </g>
+
+  <!-- ARROW 1 -> 2 -->
+  <text x="375" y="278" font-size="22" font-weight="300" fill="#9ca3af">→</text>
+
+  <!-- COLUMN 2: LEVEL 2 · MENU -->
+  <g transform="translate(425, 230)">
+    <text x="0" y="0" font-size="11" font-weight="700" fill="#71717a" letter-spacing="1.5">LEVEL 2 · MENU &amp; SEKSI</text>
+    
+    <!-- Box 1: Showcase -->
+    <rect x="0" y="18" width="250" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="49" font-size="14" font-weight="500" fill="#27272a">Hero Squeeze Showcase</text>
+
+    <!-- Box 2: Katalog -->
+    <rect x="0" y="86" width="250" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="117" font-size="14" font-weight="600" fill="#18181b">Katalog Produk Kaos</text>
+
+    <!-- Box 3: Smart Size Guide -->
+    <rect x="0" y="154" width="250" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="185" font-size="14" font-weight="500" fill="#27272a">Smart Size &amp; Fit Guide</text>
+
+    <!-- Box 4: Battle Room -->
+    <rect x="0" y="222" width="250" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="253" font-size="14" font-weight="500" fill="#27272a">Battle-Room Matrix</text>
+
+    <!-- Box 5: Shopping Bag -->
+    <rect x="0" y="290" width="250" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="321" font-size="14" font-weight="500" fill="#27272a">Shopping Bag (Cart)</text>
+
+    <!-- Box 6: Lookbook -->
+    <rect x="0" y="358" width="250" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="389" font-size="14" font-weight="500" fill="#27272a">Lookbook Editorial Street</text>
+
+    <!-- Box 7: Admin CMS -->
+    <rect x="0" y="426" width="250" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="457" font-size="14" font-weight="500" fill="#27272a">Admin Portal (CMS)</text>
+  </g>
+
+  <!-- ARROW 2 -> 3 -->
+  <text x="710" y="278" font-size="22" font-weight="300" fill="#9ca3af">→</text>
+
+  <!-- COLUMN 3: LEVEL 3 · ISI KATALOG & FITUR -->
+  <g transform="translate(760, 230)">
+    <text x="0" y="0" font-size="11" font-weight="700" fill="#71717a" letter-spacing="1.5">LEVEL 3 · ISI &amp; FITUR KATALOG</text>
+    
+    <!-- Box 1: Pencarian -->
+    <rect x="0" y="18" width="260" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="49" font-size="14" font-weight="500" fill="#27272a">Pencarian (Nama, SKU, Desain)</text>
+
+    <!-- Box 2: Filter Kategori -->
+    <rect x="0" y="86" width="260" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="117" font-size="14" font-weight="500" fill="#27272a">Kategori (Boxy, Heavy, LS)</text>
+
+    <!-- Box 3: Filter GSM & Fit -->
+    <rect x="0" y="154" width="260" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="185" font-size="14" font-weight="500" fill="#27272a">Filter GSM &amp; Karakter Fit</text>
+
+    <!-- Box 4: Filter Status -->
+    <rect x="0" y="222" width="260" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="253" font-size="14" font-weight="500" fill="#27272a">Filter Status (Ready / Sold Out)</text>
+
+    <!-- Box 5: Grid Produk -->
+    <rect x="0" y="290" width="260" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="321" font-size="14" font-weight="500" fill="#27272a">Daftar Kartu Kaos (Grid &amp; Stok)</text>
+
+    <!-- Box 6: Smart Fit Calculator -->
+    <rect x="0" y="358" width="260" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="389" font-size="14" font-weight="500" fill="#27272a">Kalkulator Fisik (Tinggi / Berat)</text>
+
+    <!-- Box 7: Cloud Sync -->
+    <rect x="0" y="426" width="260" height="52" rx="4" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5"/>
+    <text x="20" y="457" font-size="14" font-weight="500" fill="#27272a">Supabase Cloud Sync (CRUD)</text>
+  </g>
+
+  <!-- ARROW 3 -> 4 -->
+  <text x="1055" y="278" font-size="22" font-weight="300" fill="#9ca3af">→</text>
+
+  <!-- COLUMN 4: LEVEL 4 · DETAIL PRODUK & AKSI -->
+  <g transform="translate(1105, 230)">
+    <text x="0" y="0" font-size="11" font-weight="700" fill="#71717a" letter-spacing="1.5">LEVEL 4 · DETAIL PRODUK &amp; AKSI</text>
+    
+    <!-- Box 1 (Black): Galeri Foto -->
+    <rect x="0" y="18" width="345" height="52" rx="4" fill="#18181b"/>
+    <text x="20" y="49" font-size="14" font-weight="500" fill="#ffffff">Galeri Foto Multi-Sudut &amp; Zoom</text>
+
+    <!-- Box 2 (Black): Spek Detail -->
+    <rect x="0" y="86" width="345" height="52" rx="4" fill="#18181b"/>
+    <text x="20" y="117" font-size="14" font-weight="500" fill="#ffffff">Info: Katun 16s, GSM, Sablon &amp; Harga</text>
+
+    <!-- Box 3 (Black): Size Chart -->
+    <rect x="0" y="154" width="345" height="52" rx="4" fill="#18181b"/>
+    <text x="20" y="185" font-size="14" font-weight="500" fill="#ffffff">Size Chart Metrik (Panjang &amp; Lebar cm)</text>
+
+    <!-- Box 4 (Black): Pilihan Ukuran & Stok -->
+    <rect x="0" y="222" width="345" height="52" rx="4" fill="#18181b"/>
+    <text x="20" y="253" font-size="14" font-weight="500" fill="#ffffff">Pilihan Size (S - XXL) &amp; Live Stock</text>
+
+    <!-- Box 5 (Black): Simpan / Bandingkan -->
+    <rect x="0" y="290" width="345" height="52" rx="4" fill="#18181b"/>
+    <text x="20" y="321" font-size="14" font-weight="500" fill="#ffffff">Tambah ke Shopping Bag / Battle-Room</text>
+
+    <!-- Box 6 (Black): Checkout WhatsApp -->
+    <rect x="0" y="358" width="345" height="52" rx="4" fill="#18181b"/>
+    <text x="20" y="389" font-size="14" font-weight="600" fill="#ffffff">Direct WhatsApp Checkout + Invoice Draft</text>
+  </g>
+</svg>
