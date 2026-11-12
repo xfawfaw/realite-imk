@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEDICATEREALITE — Official High-Fidelity UI Mockups</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: #0c0d10;
+      color: #f4f4f5;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #121318;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #7A0006;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-zinc-100 antialiased selection:bg-[#7A0006] selection:text-white pb-24">
+
+  <!-- TOP HEADER / NAVIGASI MOCKUP PRESENTATION -->
+  <header class="sticky top-0 z-50 bg-[#09090b]/90 backdrop-blur-md border-b border-zinc-800 px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center space-x-3">
+      <div class="w-9 h-9 rounded-full bg-[#7A0006] flex items-center justify-center font-bold text-white shadow-lg shadow-[#7A0006]/30 border border-red-500/30">
+        D
+      </div>
+      <div>
+        <h1 class="text-sm font-bold tracking-wider uppercase text-white flex items-center gap-2">
+          <span>DEDICATEREALITE — HIGH-FIDELITY UI MOCKUP</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#7A0006]/30 text-red-400 border border-[#7A0006]/50">IMK COURSEWORK</span>
+        </h1>
+        <p class="text-[11px] text-zinc-400 font-mono">Representasi visual terstruktur &amp; lengkap dari seluruh halaman &amp; fitur website saat ini</p>
+      </div>
+    </div>
+
+    <!-- Switcher Nav Tabs -->
+    <div class="flex items-center space-x-2 text-xs font-mono">
+      <a href="#desktop-view" class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition">1. Desktop Beranda</a>
+      <a href="#modals-view" class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition">2. Modal Interaktif</a>
+      <a href="#mobile-view" class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition">3. Mobile View</a>
+      <a href="https://www.figma.com/design/VqTQH5n0X02hhAjXwJ6LWh" target="_blank" class="px-3 py-1.5 rounded-lg bg-[#7A0006] hover:bg-red-700 text-white font-bold transition flex items-center gap-1.5 shadow-md shadow-[#7A0006]/30">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 38 57" fill="none"><path fill="#F24E1E" d="M19 28.5A9.5 9.5 0 1 1 28.5 19 9.5 9.5 0 0 1 19 28.5z"/><path fill="#0ACF83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5A9.5 9.5 0 1 1 0 47.5z"/><path fill="#1ABCFE" d="M0 28.5A9.5 9.5 0 0 1 9.5 19H19v19H9.5A9.5 9.5 0 0 1 0 28.5z"/><path fill="#FF7262" d="M0 9.5A9.5 9.5 0 0 1 9.5 0H19v19H9.5A9.5 9.5 0 0 1 0 9.5z"/><path fill="#A259FF" d="M19 0h9.5A9.5 9.5 0 0 1 38 9.5 9.5 9.5 0 0 1 28.5 19H19V0z"/></svg>
+        <span>Buka di Figma</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 space-y-20">
+
+    <!-- ========================================================================= -->
+    <!-- SECTION 1: FULL DESKTOP STOREFRONT MOCKUP                                -->
+    <!-- ========================================================================= -->
+    <section id="desktop-view" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-zinc-800 pb-4 gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-[#A60009] font-bold tracking-widest">MOCKUP SCREEN 01</span>
+          <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Full Desktop Storefront (Beranda Utama)</h2>
+          <p class="text-xs text-zinc-400 mt-1">Struktur lengkap: Running Marquee, Navbar, Hero Squeeze Carousel, Spek Kain, Katalog Kaos, &amp; Lookbook</p>
+        </div>
+        <div class="text-xs font-mono text-zinc-500">Resolusi Standard Desktop: 1440 × 900 px</div>
+      </div>
+
+      <!-- DESKTOP BROWSER FRAME -->
+      <div class="rounded-2xl border border-zinc-800 bg-[#09090b] shadow-2xl overflow-hidden ring-1 ring-white/10">
+        
+        <!-- Browser Top Header -->
+        <div class="bg-[#18181b] px-4 py-3 border-b border-zinc-800 flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+          </div>
+          <div class="px-6 py-1 rounded-md bg-[#09090b] border border-zinc-800 text-[11px] font-mono text-zinc-400 flex items-center space-x-2 w-96 justify-center">
+            <span>🔒</span>
+            <span class="text-zinc-200 font-medium">https://dedicaterealite.vercel.app</span>
+          </div>
+          <div class="text-[11px] font-mono text-zinc-500">100% Zoom</div>
+        </div>
+
+        <!-- 1. Running Marquee -->
+        <div class="bg-[#7A0006] text-white py-1.5 px-4 text-[10px] font-mono font-bold tracking-wider text-center uppercase border-b border-red-900/60 flex items-center justify-center space-x-3">
+          <span>⚡ FREE SHIPPING JOGJA AREA</span>
+          <span>•</span>
+          <span>NEW DROP: NERO X DEDICATE 240 GSM</span>
+          <span>•</span>
+          <span>DIRECT WHATSAPP CHECKOUT</span>
+          <span>•</span>
+          <span>KATUN 16s HEAVYWEIGHT</span>
+        </div>
+
+        <!-- 2. Navbar -->
+        <nav class="bg-[#09090b] border-b border-zinc-800 px-6 py-3.5 flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <img src="/dedicate-logo.png" alt="Logo" class="w-8 h-8 rounded-full border border-red-900 object-cover shadow-sm">
+            <span class="font-black tracking-widest text-base text-white uppercase">DEDICATEREALITE</span>
+          </div>
+
+          <!-- Nav Menu Links -->
+          <div class="hidden md:flex items-center space-x-8 text-xs font-mono uppercase tracking-wider text-zinc-400">
+            <span class="text-white font-bold border-b-2 border-[#7A0006] pb-1">Katalog Produk</span>
+            <span class="hover:text-white cursor-pointer transition">Lookbook Jalanan</span>
+            <span class="hover:text-white cursor-pointer transition">Smart Size Guide</span>
+            <span class="hover:text-white cursor-pointer transition">Tentang Brand</span>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center space-x-2.5">
+            <div class="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono text-emerald-400 font-bold flex items-center gap-1.5">
+              <span>🛍️ Tas Belanja</span>
+              <span class="px-1.5 py-0.2 rounded-full bg-emerald-500 text-black text-[10px]">2</span>
+            </div>
+            <div class="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono text-red-400 font-bold">
+              ⚔️ Battle-Room [1]
+            </div>
+            <div class="px-2.5 py-1.5 rounded-lg bg-[#7A0006] text-white text-xs font-mono font-bold">
+              🛡️ CMS
+            </div>
+          </div>
+        </nav>
+
+        <!-- 3. Hero Squeeze Carousel Showcase -->
+        <div class="p-6 bg-gradient-to-b from-zinc-950 to-black">
+          <div class="rounded-2xl border border-zinc-800 overflow-hidden bg-[#121215] grid grid-cols-1 lg:grid-cols-12 min-h-[380px]">
+            <div class="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-between space-y-6">
+              <div class="space-y-3">
+                <span class="inline-block px-3 py-1 rounded-md bg-black/80 border border-white/10 font-mono text-xs font-bold text-red-500 uppercase tracking-widest">
+                  DROP 01 // NERO CREW COLLAB
+                </span>
+                <h3 class="text-3xl sm:text-4xl font-black uppercase text-white leading-tight tracking-tight">
+                  NERO X DEDICATE — Heavyweight Collab Drop.
+                </h3>
+                <p class="text-sm text-zinc-400 leading-relaxed max-w-xl">
+                  240 GSM ultra-combed cotton dengan front dragon artwork &amp; bold N.E.R.O CREW backprint. Edisi kolaborasi terbatas streetwear Yogyakarta dengan potongan signature boxy fit.
+                </p>
+              </div>
+
+              <div class="flex items-center space-x-4 pt-2">
+                <button class="px-6 py-3 rounded-xl bg-[#7A0006] hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-[#7A0006]/30 flex items-center gap-2">
+                  <span>Lihat Detail Kaos</span>
+                  <span>→</span>
+                </button>
+                <span class="font-mono text-xs text-zinc-400">Harga: <strong class="text-white text-sm">Rp 210.000</strong></span>
+              </div>
+            </div>
+
+            <!-- Hero Image Visual -->
+            <div class="lg:col-span-5 relative bg-zinc-900 overflow-hidden min-h-[260px] lg:min-h-full">
+              <img src="/images/nero-rooftop-duo.png" alt="Nero Rooftop Duo" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+              <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-[11px] font-mono text-white/80">
+                <span>Rooftop Session, Yogyakarta</span>
+                <span>240 GSM Boxy Cut</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Technical Specs Bar -->
+        <div class="grid grid-cols-2 md:grid-cols-4 border-y border-zinc-800 bg-[#0c0d10] text-xs font-mono divide-x divide-zinc-800">
+          <div class="p-3.5 flex items-center space-x-2.5">
+            <span class="text-red-500 font-bold">01</span>
+            <div>
+              <div class="font-bold text-white uppercase text-[11px]">Heavyweight GSM</div>
+              <div class="text-[10px] text-zinc-400">Katun 16s (235-260 GSM)</div>
+            </div>
+          </div>
+          <div class="p-3.5 flex items-center space-x-2.5">
+            <span class="text-red-500 font-bold">02</span>
+            <div>
+              <div class="font-bold text-white uppercase text-[11px]">Boxy Silhouette</div>
+              <div class="text-[10px] text-zinc-400">Drop shoulder &amp; rib leher tebal</div>
+            </div>
+          </div>
+          <div class="p-3.5 flex items-center space-x-2.5">
+            <span class="text-red-500 font-bold">03</span>
+            <div>
+              <div class="font-bold text-white uppercase text-[11px]">High-Density Print</div>
+              <div class="text-[10px] text-zinc-400">Plastisol &amp; discharge awet</div>
+            </div>
+          </div>
+          <div class="p-3.5 flex items-center space-x-2.5">
+            <span class="text-emerald-400 font-bold">04</span>
+            <div>
+              <div class="font-bold text-white uppercase text-[11px]">Direct WA Order</div>
+              <div class="text-[10px] text-emerald-400">+62 821-1407-2159</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Product Catalog & Filter Grid -->
+        <div class="p-6 sm:p-8 space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h4 class="text-xl font-black uppercase text-white tracking-wide">ETALASE KATALOG APPAREL</h4>
+              <p class="text-xs text-zinc-400 font-mono mt-0.5">Semua produk menggunakan katun tebal combed 16s berkarakter kokoh</p>
+            </div>
+
+            <!-- Filter Pills -->
+            <div class="flex items-center space-x-1.5 overflow-x-auto text-xs font-mono">
+              <span class="px-3 py-1.5 rounded-lg bg-[#7A0006] text-white font-bold cursor-pointer">Semua (6)</span>
+              <span class="px-3 py-1.5 rounded-lg bg-zinc-900 text-zinc-400 border border-zinc-800 cursor-pointer hover:text-white">Boxy Tee</span>
+              <span class="px-3 py-1.5 rounded-lg bg-zinc-900 text-zinc-400 border border-zinc-800 cursor-pointer hover:text-white">Heavyweight</span>
+              <span class="px-3 py-1.5 rounded-lg bg-zinc-900 text-zinc-400 border border-zinc-800 cursor-pointer hover:text-white">Longsleeve</span>
+              <span class="px-3 py-1.5 rounded-lg bg-zinc-900 text-zinc-400 border border-zinc-800 cursor-pointer hover:text-white">Outerwear</span>
+            </div>
+          </div>
+
+          <!-- Product Grid: 4 Authentic Products -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <!-- Product 1 -->
+            <div class="rounded-xl border border-zinc-800 bg-[#121215] p-3.5 flex flex-col justify-between space-y-3 group hover:border-[#7A0006] transition">
+              <div class="relative rounded-lg overflow-hidden bg-zinc-900 aspect-[4/5]">
+                <img src="/images/you-are-sick-front.jpg" alt="You Are Sick" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-800 font-mono text-[9px] font-bold">READY</span>
+                <span class="absolute top-2 right-2 px-2 py-0.5 rounded bg-black/80 text-zinc-300 font-mono text-[9px]">235 GSM</span>
+              </div>
+              <div class="space-y-1">
+                <div class="text-[10px] font-mono text-zinc-500">DDC-TC-001 • Boxy Fit</div>
+                <h5 class="text-xs font-bold text-white uppercase group-hover:text-red-400 transition">DEDICATE "YOU ARE SICK" Boxy Tee</h5>
+                <div class="text-sm font-bold text-white pt-1">Rp 195.000</div>
+              </div>
+              <div class="flex items-center space-x-2 pt-2 border-t border-zinc-800 text-[11px] font-mono">
+                <button class="flex-1 py-2 rounded-lg bg-[#7A0006] hover:bg-red-700 text-white font-bold text-center">Beli via WA</button>
+                <button class="px-2.5 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white" title="Bandingkan">⚔️</button>
+              </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="rounded-xl border border-zinc-800 bg-[#121215] p-3.5 flex flex-col justify-between space-y-3 group hover:border-[#7A0006] transition">
+              <div class="relative rounded-lg overflow-hidden bg-zinc-900 aspect-[4/5]">
+                <img src="/images/nero-rooftop-duo.png" alt="Nero Collab" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-800 font-mono text-[9px] font-bold">READY</span>
+                <span class="absolute top-2 right-2 px-2 py-0.5 rounded bg-black/80 text-zinc-300 font-mono text-[9px]">240 GSM</span>
+              </div>
+              <div class="space-y-1">
+                <div class="text-[10px] font-mono text-zinc-500">DDC-TC-002 • Boxy Fit</div>
+                <h5 class="text-xs font-bold text-white uppercase group-hover:text-red-400 transition">NERO X DEDICATE Dragon Tee</h5>
+                <div class="text-sm font-bold text-white pt-1">Rp 210.000</div>
+              </div>
+              <div class="flex items-center space-x-2 pt-2 border-t border-zinc-800 text-[11px] font-mono">
+                <button class="flex-1 py-2 rounded-lg bg-[#7A0006] hover:bg-red-700 text-white font-bold text-center">Beli via WA</button>
+                <button class="px-2.5 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white" title="Bandingkan">⚔️</button>
+              </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="rounded-xl border border-zinc-800 bg-[#121215] p-3.5 flex flex-col justify-between space-y-3 group hover:border-[#7A0006] transition">
+              <div class="relative rounded-lg overflow-hidden bg-zinc-900 aspect-[4/5]">
+                <img src="/images/dedicate-black-front.png" alt="Noir Sacrifice" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-800 font-mono text-[9px] font-bold">READY</span>
+                <span class="absolute top-2 right-2 px-2 py-0.5 rounded bg-black/80 text-zinc-300 font-mono text-[9px]">240 GSM</span>
+              </div>
+              <div class="space-y-1">
+                <div class="text-[10px] font-mono text-zinc-500">DDC-TC-003 • Boxy Fit</div>
+                <h5 class="text-xs font-bold text-white uppercase group-hover:text-red-400 transition">Noir Sacrifice Black Tee</h5>
+                <div class="text-sm font-bold text-white pt-1">Rp 195.000</div>
+              </div>
+              <div class="flex items-center space-x-2 pt-2 border-t border-zinc-800 text-[11px] font-mono">
+                <button class="flex-1 py-2 rounded-lg bg-[#7A0006] hover:bg-red-700 text-white font-bold text-center">Beli via WA</button>
+                <button class="px-2.5 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white" title="Bandingkan">⚔️</button>
+              </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="rounded-xl border border-zinc-800 bg-[#121215] p-3.5 flex flex-col justify-between space-y-3 group hover:border-[#7A0006] transition">
+              <div class="relative rounded-lg overflow-hidden bg-zinc-900 aspect-[4/5]">
+                <img src="/images/dedicate-white-flatlay.png" alt="Sacrifice White" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-800 font-mono text-[9px] font-bold">READY</span>
+                <span class="absolute top-2 right-2 px-2 py-0.5 rounded bg-black/80 text-zinc-300 font-mono text-[9px]">235 GSM</span>
+              </div>
+              <div class="space-y-1">
+                <div class="text-[10px] font-mono text-zinc-500">DDC-TC-004 • Boxy Fit</div>
+                <h5 class="text-xs font-bold text-white uppercase group-hover:text-red-400 transition">Sacrifice Limited White Tee</h5>
+                <div class="text-sm font-bold text-white pt-1">Rp 185.000</div>
+              </div>
+              <div class="flex items-center space-x-2 pt-2 border-t border-zinc-800 text-[11px] font-mono">
+                <button class="flex-1 py-2 rounded-lg bg-[#7A0006] hover:bg-red-700 text-white font-bold text-center">Beli via WA</button>
+                <button class="px-2.5 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white" title="Bandingkan">⚔️</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 6. Lookbook Streetwear Strip -->
+        <div class="p-6 bg-black border-t border-zinc-800 space-y-4">
+          <div class="flex items-center justify-between">
+            <h4 class="text-sm font-bold uppercase text-white tracking-widest font-mono">EDITORIAL STREET ARCHIVE // YOGYAKARTA</h4>
+            <span class="text-[11px] font-mono text-zinc-500">10 Sesi Pemotretan Realitas</span>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="rounded-lg overflow-hidden aspect-video relative group">
+              <img src="/images/dedicate-duo-street.jpg" class="w-full h-full object-cover group-hover:scale-105 transition">
+              <span class="absolute bottom-2 left-2 text-[10px] font-mono text-white bg-black/70 px-2 py-0.5 rounded">Malioboro Outer</span>
+            </div>
+            <div class="rounded-lg overflow-hidden aspect-video relative group">
+              <img src="/images/you-are-sick-alley-bike.jpg" class="w-full h-full object-cover group-hover:scale-105 transition">
+              <span class="absolute bottom-2 left-2 text-[10px] font-mono text-white bg-black/70 px-2 py-0.5 rounded">Alleyway Night Riders</span>
+            </div>
+            <div class="rounded-lg overflow-hidden aspect-video relative group">
+              <img src="/images/dedicate-sacrifice-vespa.jpg" class="w-full h-full object-cover group-hover:scale-105 transition">
+              <span class="absolute bottom-2 left-2 text-[10px] font-mono text-white bg-black/70 px-2 py-0.5 rounded">Vespa Midnight Run</span>
+            </div>
+            <div class="rounded-lg overflow-hidden aspect-video relative group">
+              <img src="/images/dedicate-sacrifice-skate.jpg" class="w-full h-full object-cover group-hover:scale-105 transition">
+              <span class="absolute bottom-2 left-2 text-[10px] font-mono text-white bg-black/70 px-2 py-0.5 rounded">Car Wash Skate Session</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Footer Strip -->
+        <footer class="bg-[#09090b] border-t border-zinc-800 px-6 py-4 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-zinc-500 gap-2">
+          <div>DEDICATEREALITE • Official WhatsApp: +62 821-1407-2159 • Yogyakarta, ID</div>
+          <div>Tugas Kelompok 7 IMK • UPN "Veteran" Yogyakarta</div>
+        </footer>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SECTION 2: THE CORE INTERACTIVE MODALS                                   -->
+    <!-- ========================================================================= -->
+    <section id="modals-view" class="space-y-6">
+      <div class="border-b border-zinc-800 pb-4">
+        <span class="text-xs font-mono uppercase text-[#A60009] font-bold tracking-widest">MOCKUP SCREEN 02</span>
+        <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Core Interactive Modals (Fitur Superpower)</h2>
+        <p class="text-xs text-zinc-400 mt-1">Modal Detail Produk dengan WhatsApp Checkout &amp; Smart Size &amp; Fit Recommendation Calculator</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- MODAL 1: PRODUCT DETAIL & WHATSAPP CHECKOUT -->
+        <div class="rounded-2xl border border-zinc-800 bg-[#121215] p-6 shadow-2xl flex flex-col justify-between space-y-6 ring-1 ring-white/10">
+          <div>
+            <div class="flex items-center justify-between pb-4 border-b border-zinc-800">
+              <span class="font-mono text-xs font-bold text-red-500 uppercase tracking-widest">MODAL // DETAIL PRODUK</span>
+              <span class="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center text-xs text-zinc-400">✕</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 pt-4">
+              <!-- Photo Gallery Column -->
+              <div class="sm:col-span-5 space-y-3">
+                <div class="rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800 aspect-[4/5]">
+                  <img src="/images/you-are-sick-front.jpg" alt="Detail Kaos" class="w-full h-full object-cover">
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="rounded border border-[#7A0006] overflow-hidden aspect-square"><img src="/images/you-are-sick-front.jpg" class="w-full h-full object-cover"></div>
+                  <div class="rounded border border-zinc-800 overflow-hidden aspect-square"><img src="/images/you-are-sick-alley-bike.jpg" class="w-full h-full object-cover"></div>
+                  <div class="rounded border border-zinc-800 overflow-hidden aspect-square"><img src="/images/you-are-sick-detail.jpg" class="w-full h-full object-cover"></div>
+                </div>
+              </div>
+
+              <!-- Product Specs & Size Picker Column -->
+              <div class="sm:col-span-7 space-y-4">
+                <div>
+                  <div class="text-[10px] font-mono text-zinc-500">SKU: DDC-TC-001 • Boxy Fit</div>
+                  <h3 class="text-base font-black uppercase text-white">DEDICATE "YOU ARE SICK" Boxy Tee</h3>
+                  <div class="text-xl font-bold text-white pt-1">Rp 195.000</div>
+                </div>
+
+                <!-- Spec Pills -->
+                <div class="flex flex-wrap gap-1.5 text-[10px] font-mono">
+                  <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-300">Cotton Combed 16s</span>
+                  <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-300">235 GSM</span>
+                  <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-300">Plastisol Glossy</span>
+                </div>
+
+                <!-- Size Picker with Stock Live -->
+                <div class="space-y-1.5 pt-1">
+                  <div class="text-[10px] font-mono font-bold text-zinc-400 uppercase">Pilih Ukuran (Sisa Stok Live):</div>
+                  <div class="grid grid-cols-5 gap-1.5 text-xs font-mono font-bold text-center">
+                    <div class="p-2 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">S (8)</div>
+                    <div class="p-2 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">M (14)</div>
+                    <div class="p-2 rounded bg-[#7A0006] text-white border border-red-500 shadow-sm">L (18)</div>
+                    <div class="p-2 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">XL (7)</div>
+                    <div class="p-2 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">XXL (4)</div>
+                  </div>
+                  <div class="text-[10px] font-mono text-emerald-400">✓ Ukuran L siap kirim ke alamat Anda</div>
+                </div>
+
+                <!-- Actions -->
+                <div class="space-y-2 pt-2">
+                  <button class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-950">
+                    <span>💬 Beli via WhatsApp (Format Rapi)</span>
+                  </button>
+                  <div class="flex items-center space-x-2">
+                    <button class="flex-1 py-2.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-200">+ Tambah ke Tas</button>
+                    <button class="flex-1 py-2.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-400">📏 Hitung Ukuran</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODAL 2: SMART SIZE & FIT RECOMMENDATION CALCULATOR -->
+        <div class="rounded-2xl border border-zinc-800 bg-[#121215] p-6 shadow-2xl flex flex-col justify-between space-y-6 ring-1 ring-white/10">
+          <div>
+            <div class="flex items-center justify-between pb-4 border-b border-zinc-800">
+              <span class="font-mono text-xs font-bold text-blue-400 uppercase tracking-widest">FITUR UNGGULAN // SMART SIZE CALCULATOR</span>
+              <span class="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center text-xs text-zinc-400">✕</span>
+            </div>
+
+            <div class="space-y-5 pt-4">
+              <!-- Slider 1: Tinggi Badan -->
+              <div class="space-y-1.5">
+                <div class="flex justify-between text-xs font-mono">
+                  <span class="text-zinc-400">TINGGI BADAN:</span>
+                  <span class="text-white font-bold">172 CM</span>
+                </div>
+                <div class="h-2 rounded-full bg-zinc-800 overflow-hidden relative">
+                  <div class="h-full bg-[#7A0006] w-[65%]"></div>
+                </div>
+              </div>
+
+              <!-- Slider 2: Berat Badan -->
+              <div class="space-y-1.5">
+                <div class="flex justify-between text-xs font-mono">
+                  <span class="text-zinc-400">BERAT BADAN:</span>
+                  <span class="text-white font-bold">65 KG</span>
+                </div>
+                <div class="h-2 rounded-full bg-zinc-800 overflow-hidden relative">
+                  <div class="h-full bg-[#7A0006] w-[50%]"></div>
+                </div>
+              </div>
+
+              <!-- Siluet Preference Toggle -->
+              <div class="space-y-1.5">
+                <div class="text-xs font-mono text-zinc-400">PREFERENSI POTONGAN KAOS:</div>
+                <div class="grid grid-cols-2 gap-3 text-xs font-mono">
+                  <div class="p-3 rounded-xl border border-[#7A0006] bg-[#7A0006]/15 text-white font-bold text-center flex items-center justify-center gap-2">
+                    <span>✓</span>
+                    <span>True Boxy Fit (Drop Shoulder)</span>
+                  </div>
+                  <div class="p-3 rounded-xl border border-zinc-800 bg-zinc-900 text-zinc-400 text-center flex items-center justify-center">
+                    <span>Baggy Oversized</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Output Recommendation Card -->
+              <div class="p-4 rounded-xl border border-emerald-500/40 bg-gradient-to-r from-emerald-950/40 to-black flex items-center space-x-4">
+                <div class="w-14 h-14 rounded-xl bg-emerald-500 text-black font-black text-2xl flex items-center justify-center shrink-0 shadow-lg shadow-emerald-500/20">
+                  L
+                </div>
+                <div>
+                  <div class="text-[10px] font-mono uppercase text-emerald-400 font-bold">HASIL REKOMENDASI CERDAS</div>
+                  <div class="text-sm font-bold text-white">UKURAN TERBAIK: SIZE L (LEBAR DADA 58 CM)</div>
+                  <p class="text-[11px] text-zinc-300 leading-snug mt-0.5">Proporsi boxy fit jatuh tepat di garis bahu, memberikan siluet streetwear kokoh dan rileks.</p>
+                </div>
+              </div>
+
+              <button class="w-full py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs uppercase font-mono transition">
+                Gunakan Ukuran Ini di Katalog
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SECTION 3: MOBILE RESPONSIVE MOCKUP (IPHONE VIEW)                        -->
+    <!-- ========================================================================= -->
+    <section id="mobile-view" class="space-y-6">
+      <div class="border-b border-zinc-800 pb-4">
+        <span class="text-xs font-mono uppercase text-[#A60009] font-bold tracking-widest">MOCKUP SCREEN 03</span>
+        <h2 class="text-2xl font-bold uppercase tracking-wide text-white">Mobile View (Tampilan Smartphone)</h2>
+        <p class="text-xs text-zinc-400 mt-1">Desain responsif di layar 390 × 844 px (iPhone 16 Pro Viewport) yang nyaman digunakan dengan satu tangan</p>
+      </div>
+
+      <div class="flex justify-center py-6">
+        <!-- Mobile Frame Container -->
+        <div class="w-[380px] rounded-[44px] border-[6px] border-zinc-800 bg-black shadow-2xl overflow-hidden ring-1 ring-white/10 relative">
+          
+          <!-- Dynamic Island / Notch -->
+          <div class="absolute top-2.5 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-50 flex items-center justify-center">
+            <span class="w-2.5 h-2.5 rounded-full bg-zinc-900 border border-zinc-800"></span>
+          </div>
+
+          <!-- Mobile Content Scroll Container -->
+          <div class="h-[740px] overflow-y-auto pt-8 pb-16 bg-[#09090b] text-white">
+            
+            <!-- Mobile Announcement Bar -->
+            <div class="bg-[#7A0006] text-white py-1 px-3 text-[9px] font-mono font-bold text-center tracking-wider uppercase">
+              ⚡ FREE ONGKIR JOGJA • WA DIRECT
+            </div>
+
+            <!-- Mobile Navbar -->
+            <div class="px-4 py-3 flex items-center justify-between border-b border-zinc-800 bg-[#09090b]/90 sticky top-0 z-40 backdrop-blur">
+              <div class="flex items-center space-x-2">
+                <img src="/dedicate-logo.png" class="w-7 h-7 rounded-full object-cover border border-red-900">
+                <span class="font-black tracking-widest text-xs uppercase">DEDICATEREALITE</span>
+              </div>
+              <div class="flex items-center space-x-2 text-xs font-mono">
+                <span class="px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-emerald-400 font-bold">BAG (2)</span>
+                <span class="p-1 text-zinc-400">☰</span>
+              </div>
+            </div>
+
+            <!-- Mobile Hero Slide -->
+            <div class="p-3.5">
+              <div class="rounded-xl overflow-hidden border border-zinc-800 bg-[#121215]">
+                <img src="/images/nero-rooftop-duo.png" class="w-full h-44 object-cover">
+                <div class="p-3.5 space-y-2">
+                  <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-black text-red-500 font-bold border border-zinc-800">DROP 01 // NERO CREW</span>
+                  <h4 class="text-sm font-black uppercase text-white leading-tight">NERO X DEDICATE — Heavyweight 240 GSM</h4>
+                  <button class="w-full py-2 rounded-lg bg-[#7A0006] text-white font-bold text-[10px] uppercase">Lihat Detail Kaos →</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile Filter Scroll -->
+            <div class="px-3.5 pb-2 flex items-center space-x-1.5 overflow-x-auto text-[10px] font-mono">
+              <span class="px-2.5 py-1 rounded bg-[#7A0006] text-white font-bold shrink-0">Semua (6)</span>
+              <span class="px-2.5 py-1 rounded bg-zinc-900 text-zinc-400 border border-zinc-800 shrink-0">Boxy Tee</span>
+              <span class="px-2.5 py-1 rounded bg-zinc-900 text-zinc-400 border border-zinc-800 shrink-0">Heavyweight</span>
+            </div>
+
+            <!-- Mobile Product Grid (2 Columns) -->
+            <div class="p-3.5 grid grid-cols-2 gap-2.5">
+              <div class="rounded-lg border border-zinc-800 bg-[#121215] p-2 space-y-2">
+                <img src="/images/you-are-sick-front.jpg" class="w-full aspect-[4/5] object-cover rounded">
+                <div class="text-[10px] font-bold uppercase truncate">YOU ARE SICK</div>
+                <div class="text-[11px] font-black text-white">Rp 195.000</div>
+                <button class="w-full py-1.5 rounded bg-[#7A0006] text-white text-[9px] font-bold uppercase">Beli WA</button>
+              </div>
+              <div class="rounded-lg border border-zinc-800 bg-[#121215] p-2 space-y-2">
+                <img src="/images/dedicate-black-front.png" class="w-full aspect-[4/5] object-cover rounded">
+                <div class="text-[10px] font-bold uppercase truncate">NOIR SACRIFICE</div>
+                <div class="text-[11px] font-black text-white">Rp 195.000</div>
+                <button class="w-full py-1.5 rounded bg-[#7A0006] text-white text-[9px] font-bold uppercase">Beli WA</button>
+              </div>
+            </div>
+
+            <!-- Mobile Sticky Bottom Floating Bag -->
+            <div class="p-3.5">
+              <div class="p-3 rounded-xl bg-gradient-to-r from-emerald-950 to-black border border-emerald-500/40 flex items-center justify-between text-xs font-mono">
+                <div>
+                  <div class="text-[10px] text-emerald-400 font-bold">2 KAOS DI TAS BELANJA</div>
+                  <div class="text-white font-bold">Total: Rp 390.000</div>
+                </div>
+                <button class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold text-[10px] uppercase">Checkout WA</button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Home Indicator Bar -->
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/40 rounded-full"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
