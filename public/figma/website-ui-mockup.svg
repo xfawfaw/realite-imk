@@ -1,0 +1,274 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" style="background:#e5e7eb; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Slide Card Shadow -->
+    <filter id="slideShadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.06"/>
+    </filter>
+    <!-- UI Component Shadow -->
+    <filter id="uiShadow" x="-4%" y="-4%" width="108%" height="110%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Slide Canvas Background -->
+  <rect x="40" y="40" width="1520" height="820" rx="20" fill="#ffffff" filter="url(#slideShadow)"/>
+
+  <!-- Top Slide Label -->
+  <text x="80" y="95" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="1">4 · UI MOCKUP</text>
+
+  <!-- Slide Title -->
+  <text x="80" y="145" font-family="Georgia, serif" font-size="38" font-weight="normal" fill="#18181b">Website UI Mockup: Dedicaterealite</text>
+  <text x="80" y="172" font-size="13" font-weight="400" fill="#71717a">Representasi ringkas antarmuka web streetwear: Beranda Desktop, Modal Detail Kaos, dan Smart Size Calculator</text>
+
+  <!-- ========================================================================= -->
+  <!-- LEFT COLUMN: DESKTOP STOREFRONT MOCKUP                                     -->
+  <!-- ========================================================================= -->
+  <g transform="translate(80, 205)">
+    <!-- Browser Window Container -->
+    <rect x="0" y="0" width="860" height="610" rx="10" fill="#09090b" stroke="#27272a" stroke-width="1.5" filter="url(#uiShadow)"/>
+
+    <!-- Browser Header Bar -->
+    <rect x="0" y="0" width="860" height="34" rx="10" fill="#18181b"/>
+    <circle cx="18" cy="17" r="4.5" fill="#ef4444"/>
+    <circle cx="34" cy="17" r="4.5" fill="#f59e0b"/>
+    <circle cx="50" cy="17" r="4.5" fill="#10b981"/>
+    <!-- URL Pill -->
+    <rect x="250" y="7" width="360" height="20" rx="5" fill="#09090b" stroke="#27272a" stroke-width="1"/>
+    <text x="430" y="21" font-size="10" font-family="monospace" fill="#a1a1aa" text-anchor="middle">🔒 https://dedicaterealite.vercel.app</text>
+
+    <!-- 1. Running Ticker Announcement Bar -->
+    <rect x="0" y="34" width="860" height="22" fill="#7A0006"/>
+    <text x="430" y="49" font-size="10" font-weight="700" font-family="monospace" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">
+      ⚡ FREE SHIPPING JOGJA AREA • NEW DROP: NERO X DEDICATE 240 GSM • DIRECT WHATSAPP CHECKOUT
+    </text>
+
+    <!-- 2. Navbar -->
+    <rect x="0" y="56" width="860" height="50" fill="#09090b" stroke="#18181b" stroke-width="1"/>
+    <!-- Logo -->
+    <circle cx="35" cy="81" r="14" fill="#7A0006"/>
+    <text x="35" y="86" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle">D</text>
+    <text x="60" y="85" font-size="13" font-weight="900" fill="#ffffff" letter-spacing="2">DEDICATEREALITE</text>
+
+    <!-- Center Nav Links -->
+    <text x="360" y="85" font-size="11" font-weight="600" fill="#ffffff">Katalog</text>
+    <text x="425" y="85" font-size="11" font-weight="500" fill="#a1a1aa">Lookbook</text>
+    <text x="500" y="85" font-size="11" font-weight="500" fill="#a1a1aa">Size Guide</text>
+
+    <!-- Right Icons -->
+    <rect x="675" y="68" width="48" height="26" rx="6" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+    <text x="699" y="85" font-size="10" font-family="monospace" font-weight="700" fill="#10b981" text-anchor="middle">BAG [2]</text>
+
+    <rect x="731" y="68" width="56" height="26" rx="6" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+    <text x="759" y="85" font-size="10" font-family="monospace" fill="#a1a1aa" text-anchor="middle">BATTLE</text>
+
+    <rect x="795" y="68" width="48" height="26" rx="6" fill="#7A0006" stroke="#991b1b" stroke-width="1"/>
+    <text x="819" y="85" font-size="10" font-family="monospace" font-weight="700" fill="#ffffff" text-anchor="middle">CMS</text>
+
+    <!-- 3. Hero Showcase Carousel Card -->
+    <g transform="translate(20, 120)">
+      <rect x="0" y="0" width="820" height="185" rx="8" fill="#121215" stroke="#27272a" stroke-width="1"/>
+      <!-- Background Graphic Accents -->
+      <rect x="520" y="10" width="290" height="165" rx="6" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      <text x="665" y="98" font-size="12" font-weight="700" font-family="monospace" fill="#52525b" text-anchor="middle">[EDITORIAL PHOTO PREVIEW]</text>
+      
+      <!-- Hero Content -->
+      <rect x="25" y="24" width="190" height="20" rx="4" fill="#000000" stroke="#27272a" stroke-width="1"/>
+      <text x="35" y="38" font-size="10" font-family="monospace" font-weight="700" fill="#f43f5e">DROP 01 // NERO CREW COLLAB</text>
+
+      <text x="25" y="78" font-size="20" font-weight="900" fill="#ffffff">NERO X DEDICATE — Heavyweight Drop</text>
+      <text x="25" y="102" font-size="11" fill="#a1a1aa">Katun combed 16s seberat 240 GSM. Potongan boxy bahu turun dengan artwork naga.</text>
+      
+      <rect x="25" y="125" width="140" height="34" rx="6" fill="#7A0006"/>
+      <text x="95" y="146" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">Lihat Detail Kaos →</text>
+    </g>
+
+    <!-- 4. Catalog Filter Header -->
+    <g transform="translate(20, 320)">
+      <text x="0" y="16" font-size="14" font-weight="800" fill="#ffffff" letter-spacing="1">ETALASE KATALOG APPAREL</text>
+      <text x="0" y="32" font-size="10" font-family="monospace" fill="#71717a">6 DESAIN SIAP ORDER • DIRECT CHECKOUT WHATSAPP</text>
+
+      <!-- Filter Buttons -->
+      <rect x="420" y="6" width="55" height="24" rx="4" fill="#7A0006"/>
+      <text x="447" y="22" font-size="10" font-family="monospace" font-weight="700" fill="#ffffff" text-anchor="middle">ALL (6)</text>
+
+      <rect x="483" y="6" width="75" height="24" rx="4" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      <text x="520" y="22" font-size="10" font-family="monospace" fill="#a1a1aa" text-anchor="middle">Boxy Tee</text>
+
+      <rect x="566" y="6" width="100" height="24" rx="4" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      <text x="616" y="22" font-size="10" font-family="monospace" fill="#a1a1aa" text-anchor="middle">Heavyweight</text>
+
+      <rect x="674" y="6" width="85" height="24" rx="4" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      <text x="716" y="22" font-size="10" font-family="monospace" fill="#a1a1aa" text-anchor="middle">Longsleeve</text>
+
+      <rect x="767" y="6" width="53" height="24" rx="4" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      <text x="793" y="22" font-size="10" font-family="monospace" fill="#a1a1aa" text-anchor="middle">Outer</text>
+    </g>
+
+    <!-- 5. Product Grid Cards (2 Sample Cards) -->
+    <g transform="translate(20, 368)">
+      <!-- Card 1 -->
+      <rect x="0" y="0" width="395" height="225" rx="8" fill="#121215" stroke="#27272a" stroke-width="1"/>
+      <!-- Image Slot -->
+      <rect x="12" y="12" width="150" height="201" rx="6" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      <text x="87" y="115" font-size="11" font-weight="700" font-family="monospace" fill="#52525b" text-anchor="middle">[FOTO KAOS]</text>
+      <!-- Details -->
+      <rect x="175" y="15" width="55" height="18" rx="3" fill="#10b981/20" stroke="#10b981" stroke-width="1"/>
+      <text x="202" y="27" font-size="9" font-family="monospace" font-weight="700" fill="#10b981" text-anchor="middle">READY</text>
+
+      <text x="175" y="52" font-size="13" font-weight="800" fill="#ffffff">DEDICATE "YOU ARE SICK"</text>
+      <text x="175" y="67" font-size="10" font-family="monospace" fill="#71717a">DDC-TC-001 • Boxy Fit</text>
+
+      <text x="175" y="92" font-size="15" font-weight="800" fill="#ffffff">Rp 195.000</text>
+
+      <text x="175" y="115" font-size="10" font-family="monospace" fill="#a1a1aa">Bahan: Combed 16s (235 GSM)</text>
+      <text x="175" y="130" font-size="10" font-family="monospace" fill="#a1a1aa">Sablon: Plastisol Glossy</text>
+      <text x="175" y="145" font-size="10" font-family="monospace" fill="#10b981">Stok Tersedia: S, M, L, XL</text>
+
+      <rect x="175" y="172" width="100" height="28" rx="5" fill="#7A0006"/>
+      <text x="225" y="190" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">Beli Sekarang</text>
+
+      <rect x="282" y="172" width="95" height="28" rx="5" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      <text x="329" y="190" font-size="10" font-family="monospace" fill="#a1a1aa" text-anchor="middle">+ Bandingkan</text>
+
+      <!-- Card 2 -->
+      <rect x="425" y="0" width="395" height="225" rx="8" fill="#121215" stroke="#27272a" stroke-width="1"/>
+      <rect x="437" y="12" width="150" height="201" rx="6" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      <text x="512" y="115" font-size="11" font-weight="700" font-family="monospace" fill="#52525b" text-anchor="middle">[FOTO KAOS]</text>
+
+      <rect x="600" y="15" width="55" height="18" rx="3" fill="#10b981/20" stroke="#10b981" stroke-width="1"/>
+      <text x="627" y="27" font-size="9" font-family="monospace" font-weight="700" fill="#10b981" text-anchor="middle">READY</text>
+
+      <text x="600" y="52" font-size="13" font-weight="800" fill="#ffffff">NERO X DEDICATE Dragon</text>
+      <text x="600" y="67" font-size="10" font-family="monospace" fill="#71717a">DDC-TC-002 • Boxy Fit</text>
+
+      <text x="600" y="92" font-size="15" font-weight="800" fill="#ffffff">Rp 210.000</text>
+
+      <text x="600" y="115" font-size="10" font-family="monospace" fill="#a1a1aa">Bahan: Ultra-Combed 240 GSM</text>
+      <text x="600" y="130" font-size="10" font-family="monospace" fill="#a1a1aa">Sablon: Halftone Discharge</text>
+      <text x="600" y="145" font-size="10" font-family="monospace" fill="#10b981">Stok Tersedia: S, M, L, XL</text>
+
+      <rect x="600" y="172" width="100" height="28" rx="5" fill="#7A0006"/>
+      <text x="650" y="190" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">Beli Sekarang</text>
+
+      <rect x="707" y="172" width="95" height="28" rx="5" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      <text x="754" y="190" font-size="10" font-family="monospace" fill="#a1a1aa" text-anchor="middle">+ Bandingkan</text>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- RIGHT COLUMN: MODAL DETAIL & SMART SIZE CALCULATOR                         -->
+  <!-- ========================================================================= -->
+  <g transform="translate(970, 205)">
+
+    <!-- 1. MODAL DETAIL PRODUK OVERLAY -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="550" height="330" rx="10" fill="#121215" stroke="#7A0006" stroke-width="1.5" filter="url(#uiShadow)"/>
+      
+      <!-- Modal Header -->
+      <rect x="0" y="0" width="550" height="38" rx="10" fill="#1c1917"/>
+      <text x="20" y="24" font-size="11" font-weight="800" font-family="monospace" fill="#ffffff">MODAL // DETAIL PRODUK &amp; CHECKOUT</text>
+      <text x="525" y="24" font-size="14" font-weight="700" fill="#71717a" text-anchor="middle">✕</text>
+
+      <!-- Modal Gallery (Left of modal) -->
+      <rect x="18" y="52" width="150" height="195" rx="6" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      <text x="93" y="150" font-size="11" font-weight="700" font-family="monospace" fill="#52525b" text-anchor="middle">[ZOOM FOTO]</text>
+
+      <!-- Thumbnails below photo -->
+      <rect x="18" y="255" width="32" height="32" rx="4" fill="#27272a" stroke="#7A0006" stroke-width="1.5"/>
+      <rect x="58" y="255" width="32" height="32" rx="4" fill="#18181b"/>
+      <rect x="98" y="255" width="32" height="32" rx="4" fill="#18181b"/>
+      <rect x="138" y="255" width="32" height="32" rx="4" fill="#18181b"/>
+
+      <!-- Modal Specs (Right of modal) -->
+      <g transform="translate(185, 52)">
+        <text x="0" y="16" font-size="14" font-weight="900" fill="#ffffff">DEDICATE "YOU ARE SICK"</text>
+        <text x="0" y="38" font-size="16" font-weight="900" fill="#7A0006">Rp 195.000</text>
+
+        <!-- Spec Pills -->
+        <rect x="0" y="48" width="105" height="18" rx="3" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+        <text x="6" y="61" font-size="9" font-family="monospace" fill="#a1a1aa">Heavy Combed 16s</text>
+
+        <rect x="112" y="48" width="60" height="18" rx="3" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+        <text x="118" y="61" font-size="9" font-family="monospace" fill="#a1a1aa">235 GSM</text>
+
+        <rect x="178" y="48" width="70" height="18" rx="3" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+        <text x="184" y="61" font-size="9" font-family="monospace" fill="#a1a1aa">Boxy Fit Cut</text>
+
+        <!-- Size Selection -->
+        <text x="0" y="92" font-size="10" font-family="monospace" font-weight="700" fill="#a1a1aa">PILIH UKURAN (STOK LIVE):</text>
+        
+        <!-- S button -->
+        <rect x="0" y="100" width="40" height="28" rx="4" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+        <text x="20" y="118" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">S</text>
+
+        <!-- M button -->
+        <rect x="46" y="100" width="40" height="28" rx="4" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+        <text x="66" y="118" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">M</text>
+
+        <!-- L button (Selected Active) -->
+        <rect x="92" y="100" width="40" height="28" rx="4" fill="#7A0006" stroke="#ef4444" stroke-width="1.5"/>
+        <text x="112" y="118" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle">L</text>
+
+        <!-- XL button -->
+        <rect x="138" y="100" width="40" height="28" rx="4" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+        <text x="158" y="118" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">XL</text>
+
+        <!-- XXL button -->
+        <rect x="184" y="100" width="40" height="28" rx="4" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+        <text x="204" y="118" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">XXL</text>
+
+        <text x="0" y="148" font-size="10" font-family="monospace" fill="#10b981">✓ Tersedia 18 pcs siap kirim</text>
+
+        <!-- CTAs -->
+        <rect x="0" y="165" width="345" height="34" rx="6" fill="#15803d"/>
+        <text x="172" y="186" font-size="11" font-weight="800" fill="#ffffff" text-anchor="middle">💬 Beli Langsung via WhatsApp (Format Rapi)</text>
+
+        <rect x="0" y="206" width="168" height="28" rx="6" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+        <text x="84" y="224" font-size="10" font-family="monospace" fill="#ffffff" text-anchor="middle">+ Tambah ke Tas</text>
+
+        <rect x="177" y="206" width="168" height="28" rx="6" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+        <text x="261" y="224" font-size="10" font-family="monospace" fill="#a1a1aa" text-anchor="middle">📏 Smart Size Guide</text>
+      </g>
+    </g>
+
+    <!-- 2. SMART SIZE CALCULATOR MODAL OVERLAY -->
+    <g transform="translate(0, 350)">
+      <rect x="0" y="0" width="550" height="260" rx="10" fill="#121215" stroke="#27272a" stroke-width="1.5" filter="url(#uiShadow)"/>
+      
+      <!-- Calculator Header -->
+      <rect x="0" y="0" width="550" height="36" rx="10" fill="#18181b"/>
+      <text x="20" y="23" font-size="11" font-weight="800" font-family="monospace" fill="#ffffff">FITUR UNGGULAN // SMART SIZE CALCULATOR</text>
+
+      <g transform="translate(20, 52)">
+        <!-- Input Row 1: Height & Weight -->
+        <text x="0" y="14" font-size="10" font-family="monospace" fill="#a1a1aa">TINGGI BADAN: <tspan fill="#ffffff" font-weight="700">172 CM</tspan></text>
+        <rect x="0" y="22" width="230" height="6" rx="3" fill="#27272a"/>
+        <rect x="0" y="22" width="140" height="6" rx="3" fill="#7A0006"/>
+        <circle cx="140" cy="25" r="7" fill="#ef4444"/>
+
+        <text x="270" y="14" font-size="10" font-family="monospace" fill="#a1a1aa">BERAT BADAN: <tspan fill="#ffffff" font-weight="700">65 KG</tspan></text>
+        <rect x="270" y="22" width="230" height="6" rx="3" fill="#27272a"/>
+        <rect x="270" y="22" width="115" height="6" rx="3" fill="#7A0006"/>
+        <circle cx="385" cy="25" r="7" fill="#ef4444"/>
+
+        <!-- Input Row 2: Preference -->
+        <text x="0" y="58" font-size="10" font-family="monospace" fill="#a1a1aa">PREFERENSI POTONGAN:</text>
+        <rect x="0" y="66" width="130" height="26" rx="5" fill="#7A0006" stroke="#ef4444" stroke-width="1"/>
+        <text x="65" y="83" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">Boxy Fit (Drop Shoulder)</text>
+
+        <rect x="138" y="66" width="120" height="26" rx="5" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+        <text x="198" y="83" font-size="10" fill="#a1a1aa" text-anchor="middle">Baggy Oversize</text>
+
+        <!-- Output Recommendation Banner -->
+        <rect x="0" y="106" width="510" height="74" rx="8" fill="#18181b" stroke="#10b981" stroke-width="1"/>
+        <rect x="14" y="118" width="50" height="50" rx="6" fill="#10b981"/>
+        <text x="39" y="152" font-size="24" font-weight="900" fill="#000000" text-anchor="middle">L</text>
+
+        <text x="75" y="132" font-size="12" font-weight="800" fill="#ffffff">REKOMENDASI UKURAN ANDA: SIZE L</text>
+        <text x="75" y="148" font-size="10" font-family="monospace" fill="#10b981">Proporsi boxy fit jatuh sempurna di garis bahu (Lebar Dada: 58 cm)</text>
+        <text x="75" y="162" font-size="9" font-family="monospace" fill="#71717a">Berdasarkan data antropometrik streetwear Indonesia</text>
+      </g>
+    </g>
+
+  </g>
+</svg>
