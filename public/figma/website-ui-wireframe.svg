@@ -1,0 +1,398 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" style="background:#e5e7eb; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Slide Card Shadow -->
+    <filter id="slideShadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.06"/>
+    </filter>
+    <!-- Wireframe Box Shadow -->
+    <filter id="boxShadow" x="-3%" y="-3%" width="106%" height="108%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Slide Canvas Background -->
+  <rect x="40" y="40" width="1520" height="820" rx="20" fill="#ffffff" filter="url(#slideShadow)"/>
+
+  <!-- Top Slide Label -->
+  <text x="80" y="95" font-size="13" font-weight="600" fill="#9ca3af" letter-spacing="1">3.4.4 · WIREFRAME (LOW-FIDELITY)</text>
+
+  <!-- Slide Title -->
+  <text x="80" y="145" font-family="Georgia, serif" font-size="38" font-weight="normal" fill="#18181b">Wireframe Antarmuka Website: Dedicaterealite</text>
+  <text x="80" y="172" font-size="13" font-weight="400" fill="#71717a">Rancangan tata letak berstruktur low-fidelity abu-abu: Beranda (Storefront), Katalog &amp; Filter, serta Detail Produk &amp; Smart Size</text>
+
+  <!-- ========================================================================= -->
+  <!-- COLUMN 1: WIREFRAME BERANDA (HOMEPAGE)                                     -->
+  <!-- ========================================================================= -->
+  <g transform="translate(80, 205)">
+    <!-- Container -->
+    <rect x="0" y="0" width="455" height="610" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="url(#boxShadow)"/>
+    
+    <!-- Title Header -->
+    <rect x="0" y="0" width="455" height="30" rx="8" fill="#e2e8f0"/>
+    <text x="20" y="20" font-size="11" font-weight="700" fill="#475569">1. BERANDA (HOMEPAGE)</text>
+
+    <!-- Top Announcement Ticker -->
+    <rect x="0" y="30" width="455" height="16" fill="#94a3b8"/>
+    <text x="227" y="42" font-size="8" font-family="monospace" fill="#ffffff" text-anchor="middle">[RUNNING TICKER: PROMO &amp; FREE ONGKIR JOGJA]</text>
+
+    <!-- Navbar -->
+    <rect x="0" y="46" width="455" height="36" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <!-- Logo placeholder -->
+    <rect x="15" y="55" width="85" height="18" rx="3" fill="#cbd5e1"/>
+    <text x="57" y="67" font-size="8" font-weight="700" fill="#475569" text-anchor="middle">LOGO DEDICATE</text>
+    <!-- Nav links -->
+    <rect x="150" y="59" width="35" height="10" rx="2" fill="#e2e8f0"/>
+    <rect x="195" y="59" width="40" height="10" rx="2" fill="#e2e8f0"/>
+    <rect x="245" y="59" width="45" height="10" rx="2" fill="#e2e8f0"/>
+    <!-- Action badges -->
+    <rect x="330" y="55" width="32" height="18" rx="9" fill="#e2e8f0"/>
+    <text x="346" y="67" font-size="8" fill="#64748b" text-anchor="middle">BAG</text>
+    <rect x="368" y="55" width="40" height="18" rx="9" fill="#e2e8f0"/>
+    <text x="388" y="67" font-size="8" fill="#64748b" text-anchor="middle">BATTLE</text>
+    <rect x="414" y="55" width="28" height="18" rx="4" fill="#64748b"/>
+    <text x="428" y="67" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">CMS</text>
+
+    <!-- Hero Showcase Section -->
+    <g transform="translate(15, 92)">
+      <rect x="0" y="0" width="425" height="130" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+      <!-- Text left -->
+      <rect x="15" y="15" width="100" height="12" rx="2" fill="#cbd5e1"/>
+      <rect x="15" y="35" width="210" height="20" rx="3" fill="#94a3b8"/>
+      <rect x="15" y="62" width="190" height="10" rx="2" fill="#e2e8f0"/>
+      <rect x="15" y="76" width="160" height="10" rx="2" fill="#e2e8f0"/>
+      <rect x="15" y="94" width="90" height="22" rx="4" fill="#475569"/>
+      <text x="60" y="108" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">CTA KATALOG</text>
+      <!-- Image right -->
+      <rect x="245" y="10" width="165" height="110" rx="4" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="4,4"/>
+      <text x="327" y="68" font-size="9" fill="#94a3b8" text-anchor="middle">[PHOTO MODEL LOOKBOOK]</text>
+    </g>
+
+    <!-- Specs Bar -->
+    <g transform="translate(15, 230)">
+      <rect x="0" y="0" width="425" height="24" rx="4" fill="#e2e8f0"/>
+      <text x="212" y="15" font-size="8" font-weight="600" fill="#475569" text-anchor="middle">
+        KATUN COMBED 16s • 240 GSM HEAVYWEIGHT • BOXY CUT • PLASTISOL PRINT
+      </text>
+    </g>
+
+    <!-- Catalog Grid (4 Items) -->
+    <g transform="translate(15, 264)">
+      <text x="0" y="12" font-size="11" font-weight="700" fill="#334155">KATALOG ARTIKEL TERBARU</text>
+      
+      <!-- Row 1 Cards -->
+      <g transform="translate(0, 20)">
+        <!-- Card 1 -->
+        <rect x="0" y="0" width="98" height="135" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        <rect x="6" y="6" width="86" height="75" rx="2" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="2,2"/>
+        <text x="49" y="47" font-size="7" fill="#94a3b8" text-anchor="middle">[FOTO KAOS]</text>
+        <rect x="6" y="86" width="65" height="8" rx="2" fill="#94a3b8"/>
+        <rect x="6" y="98" width="45" height="8" rx="2" fill="#cbd5e1"/>
+        <rect x="6" y="110" width="86" height="18" rx="3" fill="#64748b"/>
+        <text x="49" y="122" font-size="7" fill="#ffffff" text-anchor="middle">DETAIL / ORDER</text>
+
+        <!-- Card 2 -->
+        <rect x="109" y="0" width="98" height="135" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        <rect x="115" y="6" width="86" height="75" rx="2" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="2,2"/>
+        <text x="158" y="47" font-size="7" fill="#94a3b8" text-anchor="middle">[FOTO KAOS]</text>
+        <rect x="115" y="86" width="65" height="8" rx="2" fill="#94a3b8"/>
+        <rect x="115" y="98" width="45" height="8" rx="2" fill="#cbd5e1"/>
+        <rect x="115" y="110" width="86" height="18" rx="3" fill="#64748b"/>
+        <text x="158" y="122" font-size="7" fill="#ffffff" text-anchor="middle">DETAIL / ORDER</text>
+
+        <!-- Card 3 -->
+        <rect x="218" y="0" width="98" height="135" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        <rect x="224" y="6" width="86" height="75" rx="2" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="2,2"/>
+        <text x="267" y="47" font-size="7" fill="#94a3b8" text-anchor="middle">[FOTO KAOS]</text>
+        <rect x="224" y="86" width="65" height="8" rx="2" fill="#94a3b8"/>
+        <rect x="224" y="98" width="45" height="8" rx="2" fill="#cbd5e1"/>
+        <rect x="224" y="110" width="86" height="18" rx="3" fill="#64748b"/>
+        <text x="267" y="122" font-size="7" fill="#ffffff" text-anchor="middle">DETAIL / ORDER</text>
+
+        <!-- Card 4 -->
+        <rect x="327" y="0" width="98" height="135" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        <rect x="333" y="6" width="86" height="75" rx="2" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="2,2"/>
+        <text x="376" y="47" font-size="7" fill="#94a3b8" text-anchor="middle">[FOTO KAOS]</text>
+        <rect x="333" y="86" width="65" height="8" rx="2" fill="#94a3b8"/>
+        <rect x="333" y="98" width="45" height="8" rx="2" fill="#cbd5e1"/>
+        <rect x="333" y="110" width="86" height="18" rx="3" fill="#64748b"/>
+        <text x="376" y="122" font-size="7" fill="#ffffff" text-anchor="middle">DETAIL / ORDER</text>
+      </g>
+    </g>
+
+    <!-- Footer Wireframe -->
+    <g transform="translate(15, 435)">
+      <rect x="0" y="0" width="425" height="160" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="15" y="24" font-size="10" font-weight="700" fill="#475569">EDITORIAL STREETWEAR ARCHIVE</text>
+      <!-- 3 thumbnail photo boxes -->
+      <rect x="15" y="35" width="125" height="75" rx="3" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="2,2"/>
+      <text x="77" y="75" font-size="7" fill="#94a3b8" text-anchor="middle">[LOOKBOOK 01]</text>
+      <rect x="150" y="35" width="125" height="75" rx="3" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="2,2"/>
+      <text x="212" y="75" font-size="7" fill="#94a3b8" text-anchor="middle">[LOOKBOOK 02]</text>
+      <rect x="285" y="35" width="125" height="75" rx="3" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="2,2"/>
+      <text x="347" y="75" font-size="7" fill="#94a3b8" text-anchor="middle">[LOOKBOOK 03]</text>
+
+      <rect x="15" y="125" width="395" height="22" rx="3" fill="#e2e8f0"/>
+      <text x="212" y="139" font-size="8" fill="#64748b" text-anchor="middle">FOOTER: BRAND INFO • INSTAGRAM @DEDICATEREALITE • WHATSAPP OFFICIAL</text>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- COLUMN 2: WIREFRAME KATALOG & FILTER                                       -->
+  <!-- ========================================================================= -->
+  <g transform="translate(565, 205)">
+    <!-- Container -->
+    <rect x="0" y="0" width="455" height="610" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="url(#boxShadow)"/>
+    
+    <!-- Title Header -->
+    <rect x="0" y="0" width="455" height="30" rx="8" fill="#e2e8f0"/>
+    <text x="20" y="20" font-size="11" font-weight="700" fill="#475569">2. KATALOG PRODUK DENGAN FILTER</text>
+
+    <!-- Search & Filter Controls Bar -->
+    <g transform="translate(15, 42)">
+      <!-- Search Input -->
+      <rect x="0" y="0" width="240" height="26" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="12" y="17" font-size="8" fill="#94a3b8">🔍 Cari kaos (cth: Nero, Sick, Boxy)...</text>
+      <!-- Sort dropdown -->
+      <rect x="250" y="0" width="105" height="26" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="260" y="17" font-size="8" fill="#475569">Urutkan: Harga ▼</text>
+      <!-- Filter toggle button -->
+      <rect x="365" y="0" width="60" height="26" rx="4" fill="#475569"/>
+      <text x="395" y="17" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">FILTER [3]</text>
+    </g>
+
+    <!-- Filter Categories Pills -->
+    <g transform="translate(15, 78)">
+      <rect x="0" y="0" width="75" height="20" rx="10" fill="#334155"/>
+      <text x="37" y="13" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">SEMUA (4)</text>
+      <rect x="83" y="0" width="80" height="20" rx="10" fill="#e2e8f0"/>
+      <text x="123" y="13" font-size="8" fill="#475569" text-anchor="middle">BOXY FIT</text>
+      <rect x="171" y="0" width="95" height="20" rx="10" fill="#e2e8f0"/>
+      <text x="218" y="13" font-size="8" fill="#475569" text-anchor="middle">HEAVYWEIGHT 240</text>
+      <rect x="274" y="0" width="85" height="20" rx="10" fill="#e2e8f0"/>
+      <text x="316" y="13" font-size="8" fill="#475569" text-anchor="middle">READY STOCK</text>
+    </g>
+
+    <!-- Left Filter Panel + Right Product Grid Layout -->
+    <g transform="translate(15, 110)">
+      <!-- Left Filter Sidebar -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="130" height="430" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        <text x="12" y="20" font-size="9" font-weight="700" fill="#334155">FILTER KRITERIA</text>
+        <line x1="12" y1="28" x2="118" y2="28" stroke="#e2e8f0" stroke-width="1"/>
+
+        <!-- Gramasi GSM Filter -->
+        <text x="12" y="44" font-size="8" font-weight="700" fill="#64748b">GRAMASI (GSM)</text>
+        <rect x="12" y="52" width="12" height="12" rx="2" fill="#334155"/>
+        <text x="30" y="62" font-size="8" fill="#334155">240 GSM (Heavy)</text>
+        <rect x="12" y="70" width="12" height="12" rx="2" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="30" y="80" font-size="8" fill="#64748b">220 GSM (Mid)</text>
+
+        <!-- Model Fit Filter -->
+        <text x="12" y="104" font-size="8" font-weight="700" fill="#64748b">POTONGAN / FIT</text>
+        <rect x="12" y="112" width="12" height="12" rx="2" fill="#334155"/>
+        <text x="30" y="122" font-size="8" fill="#334155">Boxy Drop-Shoulder</text>
+        <rect x="12" y="130" width="12" height="12" rx="2" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="30" y="140" font-size="8" fill="#64748b">Oversized Relaxed</text>
+
+        <!-- Ukuran Filter -->
+        <text x="12" y="164" font-size="8" font-weight="700" fill="#64748b">UKURAN (SIZE)</text>
+        <!-- Size buttons grid -->
+        <rect x="12" y="174" width="22" height="18" rx="3" fill="#e2e8f0"/>
+        <text x="23" y="186" font-size="7" fill="#334155" text-anchor="middle">S</text>
+        <rect x="38" y="174" width="22" height="18" rx="3" fill="#e2e8f0"/>
+        <text x="49" y="186" font-size="7" fill="#334155" text-anchor="middle">M</text>
+        <rect x="64" y="174" width="22" height="18" rx="3" fill="#334155"/>
+        <text x="75" y="186" font-size="7" font-weight="700" fill="#ffffff" text-anchor="middle">L</text>
+        <rect x="90" y="174" width="22" height="18" rx="3" fill="#e2e8f0"/>
+        <text x="101" y="186" font-size="7" fill="#334155" text-anchor="middle">XL</text>
+
+        <!-- Ketersediaan Filter -->
+        <text x="12" y="214" font-size="8" font-weight="700" fill="#64748b">KETERSEDIAAN</text>
+        <rect x="12" y="222" width="12" height="12" rx="2" fill="#334155"/>
+        <text x="30" y="232" font-size="8" fill="#334155">Ready Stock</text>
+        <rect x="12" y="240" width="12" height="12" rx="2" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="30" y="250" font-size="8" fill="#64748b">Pre-Order</text>
+
+        <!-- Reset Button -->
+        <rect x="12" y="390" width="106" height="24" rx="4" fill="#e2e8f0"/>
+        <text x="65" y="405" font-size="8" font-weight="700" fill="#475569" text-anchor="middle">RESET FILTER</text>
+      </g>
+
+      <!-- Right 2x2 Products Grid -->
+      <g transform="translate(142, 0)">
+        <!-- Product Card 1 -->
+        <rect x="0" y="0" width="136" height="205" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        <rect x="8" y="8" width="120" height="110" rx="4" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="2,2"/>
+        <text x="68" y="65" font-size="8" fill="#94a3b8" text-anchor="middle">[FOTO KAOS]</text>
+        <rect x="12" y="12" width="45" height="14" rx="3" fill="#334155"/>
+        <text x="34" y="22" font-size="6" font-family="monospace" fill="#ffffff" text-anchor="middle">240 GSM</text>
+        <text x="10" y="132" font-size="8" font-weight="700" fill="#1e293b">Nero Heavyweight</text>
+        <text x="10" y="145" font-size="8" font-weight="600" fill="#475569">Rp 175.000</text>
+        <rect x="8" y="160" width="120" height="18" rx="3" fill="#64748b"/>
+        <text x="68" y="172" font-size="7" font-weight="600" fill="#ffffff" text-anchor="middle">+ BAG / DETAIL</text>
+        <rect x="8" y="182" width="120" height="16" rx="3" fill="#e2e8f0"/>
+        <text x="68" y="193" font-size="7" fill="#475569" text-anchor="middle">ADU DI BATTLE</text>
+
+        <!-- Product Card 2 -->
+        <rect x="148" y="0" width="136" height="205" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        <rect x="156" y="8" width="120" height="110" rx="4" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="2,2"/>
+        <text x="216" y="65" font-size="8" fill="#94a3b8" text-anchor="middle">[FOTO KAOS]</text>
+        <rect x="160" y="12" width="45" height="14" rx="3" fill="#334155"/>
+        <text x="182" y="22" font-size="6" font-family="monospace" fill="#ffffff" text-anchor="middle">235 GSM</text>
+        <text x="158" y="132" font-size="8" font-weight="700" fill="#1e293b">Dedicate Boxy Tee</text>
+        <text x="158" y="145" font-size="8" font-weight="600" fill="#475569">Rp 165.000</text>
+        <rect x="156" y="160" width="120" height="18" rx="3" fill="#64748b"/>
+        <text x="216" y="172" font-size="7" font-weight="600" fill="#ffffff" text-anchor="middle">+ BAG / DETAIL</text>
+        <rect x="156" y="182" width="120" height="16" rx="3" fill="#e2e8f0"/>
+        <text x="216" y="193" font-size="7" fill="#475569" text-anchor="middle">ADU DI BATTLE</text>
+
+        <!-- Product Card 3 -->
+        <rect x="0" y="215" width="136" height="205" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        <rect x="8" y="223" width="120" height="110" rx="4" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="2,2"/>
+        <text x="68" y="280" font-size="8" fill="#94a3b8" text-anchor="middle">[FOTO KAOS]</text>
+        <rect x="12" y="227" width="45" height="14" rx="3" fill="#334155"/>
+        <text x="34" y="237" font-size="6" font-family="monospace" fill="#ffffff" text-anchor="middle">240 GSM</text>
+        <text x="10" y="347" font-size="8" font-weight="700" fill="#1e293b">Realite Vintage</text>
+        <text x="10" y="360" font-size="8" font-weight="600" fill="#475569">Rp 175.000</text>
+        <rect x="8" y="375" width="120" height="18" rx="3" fill="#64748b"/>
+        <text x="68" y="387" font-size="7" font-weight="600" fill="#ffffff" text-anchor="middle">+ BAG / DETAIL</text>
+        <rect x="8" y="397" width="120" height="16" rx="3" fill="#e2e8f0"/>
+        <text x="68" y="408" font-size="7" fill="#475569" text-anchor="middle">ADU DI BATTLE</text>
+
+        <!-- Product Card 4 -->
+        <rect x="148" y="215" width="136" height="205" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+        <rect x="156" y="223" width="120" height="110" rx="4" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="2,2"/>
+        <text x="216" y="280" font-size="8" fill="#94a3b8" text-anchor="middle">[FOTO KAOS]</text>
+        <rect x="160" y="227" width="45" height="14" rx="3" fill="#334155"/>
+        <text x="182" y="237" font-size="6" font-family="monospace" fill="#ffffff" text-anchor="middle">220 GSM</text>
+        <text x="158" y="347" font-size="8" font-weight="700" fill="#1e293b">Artifact Oversized</text>
+        <text x="158" y="360" font-size="8" font-weight="600" fill="#475569">Rp 165.000</text>
+        <rect x="156" y="375" width="120" height="18" rx="3" fill="#64748b"/>
+        <text x="216" y="387" font-size="7" font-weight="600" fill="#ffffff" text-anchor="middle">+ BAG / DETAIL</text>
+        <rect x="156" y="397" width="120" height="16" rx="3" fill="#e2e8f0"/>
+        <text x="216" y="408" font-size="7" fill="#475569" text-anchor="middle">ADU DI BATTLE</text>
+      </g>
+    </g>
+
+    <!-- Bottom Compare Bar Wireframe -->
+    <g transform="translate(15, 555)">
+      <rect x="0" y="0" width="425" height="38" rx="6" fill="#334155"/>
+      <text x="15" y="23" font-size="8" font-weight="600" fill="#ffffff">⚔️ BATTLE-ROOM: [2] ARTIKEL DIPILIH UNTUK DIADU</text>
+      <rect x="315" y="8" width="95" height="22" rx="4" fill="#64748b"/>
+      <text x="362" y="22" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">BUKA MATRIX →</text>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- COLUMN 3: WIREFRAME DETAIL PRODUK & SMART SIZE                            -->
+  <!-- ========================================================================= -->
+  <g transform="translate(1050, 205)">
+    <!-- Container -->
+    <rect x="0" y="0" width="470" height="610" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="url(#boxShadow)"/>
+    
+    <!-- Title Header -->
+    <rect x="0" y="0" width="470" height="30" rx="8" fill="#e2e8f0"/>
+    <text x="20" y="20" font-size="11" font-weight="700" fill="#475569">3. DETAIL KAOS &amp; SMART SIZE CALCULATOR</text>
+
+    <!-- Breadcrumb Wireframe -->
+    <text x="20" y="52" font-size="8" fill="#64748b">Beranda / Katalog Kaos / Nero Heavyweight 240 GSM</text>
+
+    <!-- Product Detail Left (Gallery) & Right (Specs) -->
+    <g transform="translate(20, 65)">
+      <!-- Left: Photo Box & Thumbnails -->
+      <rect x="0" y="0" width="190" height="160" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+      <rect x="8" y="8" width="174" height="144" rx="4" fill="#e2e8f0" stroke="#cbd5e1" stroke-dasharray="2,2"/>
+      <text x="95" y="85" font-size="8" fill="#94a3b8" text-anchor="middle">[GALERI FOTO UTAMA DEPAN]</text>
+      
+      <!-- 3 Thumbnails below -->
+      <rect x="0" y="170" width="58" height="42" rx="4" fill="#334155"/>
+      <text x="29" y="193" font-size="6" fill="#ffffff" text-anchor="middle">DEPAN</text>
+      <rect x="66" y="170" width="58" height="42" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="95" y="193" font-size="6" fill="#64748b" text-anchor="middle">BELAKANG</text>
+      <rect x="132" y="170" width="58" height="42" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="161" y="193" font-size="6" fill="#64748b" text-anchor="middle">DETAIL</text>
+
+      <!-- Right: Specs, Pricing, Size Selector -->
+      <g transform="translate(205, 0)">
+        <rect x="0" y="0" width="60" height="16" rx="8" fill="#334155"/>
+        <text x="30" y="11" font-size="7" font-weight="700" fill="#ffffff" text-anchor="middle">DROP 01</text>
+        <text x="0" y="32" font-size="12" font-weight="700" fill="#1e293b">Nero Heavyweight Tee</text>
+        <text x="0" y="50" font-size="11" font-weight="700" fill="#334155">Rp 175.000</text>
+        <text x="0" y="65" font-size="7" fill="#64748b">Katun Combed 16s • 240 GSM • Sablon Discharge</text>
+
+        <!-- Size Selection -->
+        <text x="0" y="85" font-size="8" font-weight="700" fill="#475569">PILIH UKURAN (LIVE STOK):</text>
+        <rect x="0" y="93" width="26" height="22" rx="4" fill="#e2e8f0"/>
+        <text x="13" y="107" font-size="8" fill="#475569" text-anchor="middle">S</text>
+        <rect x="30" y="93" width="26" height="22" rx="4" fill="#e2e8f0"/>
+        <text x="43" y="107" font-size="8" fill="#475569" text-anchor="middle">M</text>
+        <rect x="60" y="93" width="26" height="22" rx="4" fill="#334155"/>
+        <text x="73" y="107" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">L</text>
+        <rect x="90" y="93" width="26" height="22" rx="4" fill="#e2e8f0"/>
+        <text x="103" y="107" font-size="8" fill="#475569" text-anchor="middle">XL</text>
+        <rect x="120" y="93" width="26" height="22" rx="4" fill="#e2e8f0"/>
+        <text x="133" y="107" font-size="8" fill="#475569" text-anchor="middle">XXL</text>
+        <text x="155" y="107" font-size="7" font-weight="600" fill="#16a34a">Tersisa 4 pcs</text>
+
+        <!-- CTA Buttons -->
+        <rect x="0" y="125" width="225" height="28" rx="4" fill="#16a34a"/>
+        <text x="112" y="142" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">💬 ORDER LANGSUNG KE WHATSAPP</text>
+        
+        <rect x="0" y="160" width="108" height="24" rx="4" fill="#334155"/>
+        <text x="54" y="175" font-size="7" font-weight="700" fill="#ffffff" text-anchor="middle">+ SHOPPING BAG</text>
+        <rect x="116" y="160" width="108" height="24" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="170" y="175" font-size="7" fill="#475569" text-anchor="middle">ADU DI BATTLE</text>
+      </g>
+    </g>
+
+    <!-- Smart Size & Fit Calculator Wireframe Section -->
+    <g transform="translate(20, 295)">
+      <rect x="0" y="0" width="430" height="285" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+      
+      <!-- Calculator Header -->
+      <rect x="0" y="0" width="430" height="26" rx="6" fill="#334155"/>
+      <text x="15" y="17" font-size="9" font-weight="700" fill="#ffffff">SMART SIZE &amp; FIT CALCULATOR (INTERAKTIF)</text>
+
+      <!-- Slider 1: Tinggi Badan -->
+      <g transform="translate(15, 40)">
+        <text x="0" y="0" font-size="8" font-weight="700" fill="#475569">TINGGI BADAN: 172 CM</text>
+        <rect x="0" y="8" width="400" height="6" rx="3" fill="#e2e8f0"/>
+        <rect x="0" y="8" width="215" height="6" rx="3" fill="#64748b"/>
+        <circle cx="215" cy="11" r="7" fill="#334155"/>
+      </g>
+
+      <!-- Slider 2: Berat Badan -->
+      <g transform="translate(15, 75)">
+        <text x="0" y="0" font-size="8" font-weight="700" fill="#475569">BERAT BADAN: 65 KG</text>
+        <rect x="0" y="8" width="400" height="6" rx="3" fill="#e2e8f0"/>
+        <rect x="0" y="8" width="180" height="6" rx="3" fill="#64748b"/>
+        <circle cx="180" cy="11" r="7" fill="#334155"/>
+      </g>
+
+      <!-- Fit Preference Toggle -->
+      <g transform="translate(15, 110)">
+        <text x="0" y="0" font-size="8" font-weight="700" fill="#475569">PREFERENSI POTONGAN:</text>
+        <rect x="0" y="8" width="105" height="22" rx="4" fill="#334155"/>
+        <text x="52" y="22" font-size="7" font-weight="700" fill="#ffffff" text-anchor="middle">BOXY FIT [AKTIF]</text>
+        <rect x="115" y="8" width="105" height="22" rx="4" fill="#e2e8f0"/>
+        <text x="167" y="22" font-size="7" fill="#64748b" text-anchor="middle">OVERSIZED BAGGY</text>
+      </g>
+
+      <!-- Result Recommendation Card -->
+      <g transform="translate(15, 155)">
+        <rect x="0" y="0" width="400" height="60" rx="6" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+        <text x="15" y="22" font-size="9" font-weight="700" fill="#1e293b">HASIL REKOMENDASI: SIZE L (LARGE)</text>
+        <text x="15" y="38" font-size="8" fill="#475569">Panjang Baju: 74 cm • Lebar Dada: 58 cm • Bahu Turun: 22 cm</text>
+        <text x="15" y="50" font-size="7" font-style="italic" fill="#64748b">*Memberikan siluet boxy proporsional sesuai postur tubuh Anda.</text>
+      </g>
+
+      <!-- Static Size Chart Table Mini -->
+      <g transform="translate(15, 230)">
+        <rect x="0" y="0" width="400" height="42" rx="4" fill="#f1f5f9"/>
+        <text x="12" y="14" font-size="7" font-weight="700" fill="#334155">TABEL METRIK RESMI DEDICATEREALITE (CM):</text>
+        <text x="12" y="26" font-size="7" font-family="monospace" fill="#475569">S: 70x52 | M: 72x55 | [L: 74x58 - HIGHLIGHT] | XL: 76x61 | XXL: 78x64</text>
+        <text x="12" y="36" font-size="6" fill="#64748b">Toleransi jahitan ± 1.5 cm. Katun 16s telah melalui proses pre-shrunk anti-susut.</text>
+      </g>
+    </g>
+  </g>
+</svg>
